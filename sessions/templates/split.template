@@ -1,0 +1,30 @@
+#!/usr/bin/env zsh
+
+source ${MDX_TMUX_DIR}/sessions/lib/helper.zsh
+
+setup <SessionName>
+
+root="${HOME}/Develop/Rust/learn_rust"
+
+# Editor
+x_new_session <FirstWindow> "${root}" 'nvim src/main.rs'
+title_pane Neovim
+
+# Watcher
+tmux split-window \
+  -t "${window}.1" \
+  -h \
+  -c "${root}" \
+  -d -- \
+  <command>
+title_pane Run
+
+# Shell
+tmux split-window \
+  -t "${window}.2" \
+  -v \
+  -c "${root}" \
+  -d
+title_pane Shell
+
+clean_up

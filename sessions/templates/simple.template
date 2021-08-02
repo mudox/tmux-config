@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+source ${MDX_TMUX_DIR}/sessions/lib/helper.zsh
+
+setup <SessionName>
+
+root="${HOME}/.dotfiles"
+
+x_new_session <FirstWindow> "${root}" <command>
+title_pane 1 <Pane Title>
+
+x_new_window <SecondWindow> "${root}" <command>
+title_pane 1 <Pane Title>
+
+clean_up

@@ -1,0 +1,17 @@
+# cli
+clap = "2.33.3"
+
+# file system
+dirs = "3.0.2"
+glob = "0.3.0"
+
+# log
+log = "0.4.14"
+pretty_env_logger = "0.4.0"
+
+# config
+serde = "1.0.127"
+toml = "0.5.8"
+
+# ui
+termion = "1.5.6"
