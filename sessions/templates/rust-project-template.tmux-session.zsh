@@ -11,8 +11,6 @@
 #   rsp -b tav Tav r
 #   rsp -l ap Ap c
 
-set -x
-
 set -euo pipefail
 
 source ~/.dotfiles/scripts/lib/jack.zsh
@@ -67,8 +65,8 @@ if [[ ! -d $root_dir ]]; then
     cd "$root_dir"
 
     temp_dir="${MDX_TMUX_DIR}/sessions/templates/rust-project-template"
-    for temp in ${temp_dir}/*; do
-      temp_name=$(basename "$temp")
+    for temp in ${temp_dir}/*.rs; do
+      temp_name="${$(basename "$temp")//-/_}"
       crate="$project_name" envsubst < "${temp}" > "${root_dir}/src/${temp_name}"
     done
 
