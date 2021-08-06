@@ -13,6 +13,4 @@ tmux split-window \
     -h \
     -c ${root_dir}
 
-# gitui_window "${root_dir}"
-
 clean_up
