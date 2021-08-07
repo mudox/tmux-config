@@ -25,7 +25,7 @@ fi
 # parse positional arguments
 #
 
-if [[ $# -ne 3 || ! $3 =~ [cbrt] ]]; then
+if [[ $# -ne 3 || ! $3 =~ [brt] ]]; then
   echo "Usage: $0 {SESSION_NAME} {ROOT_DIR} {ACTION}"
   exit 1
 fi
@@ -87,6 +87,7 @@ tmux split-window \
   -d -- \
   swiftwatch "$3"
 title_pane 2 "${titles[$3]}"
+tmux set-option -p -t "${window}.2" "@respawn-menu-id" swift
 
 # Shell
 tmux split-window \
