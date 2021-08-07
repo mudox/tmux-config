@@ -1,0 +1,23 @@
+# This tmux statusbar config was created by mdx-tmux-theme.vim
+# on Sat, 07 Aug 2021
+
+set -g status-justify "centre"
+set -g status "on"
+set -g status-left-style "none"
+set -g message-command-style "fg=#a59daf,bg=#d8d5dd"
+set -g status-right-style "none"
+set -g pane-active-border-style "fg=#A3B367"
+set -g status-style "none,bg=#f2f1f4"
+set -g message-style "fg=#a59daf,bg=#d8d5dd"
+set -g pane-border-style "fg=#d8d5dd"
+set -g status-right-length "100"
+set -g status-left-length "100"
+setw -g window-status-activity-style "none"
+setw -g window-status-separator " "
+setw -g window-status-style "none,fg=#a59daf,bg=#f2f1f4"
+set -g status-left "#[fg=#f2f1f4,bg=#A3B367] #S #[fg=#A3B367,bg=#f2f1f4,nobold,nounderscore,noitalics]#[fg=#a59daf,bg=#f2f1f4] %H:%M "
+set -g status-right "#[fg=#a59daf,bg=#f2f1f4] %d %b #[fg=#A3B367,bg=#f2f1f4,nobold,nounderscore,noitalics]#[fg=#f2f1f4,bg=#A3B367] #h "
+setw -g window-status-format "#[fg=#a59daf,bg=#f2f1f4] #I | #W "
+setw -g window-status-current-format "#[fg=#f2f1f4,bg=#d8d5dd,nobold,nounderscore,noitalics]#[fg=#a59daf,bg=#d8d5dd] #I  #W  #P #[fg=#f2f1f4,bg=#d8d5dd,nobold,nounderscore,noitalics]"
+
+set -g @mdx-tmux-theme base16_cupcake-insert

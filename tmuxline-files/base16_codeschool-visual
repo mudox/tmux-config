@@ -1,0 +1,23 @@
+# This tmux statusbar config was created by mdx-tmux-theme.vim
+# on Sat, 07 Aug 2021
+
+set -g status-justify "centre"
+set -g status "on"
+set -g status-left-style "none"
+set -g message-command-style "fg=#a7cfa3,bg=#2a343a"
+set -g status-right-style "none"
+set -g pane-active-border-style "fg=#c59820"
+set -g status-style "none,bg=#1c3657"
+set -g message-style "fg=#a7cfa3,bg=#2a343a"
+set -g pane-border-style "fg=#2a343a"
+set -g status-right-length "100"
+set -g status-left-length "100"
+setw -g window-status-activity-style "none"
+setw -g window-status-separator " "
+setw -g window-status-style "none,fg=#43820d,bg=#1c3657"
+set -g status-left "#[fg=#1c3657,bg=#c59820] #S #[fg=#c59820,bg=#1c3657,nobold,nounderscore,noitalics]#[fg=#43820d,bg=#1c3657] %H:%M "
+set -g status-right "#[fg=#43820d,bg=#1c3657] %d %b #[fg=#c59820,bg=#1c3657,nobold,nounderscore,noitalics]#[fg=#1c3657,bg=#c59820] #h "
+setw -g window-status-format "#[fg=#43820d,bg=#1c3657] #I | #W "
+setw -g window-status-current-format "#[fg=#1c3657,bg=#2a343a,nobold,nounderscore,noitalics]#[fg=#a7cfa3,bg=#2a343a] #I  #W  #P #[fg=#1c3657,bg=#2a343a,nobold,nounderscore,noitalics]"
+
+set -g @mdx-tmux-theme base16_codeschool-visual
