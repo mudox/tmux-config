@@ -1,13 +1,17 @@
 use std::path::PathBuf;
 
-pub struct Config {}
+use serde::Deserialize;
+use clap::{app_from_app, crate_name, App, Arg};
 
-/// Return config dir string.
+/// Return config dir path.
 pub fn dir() -> PathBuf {
     let mut path = dirs::home_dir().unwrap();
-    path.push(".config/ap");
+    path.push(".config");
+    path.push(crate_name!());
     path
 }
+
+pub struct Config {}
 
 /// Program configuration.
 impl Config {
