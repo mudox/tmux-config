@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 
 use serde::Deserialize;
-use clap::{app_from_app, crate_name, App, Arg};
+use clap::{app_from_crate, crate_name, App, Arg};
 
 /// Return config dir path.
 pub fn dir() -> PathBuf {
