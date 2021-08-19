@@ -85,7 +85,7 @@ tmux split-window \
   -h \
   -c "${root}" \
   -d -- \
-  swiftwatch "$3"
+  swift-watch "$3"
 title_pane 2 "${titles[$3]}"
 tmux set-option -p -t "${window}.2" "@respawn-menu-id" swift
 
