@@ -15,7 +15,7 @@ setup() { # {{{1
   set -euo pipefail
 
   # for reporting progress
-  source ~/.dotfiles/scripts/lib/jack.zsh
+  source "${MDX_DOT_DIR}/scripts/lib/jack.zsh"
 
   # hide cursor
   tput civis
