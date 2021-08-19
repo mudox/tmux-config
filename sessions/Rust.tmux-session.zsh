@@ -1,3 +1,3 @@
 #!/usr/bin/env zsh
 
-rsp -b Rust rust r
+rsp Rust rust-playground r
