@@ -14,3 +14,6 @@ typeset -A sessions=(
 for key name in "${(@kv)sessions}"; do
   tmux bind-key -Tmudox "$key" run-shell "${MDX_TMUX_DIR}/scripts/switch-session.zsh ${name}"
 done
+
+# WTF
+tmux bind-key -Tmudox g display-popup -E -w90% -h90% git-repos-status-dashboard
