@@ -76,7 +76,7 @@ source ${MDX_TMUX_DIR}/sessions/lib/helper.zsh
 setup "$1"
 
 # Editor
-x_new_session Main "${root}" nvim
+new_session Main "${root}" nvim
 title_pane 1 'Edit'
 
 # Watcher

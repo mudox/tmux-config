@@ -6,7 +6,7 @@ setup ECS
 
 root="${HOME}"
 
-x_new_session SSH "${root}" 'ssh -i ~/.ssh/ecs root@120.24.177.88'
+new_session SSH "${root}" 'ssh -i ~/.ssh/ecs root@120.24.177.88'
 title_pane 1 '120.24.177.88'
 
 clean_up

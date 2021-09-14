@@ -6,6 +6,6 @@ setup Default
 
 root="${HOME}"
 
-x_new_session Main "${root}"
+new_session Main "${root}"
 
 clean_up

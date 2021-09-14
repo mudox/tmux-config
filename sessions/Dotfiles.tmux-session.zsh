@@ -6,15 +6,13 @@ setup Dotfiles
 
 root_dir="${HOME}/.dotfiles"
 
-x_new_session Main "${root_dir}" nvim
+new_session Main "${root_dir}" nvim
 title_pane 1 Neovim
 
-x_new_window Tmux "${root_dir}/tmux" nvim
+new_window Karabiner "${root_dir}/karabiner" nvim
 title_pane 1 Neovim
 
-x_new_window Karabiner "${root_dir}/karabiner" nvim
+new_window Actions "${root_dir}/ap" nvim
 title_pane 1 Neovim
-
-# gitui_window "${root_dir}"
 
 clean_up

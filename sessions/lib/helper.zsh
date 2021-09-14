@@ -1,12 +1,6 @@
-nap() {
-  sleep 0.2
-}
-
-# Usage: setup <session_name>
+# Usage: setup session_name
 #
-# It defines env `$session_name` which can be used by other functions.
-#
-# Output envs:
+# Defines envs:
 # - session_name
 
 setup() { # {{{1
@@ -14,113 +8,77 @@ setup() { # {{{1
 
   set -euo pipefail
 
-  # for reporting progress
-  source "${MDX_DOT_DIR}/scripts/lib/jack.zsh"
-
   # hide cursor
   tput civis
   trap 'tput cnorm' EXIT
 
   # kill old session if any
   if tmux has-session -t ${session_name} &>/dev/null; then
-    echo "session [${session_name}] already exists, kill it!"
+    jack warn "session [${session_name}] already exists, kill it!"
     tmux kill-session -t "${session_name}"
   fi
 } # }}}
 
-# Usage: new_session <window_name> <path> [keys]
+# Usage: new_session window_name path [command]
 #
 # It creates a new session with its initial window.
 #
-# Input envs:
+# Depends on envs:
 # - session_name
 #
-# Output envs:
+# Defines envs:
 # - window # tmux full identifier of the create window, e.g. `GuruLibs:Config`.
 
 new_session() { # {{{1
   local window_name="$1"
-  local root="$2"
+  local root_dir="$2"
+  
+  local cmd="${3:-zsh}"
+  # set +u
+  # if [[ -n $3 ]]; then
+    # cmd="sleep 0.1; $3"
+  # else
+    # cmd='zsh'
+  # fi
+  # set -u
 
   window="${session_name}:${window_name}"
 
-  jackProgress "Creating window [$1] ..."
+  jack info "Create session [${session_name}]"
+  jack verbose "Create window [$1]"
 
-  tmux new-session \
+  tmux new-session       \
     -s "${session_name}" \
-    -n "${window_name}" \
-    -c "${root}" \
-    -d
-
-  if [[ $# > 2 ]]; then
-    tmux send-keys -t "${window}" "$3"
-  fi
-
-  nap
+    -n "${window_name}"  \
+    -c "${root_dir}"     \
+    -d                   \
+    --                   \
+    "$cmd"
 } # }}}
 
-x_new_session() { # {{{1
-  local window_name="$1"
-  local root="$2"
-
-  window="${session_name}:${window_name}"
-
-  jackProgress "Creating window [$1] ..."
-
-  tmux new-session \
-    -s "${session_name}" \
-    -n "${window_name}" \
-    -c "${root}" \
-    -d \
-    -- \
-    "${3-zsh}"
-} # }}}
-
-# Usage: new_window <name> <path> [keys]
+# Usage: new_window window_name path [command];
 #
-# Create a new window appending it to the `$session_name`
+# Create a new window and append it to the session
 #
-# Input envs:
+# Depends on envs:
 # - session_name
 #
-# Output envs:
+# Set envs:
 # - window # tmux absolute identifier of the create window, e.g. `GuruLibs:Config`.
 
 new_window() { # {{{1
   local window_name=$1
-  local root=$2
+  local root_dir=$2
 
   window="${session_name}:${window_name}"
 
-  jackProgress "Creating window [${window_name}] ..."
+  jack verbose "Create window [${window_name}]"
 
   tmux new-window \
     -a \
     -t "${session_name}:{end}" \
     -n "${window_name}" \
-    -c "${root}" \
-    -d
-
-  if [[ $# > 2 ]]; then
-    tmux send-keys -t "${window}" "$3"
-  fi
-
-  nap
-} # }}}
-
-x_new_window() { # {{{1
-  local window_name=$1
-  local root=$2
-
-  window="${session_name}:${window_name}"
-
-  jackProgress "Creating window [${window_name}] ..."
-
-  tmux new-window \
-    -a \
-    -t "${session_name}:{end}" \
-    -n "${window_name}" \
-    -c "${root}" \
+    -c "${root_dir}" \
     -d \
     -- \
     "${3-zsh}"
@@ -128,16 +86,11 @@ x_new_window() { # {{{1
 
 # Usage: clean_up
 #
-# Input envs:
+# Depends on envs:
 # - session_name
 
 clean_up() { # {{{1
-  jackEndProgress
-
   tmux select-window -t "${session_name}:1.1"
-
-  echo "[${session_name}]"
-  tmux list-window -t "${session_name}" -F ' - #W'
 } # }}}
 
 # Usage: title_pane {pane} {title}
@@ -147,12 +100,6 @@ title_pane() {
 
 hide_title() {
   tmux set -w -t "$window" pane-border-status off
-}
-
-# Usage: gitui_window {repo_dir}
-gitui_window() {
-  x_new_window Git "$1" gitui
-  title_pane 1 GitUI
 }
 
 # vim: ft=sh fdm=marker

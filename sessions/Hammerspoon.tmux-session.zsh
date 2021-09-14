@@ -6,7 +6,7 @@ root_dir="${HOME}/Git/hs-config"
 
 setup Hammerspoon
 
-x_new_session Main "${root_dir}" nvim
+new_session Main "${root_dir}" nvim
 
 tmux split-window \
     -t "${window}" \

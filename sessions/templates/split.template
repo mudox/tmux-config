@@ -3,12 +3,11 @@
 source ${MDX_TMUX_DIR}/sessions/lib/helper.zsh
 
 setup <SessionName>
-
-root="${HOME}/Develop/Rust/learn_rust"
-
+root_dir="${HOME}/Develop/Rust/learn_rust"
+ 
 # Editor
-x_new_session <FirstWindow> "${root}" 'nvim src/main.rs'
-title_pane Neovim
+new_session <FirstWindow> "${root_dir}" 'nvim src/main.rs'
+title_pane 1 Neovim
 
 # Watcher
 tmux split-window \

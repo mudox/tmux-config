@@ -13,7 +13,6 @@
 
 set -euo pipefail
 
-source ~/.dotfiles/scripts/lib/jack.zsh
 source ${MDX_TMUX_DIR}/sessions/lib/helper.zsh
 
 #
@@ -58,7 +57,7 @@ titles=(
 if [[ ! -d $root_dir ]]; then
   set +u
   if [[ -n $create ]]; then
-    jackInfo 'Create project ...'
+    jack info 'Create project ...'
 
     cargo new "$root_dir" "$create"
 
@@ -74,7 +73,7 @@ if [[ ! -d $root_dir ]]; then
 
     gi rust >> "${root_dir}/.gitignore"
   else
-    jackError "Invalid path: $root_dir"
+    jack error "Invalid path: $root_dir"
     exit 1
   fi
   set -u
@@ -84,17 +83,17 @@ fi
 # creat tmux session
 #
 
-jackInfo "Create tmux session [$1]"
+jack info "Create tmux session [$1]"
 
 setup "$1"
 
 # Editor
-if [[ -f $root_dir/src/main.rs ]]; then
+if [[ -f "${root_dir}/src/main.rs" ]]; then
   file='src/main.rs'
 else
   file='src/lib.rs'
 fi
-x_new_session Main "${root_dir}" "nvim $root_dir/$file"
+new_session Main "${root_dir}" "nvim $root_dir/$file"
 title_pane 1 Edit
 
 # Watcher
@@ -116,6 +115,5 @@ tmux split-window \
 title_pane 3 Console
 
 # Window: Git
-# gitui_window "${root_dir}"
 
 clean_up

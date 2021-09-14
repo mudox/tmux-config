@@ -6,7 +6,7 @@ setup Tmux
 
 root_dir="${MDX_TMUX_DIR}"
 
-x_new_session Main "${root_dir}" nvim
+new_session Main "${root_dir}" nvim
 title_pane 1 Neovim
 
 clean_up
