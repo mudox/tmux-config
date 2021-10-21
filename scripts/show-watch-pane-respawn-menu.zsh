@@ -12,6 +12,7 @@ rust)
     Build b "$(cmd 'Build' 'cargo watch -c -x build')"
     Run r "$(cmd 'Run' 'cargo watch -c -x run')"
     Test t "$(cmd 'Test' 'cargo watch -c -x test')"
+    'Bench (nightly)' m "$(cmd 'Benchmark' 'cargo +nightly watch -c -x bench')"
   )
   ;;
 swift)
