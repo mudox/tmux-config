@@ -17,3 +17,6 @@ done
 
 # WTF
 tmux bind-key -Tmudox g display-popup -E -w90% -h90% git-repos-status-dashboard
+
+# Ap
+tmux bind-key -Tmudox a display-popup -w60% -h80% ap
