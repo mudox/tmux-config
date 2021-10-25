@@ -3,7 +3,7 @@
 # Defines envs:
 # - session_name
 
-setup() { # {{{1
+setup() { # 〈1
   session_name="$1"
 
   set -euo pipefail
@@ -17,7 +17,7 @@ setup() { # {{{1
     jack warn "session [${session_name}] already exists, kill it!"
     tmux kill-session -t "${session_name}"
   fi
-} # }}}
+} # 〉
 
 # Usage: new_session window_name path [command]
 #
@@ -29,7 +29,7 @@ setup() { # {{{1
 # Defines envs:
 # - window # tmux full identifier of the create window, e.g. `GuruLibs:Config`.
 
-new_session() { # {{{1
+new_session() { # 〈1
   local window_name="$1"
   local root_dir="$2"
   
@@ -54,7 +54,7 @@ new_session() { # {{{1
     -d                   \
     --                   \
     "$cmd"
-} # }}}
+} # 〉
 
 # Usage: new_window window_name path [command];
 #
@@ -66,7 +66,7 @@ new_session() { # {{{1
 # Set envs:
 # - window # tmux absolute identifier of the create window, e.g. `GuruLibs:Config`.
 
-new_window() { # {{{1
+new_window() { # 〈1
   local window_name=$1
   local root_dir=$2
 
@@ -82,16 +82,16 @@ new_window() { # {{{1
     -d \
     -- \
     "${3-zsh}"
-} # }}}
+} # 〉
 
 # Usage: clean_up
 #
 # Depends on envs:
 # - session_name
 
-clean_up() { # {{{1
+clean_up() { # 〈1
   tmux select-window -t "${session_name}:1.1"
-} # }}}
+} # 〉
 
 # Usage: title_pane {pane} {title}
 title_pane() {
@@ -102,4 +102,4 @@ hide_title() {
   tmux set -w -t "$window" pane-border-status off
 }
 
-# vim: ft=sh fdm=marker
+# vim: fdm=marker fmr=〈,〉
