@@ -1,50 +1,70 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-# flags:
+# Create tmux session for Python project, create project if requested.
+#
+# Flags:
 #   -c: create new project if not exists
 #
-# positional arguments:
+# Positional arguments:
 #   $1: tmux session name, usually capitalized
 #   $2: project path or name (under ~/Develop/Python), usually fully lowercase
 #
-# example:
+# Example:
 #   pyp DA-Python da-python
 
-# parse flag 〈
+# Parse flag 〈
 
+create=''
 zparseopts -D -E c=create
 
 # 〉
 
-# parse positional arguments 〈
+# Parse positional arguments 〈
 
 if [[ $# -ne 2 ]]; then
-  echo "Usage: $0 SESSION_NAME ROOT_DIR_OR_NAME"
+  jack error 'Invalid number of arguments'
+
+  print -- "\
+  Usage: $(basename $0) [-c] session-name name-or-path
+  
+  Flags:
+    -c: create new project if not exists
+  "
+
   exit 1
 fi
 
+# $root_dir
 if [[ -d $2 ]]; then
   root_dir="$2"
 else
   root_dir="${HOME}/Develop/Python/$2"
 fi
+
+# $project_name
 project_name=$(basename $root_dir)
 
 # 〉
 
-# create project if requested 〈
+# Create project if requested 〈
 
 if [[ ! -d $root_dir ]]; then
   set +u
   if [[ -n $create ]]; then
-    jack info 'Create project ...'
+    jack info 'Create project'
 
-    poetry new "$root_dir"
+    # project
+    poetry new --src "$root_dir"
     cd "$root_dir"
 
+    # git repo
     git init
-    gi python >> "${root_dir}/.gitignore"
+    gi python >>"${root_dir}/.gitignore"
+
+    # ap actions
+    template_dir="${MDX_TMUX_DIR}/sessions/templates/python-project"
+    cp -r ${template_dir}/.ap-actions "${root_dir}"
   else
     jack error "Invalid path: $root_dir"
     exit 1
@@ -54,7 +74,7 @@ fi
 
 # 〉
 
-# creat tmux session 〈
+# Creat tmux session 〈
 
 source ${MDX_TMUX_DIR}/sessions/lib/helper.zsh
 
@@ -72,10 +92,9 @@ tmux split-window \
   -h \
   -c "${root_dir}" \
   -d -- \
-  zsh # todo
-  
+  "${MDX_DOT_DIR}/zsh/scripts/python/watch.zsh"
+
 title_pane 2 'Watch + Test'
-tmux set-option -p -t "${window}.2" "@respawn-menu-id" python
 
 # Shell
 tmux split-window \
