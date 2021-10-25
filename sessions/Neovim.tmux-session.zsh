@@ -2,13 +2,12 @@
 
 source ${MDX_TMUX_DIR}/sessions/lib/helper.zsh
 
+setup Neovim
+
 root_dir="${HOME}/.config/nvim"
 
-setup 'Neovim' "${root_dir}"
-
-new_session Main "${root_dir}" 'nvim'
+new_session Main "${root_dir}" 'nvim init.lua'
 title_pane 1 Neovim
-
 
 path_dir="${HOME}/Develop/Lua"
 new_window Pad "$path_dir" "nvim luapad.lua -c 'lua require(\"luapad\").attach()'"
