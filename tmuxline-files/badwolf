@@ -21,3 +21,4 @@ setw -g window-status-format "#[fg=#8cffba,bg=#242321] #I | #W "
 setw -g window-status-current-format "#[fg=#242321,bg=#45413b,nobold,nounderscore,noitalics]#[fg=#f4cf86,bg=#45413b] #I  #W  #P #[fg=#242321,bg=#45413b,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme badwolf
+

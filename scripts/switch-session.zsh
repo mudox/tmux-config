@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+set -euo pipefail
 
 if ! tmux has-session -t "$1"; then
   bin="${MDX_TMUX_DIR}/sessions/$1.tmux-session.zsh"

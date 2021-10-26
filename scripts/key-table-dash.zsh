@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-
 set -euo pipefail
 
 tmux bind-key - switch-client -T mudox
