@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-set -eo pipefail
 
 # Tmux binary
 # wait for tmux 3.3 to release
@@ -27,9 +26,9 @@ if (($# > 0)); then
     fi
 else
     # Attach or launch
-    if $cmd list-sessions &>/dev/null; then
-        $cmd attach
-    else
+    $cmd attach >/dev/null 2>&1
+    if (($? != 0)); then
+        echo 'creating intial session ...'
         exec $cmd new-session -s Default -n Main
     fi
 fi
