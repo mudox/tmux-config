@@ -1,3 +1,3 @@
 #!/usr/bin/env zsh
 
-rsp Ap ap c
+rsp Ap ap
