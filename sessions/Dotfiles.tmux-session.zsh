@@ -1,18 +1,41 @@
 #!/usr/bin/env zsh
 
-source ${MDX_TMUX_DIR}/sessions/lib/helper.zsh
-
-setup Dotfiles
+source ${MDX_TMUX_DIR}/sessions/lib/utils.zsh
 
 root_dir="${HOME}/.dotfiles"
 
-new_session Main "${root_dir}" nvim
-title_pane 1 Neovim
+session "Dotfiles"
 
-new_window Karabiner "${root_dir}/karabiner" nvim
-title_pane 1 Neovim
+# Window: Main 〈
+() {
+window_name="Main"
+pane_title="Edit"
+dir="${root_dir}"
+cmd="nvim zsh/zshrc.zsh"
+window
+}
+#  〉
 
-new_window Actions "${root_dir}/ap" nvim
-title_pane 1 Neovim
+# Window: Karabiner 〈
+() {
+window_name="Karabiner"
+pane_title="Edit"
+dir="${root_dir}/karabiner"
+cmd="nvim"
+window
+}
+#  〉
 
-clean_up
+# Window: Actions 〈
+() {
+window_name="Actions"
+pane_title="Edit"
+dir="${root_dir}/ap"
+cmd="nvim"
+window
+}
+#  〉
+
+finish
+
+#  vim: ft=tmux-session.zsh fdm=marker fmr=\ 〈,\ 〉

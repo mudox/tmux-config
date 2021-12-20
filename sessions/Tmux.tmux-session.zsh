@@ -1,14 +1,31 @@
 #!/usr/bin/env zsh
 
-source ${MDX_TMUX_DIR}/sessions/lib/helper.zsh
-
-setup Tmux
+source ${MDX_TMUX_DIR}/sessions/lib/utils.zsh
 
 root_dir="${MDX_TMUX_DIR}"
 
-new_session Main "${root_dir}" 'nvim tmux.conf'
-title_pane 1 Neovim
+session "Tmux"
 
-new_window Help "${root_dir}" 'MDX_NVIM_MODE=help man tmux'
+# Window: "Main" 〈
+() {
+local window_name='Main'
+local pane_title='Edit'
+local dir="$root_dir"
+local cmd='nvim tmux.conf'
+window
+}
+# 〉
 
-clean_up
+# Window: 'Help' 〈
+() {
+local window_name='Help'
+local pane_title='Help'
+local dir="$root_dir"
+local cmd='man tmux'
+window
+}
+# 〉
+
+finish
+
+#  vim: ft=tmux-session.zsh fdm=marker fmr=\ 〈,\ 〉
