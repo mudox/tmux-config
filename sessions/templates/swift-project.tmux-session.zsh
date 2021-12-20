@@ -73,37 +73,40 @@ fi
 # 〉
 
 # Create tmux session 〈
+source ${MDX_TMUX_DIR}/sessions/lib/utils.zsh
 
-jack info "Craete tmux session [$1]"
+session "${1:?need a session name}"
 
-source ${MDX_TMUX_DIR}/sessions/lib/helper.zsh
+# Window: "Main" 〈
+() {
+  local window_name="Main"
+  local pane_title="Edit"
+  local dir="${root_dir}"
+  local cmd="nvim '-c tabnew ${root_dir}/.ap-actions/tmux-watch.zsh' -c 'tabp'"
+  window
+}
 
-setup "$1"
+# Pane: Watcher 〈
+() {
+  local pane_title='Watcher'
+  local dir="${root_dir}"
+  local cmd=
+  pane
+}
+# 〉
 
-# Editor
-new_session Main "${root_dir}" "nvim ${root_dir}/package.swift ${root_dir}/.ap-actions/tmux-watch.zsh"
-title_pane 1 'Edit'
-
-# Watcher
-tmux split-window \
-  -t "${window}.1" \
-  -h \
-  -c "${root_dir}" \
-  -d \
-  -- \
-  "${MDX_DOT_DIR}/zsh/scripts/swift/watch.zsh"
-title_pane 2 Watcher
-
-# Shell
-tmux split-window \
-  -t "${window}.2" \
-  -v \
-  -c "${root_dir}" \
-  -d
-title_pane 3 Shell
-
-clean_up
+# Pane: Shell 〈
+() {
+  local hv='v'
+  local pane_title='Watcher'
+  local dir="${root_dir}"
+  pane
+}
+# 〉
 
 # 〉
 
-# vim: fdm=marker fmr=〈,〉
+finish
+# 〉
+
+#  vim: ft=tmux-session.zsh fdm=marker fmr=〈,〉

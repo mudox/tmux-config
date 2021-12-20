@@ -15,16 +15,41 @@ set -euo pipefail
 #   rsp -b tav Tav
 #   rsp -l ap Ap
 
-# Parse flags {{{1
+typeset create
+typeset root_dir
 
-zparseopts -D -E l=lib b=bin
+usage() {
+cat <<END
+Usage: $(basename $0) [-b|-l] {session-name} {name-or-path}
+
+Flags:
+  -l create library project
+  -b create executable project
+
+Positional arguments:
+  $1 name of the session
+  $2 full path of the project or folder name under `~/Develop/Rust`
+END
+}
+
+# Parse flags 〈
+zparseopts -D -E l=create b=create
 
 # $create
-create=''
-if [[ -n $lib ]]; then
+if [[ $create = '-l' ]]; then
   create='--lib'
-elif [[ -n $bin ]]; then
+elif [[ $create = '-b' ]]; then
   create='--bin'
+fi
+
+# 〉
+
+# Parse positional arguments  〈
+
+if [[ $# -ne 2 ]]; then 
+  jack error "Invalid number of positional arguments"
+  usage
+  exit 1
 fi
 
 # $root_dir
@@ -37,27 +62,9 @@ fi
 # $project_name
 project_name=$(basename $root_dir)
 
-# }}}1
+# 〉
 
-# Parse positional arguments {{{1
-
-if [[ $# -ne 2 ]]; then
-  jack error 'Invalid number of arguments'
-
-  print "\
-  Usage: $(basename $0) [-b | -l] session-name name-or-path
-
-  Flags:
-    -l create library project
-    -b create executable project
-  "
-
-  exit 1
-fi
-# }}}1
-
-# Create project if requested {{{1
-
+# Create project if requested  〈
 if [[ ! -d $root_dir ]]; then
   if [[ -n $create ]]; then
     jack info 'Create project'
@@ -76,7 +83,7 @@ if [[ ! -d $root_dir ]]; then
 
     # ap actions
     cp -r "${skeleton_dir}/.ap-actions" "${root_dir}"
-    
+
     # dependency crates
     cat "${skeleton_dir}/deps.toml" >> "${root_dir}/Cargo.toml"
 
@@ -88,49 +95,51 @@ if [[ ! -d $root_dir ]]; then
   fi
 fi
 
-# }}}1
+# 〉
 
-# Creat tmux session {{{1
+# Creat tmux session  〈
+source ${MDX_TMUX_DIR}/sessions/lib/utils.zsh
 
-source ${MDX_TMUX_DIR}/sessions/lib/helper.zsh
+session "$1"
 
+# Window: "Main" 〈
+() {
+  if [[ -f "${root_dir}/src/main.rs" ]]; then
+    file='src/main.rs'
+  else
+    file='src/lib.rs'
+  fi
 
-jack info "Create tmux session [$1]"
+  local window_name="Main"
+  local pane_title='Edit'
+  local dir="${root_dir}"
+  local cmd="nvim -p ${root_dir}/${file} ${root_dir}/.ap-actions/tmux-watch.zsh"
+  window
+}
 
-setup "$1"
+# Pane: 'Watcher' 〈
+() {
+  local pane_title='Watcher'
+  local dir="$root_dir"
+  local cmd="${MDX_DOT_DIR}/zsh/scripts/rust/watch.zsh"
+  pane
+}
+# 〉
 
-# Editor
-if [[ -f "${root_dir}/src/main.rs" ]]; then
-  file='src/main.rs'
-else
-  file='src/lib.rs'
-fi
-new_session Main "${root_dir}" "nvim -p ${root_dir}/$file ${root_dir}/.ap-actions/tmux-watch.zsh"
-title_pane 1 Edit
+# Pane: 'Shell' 〈
+() {
+  local hv=v
+  local window_name='Shell'
+  local pane_title='Shell'
+  local dir="$root_dir"
+  pane
+}
+# 〉
 
-# Watcher
-tmux split-window \
-  -t "${window}.1" \
-  -h \
-  -c "${root_dir}" \
-  -d -- \
-  ${MDX_DOT_DIR}/zsh/scripts/rust/watch.zsh
+# 〉
 
-title_pane 2 Watcher
-# tmux set-option -p -t "${window}.2" "@respawn-menu-id" rust
+finish
 
-# Shell
-tmux split-window \
-  -t "${window}.2" \
-  -v \
-  -c "${root_dir}" \
-  -d
-title_pane 3 Shell
+# 〉
 
-# Window: Git
-
-clean_up
-
-# }}}1
-
-# vim: fdm=marker
+# vim: ft=tmux-session.zsh fdm=marker fmr=〈,〉

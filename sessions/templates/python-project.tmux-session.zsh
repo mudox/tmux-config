@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-# Create tmux session for Python project, create project if requested.
+# 
 #
 # Flags:
 #   -c: create new project if not exists
@@ -13,9 +13,21 @@ set -euo pipefail
 # Example:
 #   pyp DA-Python da-python
 
+typeset create
+
+usage() {
+cat <<END
+Create tmux session for Python project, create project if requested.
+
+Usage: $(basename $0) [-c] {session-name} {path_or_name}
+
+Flags:
+  -c: create new project if not exists.
+END
+}
+
 # Parse flag 〈
 
-create=''
 zparseopts -D -E c=create
 
 # 〉
@@ -24,14 +36,7 @@ zparseopts -D -E c=create
 
 if [[ $# -ne 2 ]]; then
   jack error 'Invalid number of arguments'
-
-  print -- "\
-  Usage: $(basename $0) [-c] session-name name-or-path
-  
-  Flags:
-    -c: create new project if not exists
-  "
-
+  usage
   exit 1
 fi
 
@@ -49,14 +54,13 @@ project_name=$(basename $root_dir)
 
 # Create project if requested 〈
 
-if [[ ! -d $root_dir ]]; then
-  set +u
+if [[ ! -d ${root_dir} ]]; then
   if [[ -n $create ]]; then
     jack info 'Create project'
 
     # project
-    poetry new --src "$root_dir"
-    cd "$root_dir"
+    poetry new --src "${root_dir}"
+    cd "${root_dir}"
 
     # git repo
     git init
@@ -66,48 +70,49 @@ if [[ ! -d $root_dir ]]; then
     template_dir="${MDX_TMUX_DIR}/sessions/templates/python-project"
     cp -r ${template_dir}/.ap-actions "${root_dir}"
   else
-    jack error "Invalid path: $root_dir"
+    jack error "Invalid path: ${root_dir}"
     exit 1
   fi
-  set -u
 fi
 
 # 〉
 
 # Creat tmux session 〈
+source ${MDX_TMUX_DIR}/sessions/lib/utils.zsh
 
-source ${MDX_TMUX_DIR}/sessions/lib/helper.zsh
+session "${1:?need a session name}"
 
-jack info "Create tmux session [$1]"
+# Window: 'Main' 〈
+() {
+  local window_name='Main'
+  local pane_title='Edit'
+  local dir="${root_dir}"
+  local cmd="nvim -c 'tabnew ${root_dir}/.ap-actions/tmux-watch.zsh' -c 'tabp'"
+  window
+}
 
-setup "$1"
+# Pane: Watcher 〈
+() {
+  local pane_title='Watcher'
+  local dir="${root_dir}"
+  pane
+}
+# 〉
 
-# Editor
-new_session Main "${root_dir}" nvim
-title_pane 1 Edit
-
-# Watcher
-tmux split-window \
-  -t "${window}.1" \
-  -h \
-  -c "${root_dir}" \
-  -d -- \
-  "${MDX_DOT_DIR}/zsh/scripts/python/watch.zsh"
-
-title_pane 2 'Watch + Test'
-
-# Shell
-tmux split-window \
-  -t "${window}.2" \
-  -v \
-  -c "${root_dir}" \
-  -d
-title_pane 3 Shell
-
-# Window: Git
-
-clean_up
+# Pane: Shell 〈
+() {
+  local hv='v'
+  local pane_title='Shell'
+  local dir="${root_dir}"
+  pane
+}
+# 〉
 
 # 〉
 
-# vim: fdm=marker fmr=〈,〉
+finish
+
+# 〉
+
+#  vim: ft=tmux-session.zsh fdm=marker fmr=〈,〉
+
