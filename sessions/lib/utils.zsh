@@ -1,6 +1,6 @@
-# vim: fdm=marker fmr=〈,〉
+#  vim: fdm=marker fmr=\ 〈,\ 〉
 
-# Declare (prepare) a new session 〈
+# declare: Declare (prepare) a new session 〈
 #
 # Usage: session "{session_name}"
 #
@@ -23,9 +23,10 @@ session() {
 
   session_created=false
   pane_count=0
-} # 〉
+} 
+# 〉
 
-# Creates a new session/window. # 〈
+# window: Creates a new session/window. 〈
 #
 # Create the session if not existed, otherwise create new window.
 #
@@ -58,7 +59,6 @@ window() {
 
   if [[ $session_created != true ]]; then
     jack info "Create session [$s]"
-    jack verbose "Create window [$w]"
 
     tmux new-session \
       -s "$s" \
@@ -84,14 +84,19 @@ window() {
   fi
 
   pane_count=1
-} # 〉
 
-# Creates a new pane by splitting a pane. # 〈
+  jack verbose "Create window [$w]"
+  jack verbose "  + Pane [$t]"
+}
+# 〉
+
+# pane: Creates a new pane by splitting a pane. 〈
 #
 # Usage:
 # ```zsh
 # () {
 # pane_title=...
+# hv=... # 'h'(default) or 'v'
 # dir=...
 # cmd=...
 # pane
@@ -109,17 +114,20 @@ pane() {
   p=${dir:?}
   c=${cmd:-zsh}
 
+  jack verbose "  + Pane [$t]"
+
   tmux split-window \
     -t "$s" \
-    -h \
+    -"${hv:-h}" \
     -d \
     -c "$p" \
     "$c"
   ((++pane_count))
   tmux select-pane -t "${window}.${pane_count}" -T "$t"
-} # 〉
+}
+# 〉
 
-# Setup a pane. 〈
+# title-pane: Setup a pane. 〈
 #
 # Usage:
 # ```
@@ -132,9 +140,10 @@ title-pane() {
   index=${1:?need pane index as 1st argument}
   title=${2:?need pane title as 2nd argument}
   tmux select-pane -t "$window.$index" -T "$title"
-} # 〉
+}
+# 〉
 
-# Finalize session creation. 〈
+# finish: Finalize session creation. 〈
 #
 # Usage: done
 #
@@ -142,7 +151,8 @@ title-pane() {
 # - session_name
 finish() {
   tmux select-window -t "${session_name:?}:1.1"
-} # 〉
+} 
+# 〉
 
 hide_title() {
   tmux set -w -t "$window" pane-border-status off
