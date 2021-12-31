@@ -51,9 +51,6 @@ else
   root_dir="${HOME}/Develop/Rust/$2"
 fi
 
-# $project_name
-project_name=$(basename $root_dir)
-
 # 〉
 
 # Create project if requested  〈
@@ -66,11 +63,13 @@ if [[ ! -d $root_dir ]]; then
 
     cd "$root_dir"
 
-    # skeleton files
     skeleton_dir="${MDX_TMUX_DIR}/sessions/templates/rust-project"
-    for temp in ${skeleton_dir}/*.rs; do
-      temp_name="${$(basename "$temp")//-/_}"
-      crate="${project_name}" envsubst < "${temp}" > "${root_dir}/src/${temp_name}"
+    crate_name="${$(basename "${root_dir}")//-/_}"
+
+    # skeleton files
+    for temp in "${skeleton_dir}"/*.rs; do
+      temp_name="$(basename $temp)"
+      crate="${crate_name}" envsubst < "${temp}" > "${root_dir}/src/${temp_name}"
     done
 
     # ap actions
@@ -83,6 +82,11 @@ if [[ ! -d $root_dir ]]; then
     gi rust >> "${root_dir}/.gitignore"
   else
     jack error "Invalid path: $root_dir"
+    exit 1
+  fi
+else
+  if [[ -n $create ]]; then
+    jack error "Path ${root_dir} already exists, skipping creation"
     exit 1
   fi
 fi
