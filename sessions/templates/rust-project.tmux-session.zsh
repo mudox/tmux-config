@@ -1,19 +1,11 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-# Create tmux session for the rust project, create the project is requested.
-#
-# Flags:
-#   -l: create library project
-#   -b: create binary executable project
-#
-# Positional arguments:
-#   $1: session (project) name, usually capitalized from crate name
-#   $2: project path or name (under ~/Develop/Rust), usually fully lowercase
+# Create tmux session for the rust project, create the project if requested.
 #
 # Example:
-#   rsp -b tav Tav
-#   rsp -l ap Ap
+#   rsp -b Tav tav
+#   rsp -l TmuxKit tmux-kit
 
 typeset create
 typeset root_dir
@@ -82,7 +74,7 @@ if [[ ! -d $root_dir ]]; then
     done
 
     # ap actions
-    cp -r "${skeleton_dir}/.ap-actions" "${root_dir}"
+    cp -r "${skeleton_dir}/ap-actions" "${root_dir}/.ap-actions"
 
     # dependency crates
     cat "${skeleton_dir}/deps.toml" >> "${root_dir}/Cargo.toml"
