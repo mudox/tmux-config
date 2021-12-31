@@ -53,9 +53,9 @@ if [[ ! -d ${root_dir} ]]; then
   jack info 'Create project'
 
   # create project
-  mkdir "${root_dir}"
-  cd "${root_dir}"
+  mkdir "${root_dir}" && cd "${root_dir}"
   npm init -y
+  sd 'index.js' 'src/index.js' "${root_dir}/package.json"
 
   # skeleton files
   mkdir 'src' 'test'
@@ -68,6 +68,7 @@ if [[ ! -d ${root_dir} ]]; then
   cp -r "${skeleton_dir}/ap-actions" "${root_dir}/.ap-actions"
 
   # git repo
+  git init
   gi node >> "${root_dir}/.gitignore"
 fi
 
@@ -83,7 +84,7 @@ session "$1"
   local window_name="Main"
   local pane_title='Edit'
   local dir="${root_dir}"
-  local cmd="nvim -p ${root_dir}/src/index.js ${root_dir}/.ap-actions/tmux-watch.zsh"
+  local cmd="nvim ${root_dir}/src/index.js"
   window
 }
 
