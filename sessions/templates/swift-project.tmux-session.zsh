@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-# Create tmux session for Swift project, create the project is requested
+# Create tmux session for Swift project, create the project if requested
 #
 # Flags:
 #   -l: create lib project
@@ -49,13 +49,13 @@ else
   root_dir="${HOME}/Develop/Swift/$2"
 fi
 
-if [[ ! -d $root_dir ]]; then
+if [[ ! -d ${root_dir} ]]; then
   if [[ -n $create ]]; then
     jack info 'Create project'
 
     # create project
-    mkdir -p "$root_dir"
-    cd "$root_dir"
+    mkdir -p "${root_dir}"
+    cd "${root_dir}"
     swift package init --type "$create"
 
     # git repo
@@ -63,9 +63,9 @@ if [[ ! -d $root_dir ]]; then
 
     # ap actions
     template_dir="${MDX_TMUX_DIR}/sessions/templates/swift-project"
-    cp -r ${template_dir}/.ap-actions "${root_dir}"
+    cp -r ${template_dir}/ap-actions "${root_dir}/.ap-actions"
   else
-    jack error "Invalid path: $root_dir, specifying `-b | -l` to create project"
+    jack error "Invalid path: ${root_dir}, specifying `-b | -l` to create project"
     exit 1
   fi
 fi
@@ -75,14 +75,14 @@ fi
 # Create tmux session 〈
 source ${MDX_TMUX_DIR}/sessions/lib/utils.zsh
 
-session "${1:?need a session name}"
+session "$1"
 
 # Window: "Main" 〈
 () {
   local window_name="Main"
   local pane_title="Edit"
   local dir="${root_dir}"
-  local cmd="nvim '-c tabnew ${root_dir}/.ap-actions/tmux-watch.zsh' -c 'tabp'"
+  local cmd="nvim ${root_dir}/package.swift"
   window
 }
 
@@ -90,7 +90,7 @@ session "${1:?need a session name}"
 () {
   local pane_title='Watcher'
   local dir="${root_dir}"
-  local cmd=
+  local cmd="nodemon --ext swift --exec ${root_dir}/.ap-actions/tmux-watch.zsh"
   pane
 }
 # 〉
