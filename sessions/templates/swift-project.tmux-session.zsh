@@ -3,14 +3,8 @@ set -euo pipefail
 
 # Create tmux session for Swift project, create the project if requested
 #
-# Flags:
-#   -l: create lib project
-#   -b: create binary execution project
-#
-# Positional arguments:
-#   $1: session name
-#   $2: project path or name (under ~/Develop/Swift)
-#   $3: one of (b)uild,(r)un,(t)test
+# Example:
+#   swp -b Try-Swift try-swift
 
 # Parse flags 〈
 
@@ -59,15 +53,19 @@ if [[ ! -d ${root_dir} ]]; then
     swift package init --type "$create"
 
     # git repo
-    gi >> .gitignore
+    gi swift >> .gitignore
+
+    template_dir="${MDX_TMUX_DIR}/sessions/templates/swift-project"
 
     # ap actions
-    template_dir="${MDX_TMUX_DIR}/sessions/templates/swift-project"
-    cp -r ${template_dir}/ap-actions "${root_dir}/.ap-actions"
+    cp -vr ${template_dir}/ap-actions "${root_dir}/.ap-actions"
   else
     jack error "Invalid path: ${root_dir}, specifying `-b | -l` to create project"
     exit 1
   fi
+else
+  jack error "Path ${root_dir} already exists, skipping creation"
+  exit 1
 fi
 
 # 〉
@@ -107,6 +105,7 @@ session "$1"
 # 〉
 
 finish
+
 # 〉
 
 #  vim: ft=tmux-session.zsh fdm=marker fmr=〈,〉
