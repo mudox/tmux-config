@@ -59,7 +59,7 @@ if [[ ! -d ${root_dir} ]]; then
     gi python >>"${root_dir}/.gitignore"
 
     template_dir="${MDX_TMUX_DIR}/sessions/templates/python-project"
-    project_name="${$(basename ${root_dir})//-/_}"
+    project_name="${$(basename "${root_dir}")//-/_}"
 
     # ap actions
     mkdir "${root_dir}/.ap-actions"
