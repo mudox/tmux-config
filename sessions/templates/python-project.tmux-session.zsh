@@ -1,14 +1,7 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-# 
-#
-# Flags:
-#   -c: create new project if not exists
-#
-# Positional arguments:
-#   $1: tmux session name, usually capitalized
-#   $2: project path or name (under ~/Develop/Python), usually fully lowercase
+# Create tmux session for the Python project, create the project if requested.
 #
 # Example:
 #   pyp DA-Python da-python
@@ -47,9 +40,6 @@ else
   root_dir="${HOME}/Develop/Python/$2"
 fi
 
-# $project_name
-project_name=$(basename $root_dir)
-
 # 〉
 
 # Create project if requested 〈
@@ -68,7 +58,7 @@ if [[ ! -d ${root_dir} ]]; then
 
     # ap actions
     template_dir="${MDX_TMUX_DIR}/sessions/templates/python-project"
-    cp -r ${template_dir}/.ap-actions "${root_dir}"
+    cp -r ${template_dir}/ap-actions "${root_dir}/.ap-actions"
   else
     jack error "Invalid path: ${root_dir}"
     exit 1
@@ -87,7 +77,7 @@ session "${1:?need a session name}"
   local window_name='Main'
   local pane_title='Edit'
   local dir="${root_dir}"
-  local cmd="nvim -c 'tabnew ${root_dir}/.ap-actions/tmux-watch.zsh' -c 'tabp'"
+  local cmd="nvim"
   window
 }
 
@@ -95,6 +85,7 @@ session "${1:?need a session name}"
 () {
   local pane_title='Watcher'
   local dir="${root_dir}"
+  local cmd="nodemon --quiet --ext py --exec ${root_dir}/.ap-actions/tmux-watch.zsh"
   pane
 }
 # 〉
