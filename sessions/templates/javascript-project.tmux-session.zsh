@@ -39,7 +39,7 @@ if [[ $# -ne 2 ]]; then
   exit 1
 fi
 
-# $root_dir
+# ${root_dir}
 if [[ -d $2 ]]; then
   root_dir="$2"
 else
@@ -49,7 +49,7 @@ fi
 # 〉
 
 # Create project if requested  〈
-if [[ ! -d $root_dir ]]; then
+if [[ ! -d ${root_dir} ]]; then
   jack info 'Create project'
 
   # create project
@@ -90,8 +90,8 @@ session "$1"
 # Pane: 'Watcher' 〈
 () {
   local pane_title='Watcher'
-  local dir="$root_dir"
-  local cmd="nodemon -V --exec ${root_dir}/.ap-actions/tmux-watch.zsh"
+  local dir="${root_dir}"
+  local cmd="nodemon --quiet --exec ${root_dir}/.ap-actions/tmux-watch.zsh"
   pane
 }
 # 〉
