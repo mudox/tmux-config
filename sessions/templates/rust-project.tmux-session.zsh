@@ -113,7 +113,7 @@ session "$1"
 () {
   local pane_title='Watcher'
   local dir="$root_dir"
-  local cmd="${MDX_DOT_DIR}/zsh/scripts/rust/watch.zsh"
+  local cmd="cargo watch -- ${root_dir}/.ap-actions/tmux-watch.zsh"
   pane
 }
 # 〉
