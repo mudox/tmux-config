@@ -1,4 +1,15 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-swift test |& xcpretty
+clear
+
+# for single file without Package.swift
+# swift main.swift
+
+# test
+# swift test |& xcpretty
+
+# run
+swift run
+
+#  vim: fdm=marker fmr=〈,〉

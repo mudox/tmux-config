@@ -90,7 +90,7 @@ session "$1"
 () {
   local pane_title='Watcher'
   local dir="${root_dir}"
-  local cmd="nodemon --ext swift --exec ${root_dir}/.ap-actions/tmux-watch.zsh"
+  local cmd="nodemon --quiet --ext swift --exec ${root_dir}/.ap-actions/tmux-watch.zsh"
   pane
 }
 # 〉
