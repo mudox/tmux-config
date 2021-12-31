@@ -52,15 +52,28 @@ if [[ ! -d ${root_dir} ]]; then
     poetry new --src "${root_dir}"
     cd "${root_dir}"
 
+    touch "src/$(basename ${root_dir//-/_})/main.py"
+
     # git repo
     git init
     gi python >>"${root_dir}/.gitignore"
 
-    # ap actions
     template_dir="${MDX_TMUX_DIR}/sessions/templates/python-project"
-    cp -r ${template_dir}/ap-actions "${root_dir}/.ap-actions"
+    project_name="${$(basename ${root_dir})//-/_}"
+
+    # ap actions
+    mkdir "${root_dir}/.ap-actions"
+    for temp in "${template_dir}"/ap-actions/*; do
+      project_name="${project_name}" envsubst < "${temp}" > "${root_dir}/.ap-actions/$(basename ${temp})"
+    done
+    chmod +x "${root_dir}/.ap-actions/tmux-watch.zsh"
   else
     jack error "Invalid path: ${root_dir}"
+    exit 1
+  fi
+else
+  if [[ -n $create ]]; then
+    jack error "Path ${root_dir} already exists, skipping creation"
     exit 1
   fi
 fi
