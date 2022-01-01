@@ -1,21 +1,22 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-# Create tmux session for the javascript project, create the project if requested.
-#
-# Example:
-#   jsp -b DA-JavaScript da-javascript
-
-typeset create
-typeset root_dir
-
 usage() {
-cat <<END
-Usage: $(basename $0) {session-name} {name-or-path}
+cat <<\END
+Create tmux session for the javascript project, create the project if requested.
 
-Positional arguments:
+Usage: $(basename $0) [-c] session_title project_name_or_path
+
+Flags:
+  -c create the project
+
+Arguments:
   $1 name of the session
-  $2 full path of the project or folder name under `~/Develop/JavaScript`
+  $2 full path of the project or folder name under `$MDX_DEV_DIR/JavaScript`
+
+Examples:
+  jsp -c Try-JavaScript try-javascript
+  jsp DA-JavaScript da-javascript
 END
 }
 
