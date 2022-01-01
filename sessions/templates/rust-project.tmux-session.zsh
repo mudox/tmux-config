@@ -22,6 +22,7 @@ END
 }
 
 # Parse flags 〈
+typeset create
 zparseopts -D -E l=create b=create
 
 # $create
@@ -30,35 +31,36 @@ if [[ $create = '-l' ]]; then
 elif [[ $create = '-b' ]]; then
   create='--bin'
 fi
-
 # 〉
 
-# Parse positional arguments  〈
-
+# Parse positional arguments 〈
 if [[ $# -ne 2 ]]; then 
   jack error "Invalid number of positional arguments"
   usage
   exit 1
 fi
 
-# $root_dir
+# ${root_dir}
+typeset root_dir
 if [[ -d $2 ]]; then
   root_dir="$2"
 else
-  root_dir="${HOME}/Develop/Rust/$2"
+  prefix="${MDX_DEV_DIR:-${HOME}/Develop}/JavaScript"
+  if [[ ! -d $prefix ]]; then
+    mkdir -pv "$prefix"
+  fi
+  root_dir="${prefix}/$2"
 fi
-
 # 〉
 
 # Create project if requested  〈
-if [[ ! -d $root_dir ]]; then
+if [[ ! -d ${root_dir} ]]; then
   if [[ -n $create ]]; then
     jack info 'Create project'
 
     # create project
-    cargo new "$root_dir" "$create"
-
-    cd "$root_dir"
+    cargo new "${root_dir}" "$create"
+    cd "${root_dir}"
 
     skeleton_dir="${MDX_TMUX_DIR}/sessions/templates/rust-project"
     crate_name="${$(basename "${root_dir}")//-/_}"
@@ -78,7 +80,7 @@ if [[ ! -d $root_dir ]]; then
     # git repo
     gi rust >> "${root_dir}/.gitignore"
   else
-    jack error "Invalid path: $root_dir"
+    jack error "Invalid path: ${root_dir}"
     exit 1
   fi
 else
@@ -87,7 +89,6 @@ else
     exit 1
   fi
 fi
-
 # 〉
 
 # Creat tmux session  〈
@@ -113,7 +114,7 @@ session "$1"
 # Pane: 'Watcher' 〈
 () {
   local pane_title='Watcher'
-  local dir="$root_dir"
+  local dir="${root_dir}"
   local cmd="cargo watch -- ${root_dir}/.ap-actions/tmux-watch.zsh"
   pane
 }
@@ -124,7 +125,7 @@ session "$1"
   local hv=v
   local window_name='Shell'
   local pane_title='Shell'
-  local dir="$root_dir"
+  local dir="${root_dir}"
   pane
 }
 # 〉
@@ -132,7 +133,6 @@ session "$1"
 # 〉
 
 finish
-
 # 〉
 
 # vim: ft=tmux-session.zsh fdm=marker fmr=〈,〉
