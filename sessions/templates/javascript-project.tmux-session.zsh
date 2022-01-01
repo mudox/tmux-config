@@ -21,56 +21,62 @@ END
 }
 
 # Parse flags 〈
-zparseopts -D -E l=create b=create
-
-# $create
-if [[ $create = '-l' ]]; then
-  create='--lib'
-elif [[ $create = '-b' ]]; then
-  create='--bin'
-fi
-
+typeset create
+zparseopts -D -E c=create
 # 〉
 
 # Parse positional arguments  〈
-
 if [[ $# -ne 2 ]]; then 
   jack error "Invalid number of positional arguments"
   usage
   exit 1
 fi
 
-# ${root_dir}
+# $root_dir
+typeset root_dir
 if [[ -d $2 ]]; then
   root_dir="$2"
 else
-  root_dir="${HOME}/Develop/JavaScript/$2"
+  prefix="${MDX_DEV_DIR:-${HOME}/Develop}/JavaScript"
+  if [[ ! -d $prefix ]]; then
+    mkdir -pv "$prefix"
+  fi
+  root_dir="${prefix}/$2"
 fi
-
 # 〉
 
 # Create project if requested  〈
 if [[ ! -d ${root_dir} ]]; then
-  jack info 'Create project'
+  if [[ -n $create ]]; then
+    jack info 'Create project'
 
-  # create project
-  mkdir "${root_dir}" && cd "${root_dir}"
-  npm init -y
-  sd 'index.js' 'src/index.js' "${root_dir}/package.json"
+    # create project
+    mkdir -p "${root_dir}" && cd "${root_dir}"
+    npm init -y
+    sd 'index.js' 'src/index.js' "${root_dir}/package.json"
 
-  # skeleton files
-  mkdir 'src' 'test'
-  touch "${root_dir}/src/index.js"
-  touch "${root_dir}/test/test.js"
+    # skeleton files
+    mkdir 'src' 'test'
+    touch "${root_dir}/src/index.js"
+    touch "${root_dir}/test/test.js"
 
-  skeleton_dir="${MDX_TMUX_DIR}/sessions/templates/javascript-project"
-  
-  # ap actions
-  cp -r "${skeleton_dir}/ap-actions" "${root_dir}/.ap-actions"
+    skeleton_dir="${MDX_TMUX_DIR}/sessions/templates/javascript-project"
+    
+    # ap actions
+    cp -r "${skeleton_dir}/ap-actions" "${root_dir}/.ap-actions"
 
-  # git repo
-  git init
-  gi node >> "${root_dir}/.gitignore"
+    # git repo
+    git init
+    gi node >> "${root_dir}/.gitignore"
+  else
+    jack error "Invalid path: ${root_dir}"
+    exit 1
+  fi
+else
+  if [[ -n $create ]]; then
+    jack error "Path ${root_dir} already exists, skipping creation"
+    exit 1
+  fi
 fi
 
 # 〉
