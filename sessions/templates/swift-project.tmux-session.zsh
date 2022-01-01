@@ -21,41 +21,38 @@ Example:
 END
 }
 
+# Parse flags 〈
 zparseopts -D -E l=lib b=bin
-create=""
+
+typeset create
 if [[ -n $lib ]]; then
   create='library'
 elif [[ -n $bin ]]; then
   create='executable'
 fi
-
 # 〉
 
 # Parse positional arguments 〈
-
-if [[ $# -ne 2 ]]; then
-  jack error 'Invalid number of arguments'
-
-  print -- "\
-  Usage: $(basename $0) [-b | -l] session-name path_or_name
-
-  Flags:
-    -b: create executable project
-    -l: create library project
-  "
+if [[ $# -ne 2 ]]; then 
+  jack error "Invalid number of positional arguments"
+  usage
   exit 1
 fi
 
-# 〉
-
-# Create project if requested 〈
-
+# $root_dir
+typeset root_dir
 if [[ -d $2 ]]; then
   root_dir="$2"
 else
-  root_dir="${HOME}/Develop/Swift/$2"
+  prefix="${MDX_DEV_DIR:-${HOME}/Develop}/Swift"
+  if [[ ! -d $prefix ]]; then
+    mkdir -pv "$prefix"
+  fi
+  root_dir="${prefix}/$2"
 fi
+# 〉
 
+# Create project if requested 〈
 if [[ ! -d ${root_dir} ]]; then
   if [[ -n $create ]]; then
     jack info 'Create project'
