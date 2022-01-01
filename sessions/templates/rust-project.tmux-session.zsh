@@ -1,26 +1,23 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-# Create tmux session for the rust project, create the project if requested.
-#
-# Example:
-#   rsp -b Tav tav
-#   rsp -l TmuxKit tmux-kit
-
-typeset create
-typeset root_dir
-
 usage() {
-cat <<END
-Usage: $(basename $0) [-b|-l] {session-name} {name-or-path}
+cat <<-\END
+   Create tmux session for the Rust project, create the project if requested.
 
-Flags:
-  -l create library project
-  -b create executable project
+   Usage: $(basename $0) [-b|-l] session_title project_name_or_path
+   
+   Flags:
+     -l create library project
+     -b create executable project
+   
+   Positional arguments:
+     $1 name of the session
+     $2 full path of the project or folder name under `$MDX_DEV_DIR/Rust`
 
-Positional arguments:
-  $1 name of the session
-  $2 full path of the project or folder name under `~/Develop/Rust`
+  Example:
+    rsp -b Tav tav
+    rsp -l TmuxKit tmux-kit
 END
 }
 
