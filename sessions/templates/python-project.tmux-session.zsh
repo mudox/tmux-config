@@ -21,9 +21,8 @@ END
 }
 
 # Parse flag 〈
-
+typeset create
 zparseopts -D -E c=create
-
 # 〉
 
 # Parse positional arguments 〈
@@ -38,7 +37,11 @@ fi
 if [[ -d $2 ]]; then
   root_dir="$2"
 else
-  root_dir="${HOME}/Develop/Python/$2"
+  prefix="${MDX_DEV_DIR:-${HOME}/Develop}/JavaScript"
+  if [[ ! -d $prefix ]]; then
+    mkdir -pv "$prefix"
+  fi
+  root_dir="${prefix}/$2"
 fi
 
 # 〉
