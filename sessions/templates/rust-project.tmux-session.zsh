@@ -3,21 +3,21 @@ set -euo pipefail
 
 usage() {
 cat <<-\END
-   Create tmux session for the Rust project, create the project if requested.
+Create tmux session for the Rust project, create the project if requested.
 
-   Usage: $(basename $0) [-b|-l] session_title project_name_or_path
-   
-   Flags:
-     -l create library project
-     -b create executable project
-   
-   Positional arguments:
-     $1 name of the session
-     $2 full path of the project or folder name under `$MDX_DEV_DIR/Rust`
+Usage: $(basename $0) [-b|-l] session_title project_name_or_path
 
-  Example:
-    rsp -b Tav tav
-    rsp -l TmuxKit tmux-kit
+Flags:
+  -l create library project
+  -b create executable project
+
+Positional arguments:
+  $1 name of the session
+  $2 full path of the project or folder name under `$MDX_DEV_DIR/Rust`
+
+Example:
+  rsp -b Tav tav
+  rsp -l TmuxKit tmux-kit
 END
 }
 
@@ -45,7 +45,7 @@ typeset root_dir
 if [[ -d $2 ]]; then
   root_dir="$2"
 else
-  prefix="${MDX_DEV_DIR:-${HOME}/Develop}/JavaScript"
+  prefix="${MDX_DEV_DIR:-${HOME}/Develop}/Rust"
   if [[ ! -d $prefix ]]; then
     mkdir -pv "$prefix"
   fi
