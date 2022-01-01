@@ -1,12 +1,25 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-# Create tmux session for Swift project, create the project if requested
-#
-# Example:
-#   swp -b Try-Swift try-swift
+usage() {
+cat <<-\END
+Create tmux session for the Swift project, create the project if requested.
 
-# Parse flags 〈
+Usage: $(basename $0) [-b|-l] session_title project_name_or_path
+
+Flags:
+  -l create framework project
+  -b create executable project
+
+Positional arguments:
+  $1 title of the session
+  $2 full path of the project or folder name under `$MDX_DEV_DIR/Rust`
+
+Example:
+  swp -b Tav tav
+  swp -l TmuxKit tmux-kit
+END
+}
 
 zparseopts -D -E l=lib b=bin
 create=""
