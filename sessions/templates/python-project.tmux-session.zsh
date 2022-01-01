@@ -37,7 +37,7 @@ fi
 if [[ -d $2 ]]; then
   root_dir="$2"
 else
-  prefix="${MDX_DEV_DIR:-${HOME}/Develop}/JavaScript"
+  prefix="${MDX_DEV_DIR:-${HOME}/Develop}/Python"
   if [[ ! -d $prefix ]]; then
     mkdir -pv "$prefix"
   fi
