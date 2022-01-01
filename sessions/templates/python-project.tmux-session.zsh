@@ -1,21 +1,22 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-# Create tmux session for the Python project, create the project if requested.
-#
-# Example:
-#   pyp DA-Python da-python
-
-typeset create
-
 usage() {
-cat <<END
+cat <<\END
 Create tmux session for Python project, create project if requested.
 
-Usage: $(basename $0) [-c] {session-name} {path_or_name}
+Usage: $(basename $0) [-c] session_title project_name_or_path
 
 Flags:
   -c: create new project if not exists.
+
+Positional arguments:
+  $1 name of the session
+  $2 full path of the project or folder name under `$MDX_DEV_DIR/Python`
+
+Example:
+  pyp -c DA-Python da-python
+  pyp Try-Python try-python
 END
 }
 
