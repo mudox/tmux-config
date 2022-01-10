@@ -6,17 +6,18 @@
 cmd=("/opt/homebrew/bin/tmux") # HEAD
 
 # Determine server
-server=default
-if [[ -n $ITERM_SESSION_ID ]]; then
-  server=iterm
-elif [[ -n $KITTY_WINDOW_ID ]]; then
+if [[ -n $KITTY_WINDOW_ID ]]; then
   server=kitty
+elif [[ -n $ITERM_SESSION_ID ]]; then
+  server=iterm
 elif [[ -n $ALACRITTY_LOG ]]; then
   server=alacritty
 elif [[ -n $HYPER ]]; then
   server=hyper
 elif [[ $TERM_PROGRAM = vscode ]]; then
   server=vscode
+else
+  server=default
 fi
 cmd+=(-L $server)
 
@@ -27,10 +28,6 @@ if (($# > 0)); then
     exec $cmd $@
   fi
 else
-  # Attach or launch
-  $cmd attach >/dev/null 2>&1
-  if (($? != 0)); then
-    echo 'creating intial session ...'
-    exec $cmd new-session -s Default -n Main
-  fi
+  eval "$("${MDX_GIT_DIR}/base16-shell/profile_helper.sh")"
+  exec $cmd attach >/dev/null 2>&1
 fi
