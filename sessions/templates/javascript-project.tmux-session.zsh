@@ -52,7 +52,7 @@ if [[ ! -d ${root_dir} ]]; then
 
     # create project
     mkdir -p "${root_dir}" && cd "${root_dir}"
-    npm init -y
+    pnpm init -y
     sd 'index.js' 'src/index.js' "${root_dir}/package.json"
 
     # skeleton files
