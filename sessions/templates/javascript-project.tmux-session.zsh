@@ -89,7 +89,7 @@ session "$1"
 # Window: "Main" 〈
 () {
   local window_name="Main"
-  local pane_title='Edit'
+  local pane_title=' Edit'
   local dir="${root_dir}"
   local cmd="nvim ${root_dir}/src/index.js"
   window
@@ -97,7 +97,7 @@ session "$1"
 
 # Pane: 'Watcher' 〈
 () {
-  local pane_title='Watcher'
+  local pane_title='  Watch'
   local dir="${root_dir}"
   local cmd="nodemon --quiet --exec ${root_dir}/.ap-actions/tmux-watch.zsh"
   pane
@@ -107,8 +107,7 @@ session "$1"
 # Pane: 'Shell' 〈
 () {
   local hv=v
-  local window_name='Shell'
-  local pane_title='Shell'
+  local pane_title='  Shell'
   local dir="${root_dir}"
   pane
 }

@@ -9,7 +9,7 @@ session "Tmux"
 # Window: "Main" 〈
 () {
 local window_name='Main'
-local pane_title='Edit'
+local pane_title=' Edit'
 local dir="$root_dir"
 local cmd='nvim tmux.conf'
 window
@@ -19,7 +19,7 @@ window
 # Window: 'Help' 〈
 () {
 local window_name='Help'
-local pane_title='Help'
+local pane_title='  Help'
 local dir="$root_dir"
 local cmd='man tmux'
 window

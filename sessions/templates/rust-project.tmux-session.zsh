@@ -105,7 +105,7 @@ session "$1"
   fi
 
   local window_name="Main"
-  local pane_title='Edit'
+  local pane_title=' Edit'
   local dir="${root_dir}"
   local cmd="nvim -p ${root_dir}/${file} ${root_dir}/.ap-actions/tmux-watch.zsh"
   window
@@ -113,7 +113,7 @@ session "$1"
 
 # Pane: 'Watcher' 〈
 () {
-  local pane_title='Watcher'
+  local pane_title='  Watch'
   local dir="${root_dir}"
   local cmd="cargo watch -- ${root_dir}/.ap-actions/tmux-watch.zsh"
   pane
@@ -124,7 +124,7 @@ session "$1"
 () {
   local hv=v
   local window_name='Shell'
-  local pane_title='Shell'
+  local pane_title='  Shell'
   local dir="${root_dir}"
   pane
 }

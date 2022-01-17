@@ -9,13 +9,13 @@ session "Neovim"
 # Window `Main` 〈
 () {
 local window_name="Main"
-local pane_title="Mode: Default"
+local pane_title=" Mode: Default"
 local dir="${root_dir}"
 local cmd='nvim init.lua'
 window
 
 # right pane
-local pane_title='Mode: LSP'
+local pane_title=' Mode: LSP'
 local cmd='MDX_NVIM_MODE=lsp nvim init.lua'
 pane
 }
@@ -27,23 +27,23 @@ local tail=(tail -n 100 -F)
 
 # pane 'Neovim'
 local window_name=Log
-local pane_title=Neovim
+local pane_title='  Neovim'
 local dir="${HOME}/.cache/nvim"
 local cmd="$tail -f log"
 window
 
 # pane 'LSP'
-local pane_title="LSP"
+local pane_title='  LSP'
 local cmd="$tail -f lsp.log"
 pane
 
 # pane 'LSP Installer'
-local pane_title="LSP Installer"
+local pane_title='  LSP Installer'
 local cmd="$tail -f lsp-installer.log"
 pane
 
 # pane 'Packer'
-local pane_title="Packer"
+local pane_title='  Packer'
 local cmd="$tail -f packer.nvim.log"
 pane
 

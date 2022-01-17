@@ -8,30 +8,30 @@ session "Dotfiles"
 
 # Window: Main 〈
 () {
-window_name="Main"
-pane_title="Edit"
-dir="${root_dir}"
-cmd="nvim zsh/zshrc.zsh"
+local window_name="Main"
+local pane_title=" Edit"
+local dir="${root_dir}"
+local cmd="nvim zsh/zshrc.zsh"
 window
 }
 #  〉
 
-# Window: Karabiner 〈
-() {
-window_name="Karabiner"
-pane_title="Edit"
-dir="${root_dir}/karabiner"
-cmd="nvim"
-window
-}
-#  〉
+# # Window: Karabiner 〈
+# () {
+# local window_name="Karabiner"
+# local pane_title=' Edit'
+# local dir="${root_dir}/karabiner"
+# local cmd="nvim"
+# window
+# }
+# #  〉
 
 # Window: Actions 〈
 () {
-window_name="Actions"
-pane_title="Edit"
-dir="${root_dir}/ap"
-cmd="nvim"
+local window_name="Actions"
+local pane_title=' Edit'
+local dir="${root_dir}/ap"
+local cmd="nvim"
 window
 }
 #  〉
