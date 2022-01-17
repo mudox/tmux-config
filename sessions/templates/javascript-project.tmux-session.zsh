@@ -2,7 +2,7 @@
 set -euo pipefail
 
 usage() {
-cat <<\END
+cat <<END
 Create tmux session for the javascript project, create the project if requested.
 
 Usage: $(basename $0) [-c] session_title project_name_or_path
@@ -47,7 +47,7 @@ fi
 
 # Create project if requested  〈
 if [[ ! -d ${root_dir} ]]; then
-  if [[ -n $create ]]; then
+  if [[ -n ${create} ]]; then
     jack info 'Create project'
 
     # create project
@@ -73,12 +73,11 @@ if [[ ! -d ${root_dir} ]]; then
     exit 1
   fi
 else
-  if [[ -n $create ]]; then
+  if [[ -n ${create} ]]; then
     jack error "Path ${root_dir} already exists, skipping creation"
     exit 1
   fi
 fi
-
 # 〉
 
 # Creat tmux session  〈
