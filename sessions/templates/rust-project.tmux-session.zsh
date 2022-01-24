@@ -107,7 +107,7 @@ session "$1"
   local window_name="Main"
   local pane_title=' Edit'
   local dir="${root_dir}"
-  local cmd="nvim -p ${root_dir}/${file} ${root_dir}/.ap-actions/tmux-watch.zsh"
+  local cmd="nvim ${root_dir}/${file}"
   window
 }
 
