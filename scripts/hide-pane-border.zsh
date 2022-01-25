@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+set -euo pipefail
 
 panes_count() {
   tmux list-panes | wc -l
