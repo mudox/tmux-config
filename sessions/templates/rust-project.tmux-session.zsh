@@ -72,7 +72,7 @@ if [[ ! -d ${root_dir} ]]; then
     done
 
     # ap actions
-    cp -r "${skeleton_dir}/ap-actions" "${root_dir}/.ap-actions"
+    cp -a "${skeleton_dir}/ap-actions" "${root_dir}/.ap-actions"
 
     # dependency crates
     cat "${skeleton_dir}/deps.toml" >> "${root_dir}/Cargo.toml"
@@ -135,4 +135,4 @@ session "$1"
 finish
 # 〉
 
-# vim: ft=tmux-session.zsh fdm=marker fmr=〈,〉
+# vim: fdm=marker fmr=〈,〉
