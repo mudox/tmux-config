@@ -68,14 +68,16 @@ if [[ ! -d ${root_dir} ]]; then
     template_dir="${MDX_TMUX_DIR}/sessions/templates/swift-project"
 
     # ap actions
-    cp -vr ${template_dir}/ap-actions "${root_dir}/.ap-actions"
+    cp -a ${template_dir}/ap-actions "${root_dir}/.ap-actions"
   else
     jack error "Invalid path: ${root_dir}, specifying `-b | -l` to create project"
     exit 1
   fi
 else
-  jack error "Path ${root_dir} already exists, skipping creation"
-  exit 1
+  if [[ -n $create ]]; then
+    jack error "Path ${root_dir} already exists, skipping creation"
+    exit 1
+  fi
 fi
 
 # 〉
@@ -98,7 +100,7 @@ session "$1"
 () {
   local pane_title='  Watch'
   local dir="${root_dir}"
-  local cmd="nodemon --quiet --ext swift --exec ${root_dir}/.ap-actions/tmux-watch.zsh"
+  local cmd="${root_dir}/.ap-actions/default-watch-action.zsh"
   pane
 }
 # 〉
@@ -118,4 +120,4 @@ finish
 
 # 〉
 
-#  vim: ft=tmux-session.zsh fdm=marker fmr=〈,〉
+#  vim: fdm=marker fmr=〈,〉
