@@ -12,8 +12,8 @@ Positional arguments:
   $2 full path of the project or folder name under `$MDX_DEV_DIR/Rust`
 
 Example:
-  wbp -b Tav tav
-  wbp -l TmuxKit tmux-kit
+  wbp -c Grid grid
+  wbp Try-Web try-web
 END
 }
 
@@ -51,16 +51,16 @@ if [[ ! -d ${root_dir} ]]; then
     mkdir -p "${root_dir}"
     cd "${root_dir}"
 
+    # copy template files
+    template_dir="${MDX_TMUX_DIR}/sessions/templates/web-project"
+    cp -a "${template_dir}"/* "${root_dir}"
+
+    # ap actions
+    mv "${root_dir}/ap-actions" "${root_dir}/.ap-actions"
+
     # git repo
     gi web >> .gitignore
 
-    template_dir="${MDX_TMUX_DIR}/sessions/templates/web-project"
-    
-    # initial files
-    cp -v "${template_dir}"/* "${root_dir}"
-
-    # ap actions
-    cp -vR "${template_dir}/ap-actions" "${root_dir}/.ap-actions"
   else
     jack error "Invalid path: ${root_dir}, specifying `-b | -l` to create project"
     exit 1
@@ -92,7 +92,7 @@ session "$1"
 () {
   local pane_title='  Watch'
   local dir="${root_dir}"
-  local cmd="live-server"
+  local cmd=".ap-actions/default-watch-action.zsh"
   pane
 }
 # 〉
@@ -112,4 +112,4 @@ finish
 
 # 〉
 
-#  vim: ft=tmux-session.zsh fdm=marker fmr=〈,〉
+#  vim: fdm=marker fmr=〈,〉
