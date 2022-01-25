@@ -56,14 +56,11 @@ if [[ ! -d ${root_dir} ]]; then
     sd 'index.js' 'src/index.js' "${root_dir}/package.json"
 
     # skeleton files
-    mkdir 'src' 'test'
-    touch "${root_dir}/src/index.js"
-    touch "${root_dir}/test/test.js"
-
     skeleton_dir="${MDX_TMUX_DIR}/sessions/templates/javascript-project"
+    mv "${skeleton_dir}"/* "${root_dir}"
     
     # ap actions
-    cp -r "${skeleton_dir}/ap-actions" "${root_dir}/.ap-actions"
+    cp -a "${root_dir}/ap-actions" "${root_dir}/.ap-actions"
 
     # git repo
     git init
@@ -98,7 +95,7 @@ session "$1"
 () {
   local pane_title='  Watch'
   local dir="${root_dir}"
-  local cmd="nodemon --quiet --exec ${root_dir}/.ap-actions/tmux-watch.zsh"
+  local cmd="${root_dir}/.ap-actions/default-watch-action.zsh"
   pane
 }
 # 〉
@@ -118,4 +115,4 @@ finish
 
 # 〉
 
-# vim: ft=tmux-session.zsh fdm=marker fmr=〈,〉
+# vim: fdm=marker fmr=〈,〉

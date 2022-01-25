@@ -1,0 +1,9 @@
+icon = " "
+
+# required
+title = "Watch & node src/index.js"
+
+# description = ""
+
+[tmux]
+pane_title = "  Run"
