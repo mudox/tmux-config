@@ -122,7 +122,7 @@ pane() {
     -d \
     -c "$p" \
     "$c"
-  ((++pane_count))
+  ((pane_count++))
   tmux select-pane -t "${window}.${pane_count}" -T "$t"
 }
 # 〉
