@@ -2,10 +2,22 @@
 set -euo pipefail
 
 session_name=$(tmux display-message -p '#{session_name}')
-config_dir="${MDX_TMUX_DIR}/scripts/session-configs"
-config="${config_dir}/${session_name}.zsh"
-if [[ -f "$config" ]]; then
-  tmux run-shell "$config"
+
+# Session theme 〈
+
+theme_dir="${MDX_TMUX_DIR}/scripts/session-themes"
+theme="${config_dir}/${session_name}"
+
+if [[ -f "$theme" ]]; then
+  tmux source-file "$theme"
 else
-  tmux run-shell "${config_dir}/Default.zsh"
+  tmux source-file "${theme_dir}/Default"
 fi
+
+# 〉
+ 
+# TODO: load session config
+# config_dir="${MDX_TMUX_DIR}/scripts/session-configs"
+# config="${config_dir}/${session_name}.zsh"
+
+#  vim: fdm=marker fmr=〈,〉
