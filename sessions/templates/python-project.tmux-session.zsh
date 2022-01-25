@@ -102,7 +102,7 @@ session "${1:?need a session name}"
 () {
   local pane_title='  Watch'
   local dir="${root_dir}"
-  local cmd="nodemon --quiet --ext py --exec ${root_dir}/.ap-actions/tmux-watch.zsh"
+  local cmd="${root_dir}/.ap-actions/default-watch-action.zsh"
   pane
 }
 # 〉
