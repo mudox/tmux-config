@@ -56,14 +56,11 @@ if [[ ! -d ${root_dir} ]]; then
     sd 'index.ts' 'src/index.ts' "${root_dir}/package.json"
 
     # skeleton files
-    mkdir 'src' 'test'
-    touch "${root_dir}/src/index.ts"
-    touch "${root_dir}/test/test.ts"
-
     skeleton_dir="${MDX_TMUX_DIR}/sessions/templates/typescript-project"
+    cp -a "${skeleton_dir}"/* "${root_dir}"
     
     # ap actions
-    cp -vr "${skeleton_dir}/ap-actions" "${root_dir}/.ap-actions"
+    mv "${skeleton_dir}/ap-actions" "${root_dir}/.ap-actions"
 
     # git repo
     git init
@@ -112,7 +109,7 @@ session "$1"
 () {
   local pane_title='  Watch'
   local dir="${root_dir}"
-  local cmd="pnpm exec ts-node-dev --clear --respawn --transpile-only src/index.ts"
+  local cmd="${root_dir}/.ap-actions/default-watch-action.zsh"
   pane
 }
 # 〉
@@ -132,4 +129,4 @@ finish
 
 # 〉
 
-# vim: ft=tmux-session.zsh fdm=marker fmr=〈,〉
+# vim: fdm=marker fmr=〈,〉
