@@ -8,6 +8,6 @@ if [[ $count -gt 1 ]]; then
   zoomed=$(tmux display-message -p '#{window_zoomed_flag}')
 
   if [[ $zoomed -ne 1 ]]; then 
-    tmux display-panes
+    tmux display-panes -d 2000
   fi
 fi
