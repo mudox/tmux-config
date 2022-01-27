@@ -15,8 +15,14 @@ Positional arguments:
   $2 full path of the project or folder name under `$MDX_DEV_DIR/Python`
 
 Example:
-  pyp -c DA-Python da-python
-  pyp Try-Python try-python
+  # equivalent to `pyp Project-Name project-name`
+	pyp Project-Name 
+
+  # create the project
+  pyp -c Project-Name project-name
+
+  # create session for existing project
+  pyp Project-Name project-name
 END
 }
 
@@ -27,21 +33,22 @@ zparseopts -D -E c=create
 
 # Parse positional arguments 〈
 
-if [[ $# -ne 2 ]]; then
+if (( $# < 1 )); then
   jack error 'Invalid number of arguments'
   usage
   exit 1
 fi
 
+root_dir="${2:-${1:l}}"
+
 # $root_dir
-if [[ -d $2 ]]; then
-  root_dir="$2"
-else
+if [[ ! -d $root_dir ]]; then
   prefix="${MDX_DEV_DIR:-${HOME}/Develop}/Python"
+	
   if [[ ! -d $prefix ]]; then
     mkdir -pv "$prefix"
   fi
-  root_dir="${prefix}/$2"
+  root_dir="${prefix}/${root_dir}"
 fi
 
 # 〉
@@ -53,26 +60,32 @@ if [[ ! -d ${root_dir} ]]; then
     jack info 'Create project'
 
     # project
+		cd "${MDX_DEV_DIR}" # NOTE: $pwd must be parent of $root_dir or poetry will panic
     poetry new --src "${root_dir}"
     cd "${root_dir}"
 
-    touch "src/$(basename ${root_dir//-/_})/main.py"
+		# main.py
+		package_name="${$(basename ${root_dir})//-/_}"
+		main_file="${root_dir}/src/${package_name}/main.py"
+		print -- "print('Hello \"${package_name}\"')" > "${main_file}"
 
     # git repo
     git init
     gi python >>"${root_dir}/.gitignore"
 
     template_dir="${MDX_TMUX_DIR}/sessions/templates/python-project"
-    project_name="${$(basename "${root_dir}")//-/_}"
 
     # ap actions
     mkdir "${root_dir}/.ap-actions"
-    for temp in "${template_dir}"/ap-actions/*; do
-      project_name="${project_name}" envsubst < "${temp}" > "${root_dir}/.ap-actions/$(basename ${temp})"
+    for skeleton in "${template_dir}"/ap-actions/*; do
+      package_name="${package_name}" \
+				envsubst \
+				< "${skeleton}" \
+				> "${root_dir}/.ap-actions/$(basename ${skeleton})"
     done
-    chmod +x "${root_dir}/.ap-actions/tmux-watch.zsh"
+    chmod +x "${root_dir}"/.ap-actions/*.zsh
   else
-    jack error "Invalid path: ${root_dir}"
+    jack error "Directory not exists: ${root_dir}"
     exit 1
   fi
 else
@@ -85,6 +98,7 @@ fi
 # 〉
 
 # Creat tmux session 〈
+
 source ${MDX_TMUX_DIR}/sessions/lib/utils.zsh
 
 session "${1:?need a session name}"
@@ -122,5 +136,5 @@ finish
 
 # 〉
 
-#  vim: ft=tmux-session.zsh fdm=marker fmr=〈,〉
+#  vim: fdm=marker fmr=〈,〉
 
