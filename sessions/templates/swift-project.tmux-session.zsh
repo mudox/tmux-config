@@ -90,7 +90,7 @@ session "$1"
 # Window: "Main" 〈
 () {
   local window_name="Main"
-  local pane_title=' Edit'
+  local pane_title='  Edit'
   local dir="${root_dir}"
   local cmd="nvim ${root_dir}/package.swift"
   window

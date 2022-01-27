@@ -9,15 +9,15 @@ session "Neovim"
 # Window `Main` 〈
 () {
 local window_name="Main"
-local pane_title=" Mode: Default"
+local pane_title="  Mode: Default"
 local dir="${root_dir}"
 local cmd='nvim init.lua'
 window
 
-# right pane
-local pane_title=' Mode: LSP'
-local cmd='MDX_NVIM_MODE=lsp nvim init.lua'
-pane
+# # right pane
+# local pane_title='  Mode: LSP'
+# local cmd='MDX_NVIM_MODE=lsp nvim init.lua'
+# pane
 }
 # 〉
 
