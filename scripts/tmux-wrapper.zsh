@@ -2,8 +2,8 @@
 
 # Tmux binary
 # wait for tmux 3.3 to release
-# cmd=("${HOME}/Git/tmux/tmux") # compiled from source
-cmd=("/opt/homebrew/bin/tmux") # HEAD
+cmd=("${HOME}/Git/tmux/tmux") # compiled from source
+# cmd=("/opt/homebrew/bin/tmux")
 
 # Determine server
 if [[ -n $KITTY_WINDOW_ID ]]; then
