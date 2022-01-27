@@ -14,6 +14,6 @@ tmux display-popup \
   -e "text=${text}" \
   -w $(( width + 2 + 4 * 2)) \
   -h 5 \
-  -s "fg=black bg=${color}" \
+  -s "fg=black bg=${color} bold" \
   -S "fg=${color} bg=${color}" \
-  'stty -echo; tput civis; tput cup 1 1; echo ${text}; sleep 0.7'
+  'stty -echo; tput civis; tput cup 1 1; echo ${text}; sleep 0.3'
