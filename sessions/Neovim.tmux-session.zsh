@@ -54,21 +54,15 @@ tmux select-layout -t "$window" -E
 # Window `Pad` 〈
 () {
 local window_name="LuaPad"
+local pane_title="  LuaPad"
 local dir="${HOME}/Develop/Lua"
 local cmd="nvim luapad.lua -c 'lua require(\"luapad\").attach()'"
 window
 }
 #  〉
 
-# Window `Snippets` 〈
-() {
-local window_name="Snippets"
-local dir="${HOME}/.local/share/nvim/site/mdx_nvim_mode/default/pack/packer/start/vim-snippets"
-local cmd="nvim UltiSnips/all.snippets"
-window
-}
 #  〉
 
 finish
 
-#  vim: ft=tmux-session.zsh fdm=marker fmr=\ 〈,\ 〉
+#  vim: fdm=marker fmr=\ 〈,\ 〉
