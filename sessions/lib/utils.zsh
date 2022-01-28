@@ -1,10 +1,5 @@
 #  vim: fdm=marker fmr=〈,〉
 
-if [[ $tmux_session_utils_sourced = yes ]]; then
-  return
-fi
-local tmux_session_utils_sourced=yes
-
 set -eo pipefail
 
 tput civis
