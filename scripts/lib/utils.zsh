@@ -1,3 +1,5 @@
+#  vim: fdm=marker fmr=〈,〉
+
 readonly scripts_dir="${MDX_TMUX_DIR}/scripts"
 readonly hooks_dir="${scripts_dir}/hooks"
 readonly session_themes_dir="${scripts_dir}/session-themes"
@@ -10,4 +12,30 @@ get_session_name() {
 
 get_session_theme_name() {
   tmux show-option -gv @mdx-tmux-theme
+}
+
+get_pane_command() {
+  tmux display-message -t "${1:?}" -p '#{pane_current_command}'
+}
+
+get_pane_label() {
+  : ${1:?pane id}
+
+  if [[ $1 = current ]]; then
+    title=$(tmux show-options -p pane-border-format)
+  else
+    title=$(tmux show-options -p -t "$1" pane-border-format)
+  fi
+}
+
+set_pane_label_suffix() {
+  : ${1:?pane id}
+  : ${2:?label}
+
+	local format=" [#{pane_index}] $2 "
+  if [[ $1 = current ]]; then
+    tmux set-option -p pane-border-format "${format}"
+  else
+    tmux set-option -p -t "$1" pane-border-format "${format}"
+  fi
 }
