@@ -3,11 +3,11 @@ set -euo pipefail
 
 source "${MDX_TMUX_DIR}/scripts/lib/utils.zsh"
 
-name='dash'
-tmux bind-key - switch-client -T "$name"
+table='dash'
+tmux bind-key - switch-client -T "${table}"
 
 bind() {
-  tmux bind-key -T "$name" "$@"
+  tmux bind-key -T "${table}" "$@"
 }
 
 # Display session tip
@@ -21,8 +21,8 @@ typeset -A sessions=(
   t Tmux
 )
 
-for key name in "${(@kv)sessions}"; do
-  bind "$key" run-shell "${scripts_dir}/switch-session.zsh ${name}"
+for key session in "${(@kv)sessions}"; do
+  bind "$key" run-shell "${scripts_dir}/switch-session.zsh ${session}"
 done
 
 # WTF
