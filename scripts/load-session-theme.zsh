@@ -3,7 +3,6 @@ set -euo pipefail
 
 source "${MDX_TMUX_DIR}/scripts/lib/utils.zsh"
 
-set -x
 theme_path="${session_themes_dir}/$(get_session_name)"
 
 if [[ -f $theme_path ]]; then

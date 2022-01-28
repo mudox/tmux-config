@@ -1,6 +1,13 @@
 #!/usr/bin/env zsh
 
-set -euo pipefail
+set -uo pipefail
+
+show=$(tmux show-options -gv '@mdx-display-pane-tip')
+: "${show:=true}"
+
+if [[ $show != true ]]; then
+	return
+fi
 
 count=$(tmux display-message -p '#{window_panes}')
 
