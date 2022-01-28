@@ -1,9 +1,14 @@
 #  vim: fdm=marker fmr=〈,〉
 
+if [[ $tmux_session_utils_sourced = yes ]]; then
+  return
+fi
+local tmux_session_utils_sourced=yes
+
 set -eo pipefail
 
 tput civis
-tmux set -g @mdx-display-pane-tip false
+tmux set-option -g @mdx-display-pane-tip false
 trap 'tput cnorm; tmux set -g @mdx-display-pane-tip true' EXIT
 
 # session: Declare (prepare) a new session 〈
