@@ -14,7 +14,10 @@ art=$(figlet -w 1000 -f "${resources_dir}/ANSI Shadow" "${text}")
 height=$(echo "${art}" | wc -l)
 width=$(echo "${art}" | "${scripts_dir}/art-width.py")
 
-cmd="stty -echo; tput civis; tput cup 2 0; echo \"${art}\"; zsh -c 'read -qt ${1:-0.3}'; true"
+cmd="stty -echo; tput civis; tput cup 2 0; \
+	echo \"${art}\"; \
+	zsh -c 'read -qt ${1:-0.3}'; \
+	true"
 
 tmux display-popup \
 	-E \
