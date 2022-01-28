@@ -20,6 +20,9 @@ set-title() {
   *nvim*)
     title='  Edit'
     ;;
+  *)
+    title="  ${cmd}"
+    ;;
   esac
 
   tmux select-pane -t "$1" -T "${title}"
