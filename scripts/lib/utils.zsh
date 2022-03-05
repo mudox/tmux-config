@@ -25,9 +25,9 @@ get_pane_label() {
   : ${1:?pane id}
 
   if [[ $1 = current ]]; then
-    title=$(tmux show-options -p pane-border-format)
+    tmux show-options -p pane-border-format
   else
-    title=$(tmux show-options -p -t "$1" pane-border-format)
+    tmux show-options -p -t "$1" pane-border-format
   fi
 }
 
