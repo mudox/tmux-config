@@ -2,8 +2,8 @@
 set -euo pipefail
 
 usage() {
-cat <<\END
-Create tmux session for the typescript project, create the project if requested.
+cat <<END
+Create tmux session for the javascript project, create the project if requested.
 
 Usage: $(basename $0) [-c] session_title project_name_or_path
 
@@ -12,11 +12,11 @@ Flags:
 
 Arguments:
   $1 name of the session
-  $2 full path of the project or folder name under `$MDX_DEV_DIR/typescript`
+  $2 full path of the project or folder name under `$MDX_DEV_DIR/JavaScript`
 
 Examples:
-  tsp -c Try-typescript try-typescript
-  tsp DA-typescript da-typescript
+  jsp -c Try-JavaScript try-javascript
+  jsp DA-JavaScript da-javascript
 END
 }
 
@@ -37,7 +37,7 @@ typeset root_dir
 if [[ -d $2 ]]; then
   root_dir="$2"
 else
-  prefix="${MDX_DEV_DIR:-${HOME}/Develop}/Typescript"
+  prefix="${MDX_DEV_DIR:-${HOME}/Develop}/JavaScript"
   if [[ ! -d $prefix ]]; then
     mkdir -pv "$prefix"
   fi
@@ -53,32 +53,18 @@ if [[ ! -d ${root_dir} ]]; then
     # create project
     mkdir -p "${root_dir}" && cd "${root_dir}"
     pnpm init -y
-    sd 'index.ts' 'src/index.ts' "${root_dir}/package.json"
+    sd 'index.js' 'src/index.js' "${root_dir}/package.json"
 
     # skeleton files
-    skeleton_dir="${MDX_TMUX_DIR}/sessions/templates/typescript-project"
-    cp -a "${skeleton_dir}"/* "${root_dir}"
+    skeleton_dir="${MDX_TMUX_DIR}/sessions/skeletons/javascript-project"
+    mv "${skeleton_dir}"/* "${root_dir}"
     
     # ap actions
-    mv "${skeleton_dir}/ap-actions" "${root_dir}/.ap-actions"
+    cp -a "${root_dir}/ap-actions" "${root_dir}/.ap-actions"
 
     # git repo
     git init
     gi node >> "${root_dir}/.gitignore"
-
-    # typescript compiler
-    jack info 'Prepare TypeScript compiler'
-    pnpm i -D typescript
-    npx tsc --init
-    sd '.*outDir.*' '    "outDir": "dist",' tsconfig.json
-
-    # watcher
-    pnpm i -D ts-node-dev
-
-    # test
-    jack info 'Prepare Jest'
-    pnpm install -D jest ts-jest @types/jest
-    pnpm exec ts-jest config:init
   else
     jack error "Invalid path: ${root_dir}"
     exit 1
@@ -101,7 +87,7 @@ session "$1"
   local window_name="Main"
   local pane_title='  Edit'
   local dir="${root_dir}"
-  local cmd="nvim ${root_dir}/src/index.ts"
+  local cmd="nvim ${root_dir}/src/index.js"
   window
 }
 

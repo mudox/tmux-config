@@ -2,34 +2,24 @@
 set -euo pipefail
 
 usage() {
-cat <<-\END
-Create tmux session for the Swift project, create the project if requested.
+cat <<\END
+Create tmux session for the Web project, create the project if requested.
 
-Usage: $(basename $0) [-b|-l] session_title project_name_or_path
-
-Flags:
-  -l create framework project
-  -b create executable project
+Usage: $(basename $0) session_title project_name_or_path
 
 Positional arguments:
   $1 title of the session
   $2 full path of the project or folder name under `$MDX_DEV_DIR/Rust`
 
 Example:
-  swp -b Tav tav
-  swp -l TmuxKit tmux-kit
+  wbp -c Grid grid
+  wbp Try-Web try-web
 END
 }
 
 # Parse flags 〈
-zparseopts -D -E l=lib b=bin
-
 typeset create
-if [[ -n $lib ]]; then
-  create='library'
-elif [[ -n $bin ]]; then
-  create='executable'
-fi
+zparseopts -D -E c=create
 # 〉
 
 # Parse positional arguments 〈
@@ -44,7 +34,7 @@ typeset root_dir
 if [[ -d $2 ]]; then
   root_dir="$2"
 else
-  prefix="${MDX_DEV_DIR:-${HOME}/Develop}/Swift"
+  prefix="${MDX_DEV_DIR:-${HOME}/Develop}/Web"
   if [[ ! -d $prefix ]]; then
     mkdir -pv "$prefix"
   fi
@@ -53,6 +43,7 @@ fi
 # 〉
 
 # Create project if requested 〈
+
 if [[ ! -d ${root_dir} ]]; then
   if [[ -n $create ]]; then
     jack info 'Create project'
@@ -60,15 +51,17 @@ if [[ ! -d ${root_dir} ]]; then
     # create project
     mkdir -p "${root_dir}"
     cd "${root_dir}"
-    swift package init --type "$create"
 
-    # git repo
-    gi swift >> .gitignore
-
-    template_dir="${MDX_TMUX_DIR}/sessions/templates/swift-project"
+    # copy skeleton files
+    skeleton_dir="${MDX_TMUX_DIR}/sessions/skeletons/web-project"
+    cp -a "${skeleton_dir}"/* "${root_dir}"
 
     # ap actions
-    cp -a ${template_dir}/ap-actions "${root_dir}/.ap-actions"
+    mv "${root_dir}/ap-actions" "${root_dir}/.ap-actions"
+
+    # git repo
+    gi web >> .gitignore
+
   else
     jack error "Invalid path: ${root_dir}, specifying `-b | -l` to create project"
     exit 1
@@ -92,7 +85,13 @@ session "$1"
   local window_name="Main"
   local pane_title='  Edit'
   local dir="${root_dir}"
-  local cmd="nvim ${root_dir}/package.swift"
+	
+	edit="${root_dir}/.ap-actions/default-edit-action.zsh"
+	if [[ -s $edit ]]; then
+		local cmd="${edit}"
+	else
+		local cmd="nvim"
+	fi
   window
 }
 
@@ -100,7 +99,7 @@ session "$1"
 () {
   local pane_title='  Watch'
   local dir="${root_dir}"
-  local cmd="${root_dir}/.ap-actions/default-watch-action.zsh"
+  local cmd=".ap-actions/default-watch-action.zsh"
   pane
 }
 # 〉
@@ -108,7 +107,7 @@ session "$1"
 # Pane: Shell 〈
 () {
   local hv='v'
-  local pane_title='  Watch'
+  local pane_title='  Shell'
   local dir="${root_dir}"
   pane
 }

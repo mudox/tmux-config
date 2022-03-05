@@ -62,7 +62,7 @@ if [[ ! -d ${root_dir} ]]; then
     cargo new "${root_dir}" "$create"
     cd "${root_dir}"
 
-    skeleton_dir="${MDX_TMUX_DIR}/sessions/templates/rust-project"
+    skeleton_dir="${MDX_TMUX_DIR}/sessions/skeletons/rust-project"
     crate_name="${$(basename "${root_dir}")//-/_}"
 
     # skeleton files

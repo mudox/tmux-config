@@ -73,7 +73,7 @@ if [[ ! -d ${root_dir} ]]; then
     git init
     gi python >>"${root_dir}/.gitignore"
 
-    template_dir="${MDX_TMUX_DIR}/sessions/templates/python-project"
+    template_dir="${MDX_TMUX_DIR}/sessions/skeletons/python-project"
 
     # ap actions
     mkdir "${root_dir}/.ap-actions"
