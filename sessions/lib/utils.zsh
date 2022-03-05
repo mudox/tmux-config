@@ -2,6 +2,8 @@
 
 set -eo pipefail
 
+source "${MDX_TMUX_DIR}/scripts/lib/utils.zsh"
+
 tput civis
 tmux set-option -g @mdx-display-pane-tip false
 trap 'tput cnorm; tmux set -g @mdx-display-pane-tip true' EXIT
@@ -83,7 +85,7 @@ window() {
   window="$s:$w"
   pane="${window}.$p"
 
-  tmux select-pane -t "${pane}" -T "${pane_title}"
+	set_pane_label_suffix "${pane}" "${pane_title}"
 
   jack verbose "Create window [${window_name}]"
   jack verbose "  + Pane [$pane_title]"
@@ -125,7 +127,7 @@ pane() {
     "${cmd}")
   pane="${window}.${pane_id}"
 
-  tmux select-pane -t "${pane}" -T "${pane_title}"
+	set_pane_label_suffix "${pane}" "${pane_title}"
 }
 # 〉
 
