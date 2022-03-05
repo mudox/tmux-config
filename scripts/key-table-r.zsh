@@ -13,6 +13,9 @@ bind() {
 # respawn with current command
 bind 'r' run-shell "${MDX_TMUX_DIR}/scripts/respawn-pane.zsh"
 
+# respawn selected pane
+bind 'q' display-panes 'respawn-pane -k -t %%'
+
 # respawn current pane with `ap` actions list
 bind '?' respawn-pane -k "${scripts_dir}/respawn-pane-with-ap-t.zsh"
 
