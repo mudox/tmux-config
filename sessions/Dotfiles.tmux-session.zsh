@@ -9,7 +9,7 @@ session "Dotfiles"
 # Window: Main 〈
 () {
 local window_name="Main"
-local pane_title=" Edit"
+local pane_title="  Edit"
 local dir="${root_dir}"
 local cmd="nvim zsh/zshrc.zsh"
 window
@@ -29,7 +29,7 @@ window
 # Window: Actions 〈
 () {
 local window_name="Actions"
-local pane_title=' Edit'
+local pane_title='  Edit'
 local dir="${root_dir}/ap"
 local cmd="nvim"
 window

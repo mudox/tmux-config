@@ -10,5 +10,5 @@ bind() {
   tmux bind-key -T "${table}" "$@"
 }
 
-# Display session tip
+# Apply random theme
 tmux bind-key -T "${table}" . run-shell "${scripts_dir}/apply-random-theme.zsh"
