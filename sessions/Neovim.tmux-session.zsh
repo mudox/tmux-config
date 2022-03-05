@@ -21,6 +21,16 @@ window
 }
 # 〉
 
+# Window `Lsp` 〈
+() {
+local window_name="Lsp"
+local pane_title="  Mode: Lsp"
+local dir="${root_dir}"
+local cmd='MDX_NVIM_MODE=lsp nvim init.lua' 
+window
+}
+# 〉
+
 # Window `Log` 〈
 () {
 local tail=(tail -n 100 -F)
@@ -56,7 +66,7 @@ tmux select-layout -t "$window" -E
 local window_name="LuaPad"
 local pane_title="  LuaPad"
 local dir="${HOME}/Develop/Lua"
-local cmd="nvim luapad.lua -c 'lua require(\"luapad\").attach()'"
+local cmd="MDX_NVIM_MODE=lsp nvim luapad.lua -c 'lua require(\"luapad\").attach()'"
 window
 }
 #  〉
