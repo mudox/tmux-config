@@ -24,3 +24,4 @@ bind 'z' respawn-pane -k "${scripts_dir}/respawn-pane-with-zsh.zsh"
 
 # respawn current pane with `neovim`
 bind 'v' respawn-pane -k "${scripts_dir}/respawn-pane-with-neovim.zsh"
+bind 'V' respawn-pane -k "${scripts_dir}/respawn-pane-with-neovim-in-lsp-mode.zsh"
