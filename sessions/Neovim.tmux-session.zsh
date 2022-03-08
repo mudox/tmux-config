@@ -21,14 +21,15 @@ window
 }
 # 〉
 
-# Window `Lsp` 〈
-() {
-local window_name="Lsp"
-local pane_title="  Mode: Lsp"
-local dir="${root_dir}"
-local cmd='MDX_NVIM_MODE=lsp nvim init.lua' 
-window
-}
+# NOTE: currently commented out
+# Window `Coc` 〈
+# () {
+# local window_name="Coc"
+# local pane_title="  Mode: Coc"
+# local dir="${root_dir}"
+# local cmd='MDX_NVIM_MODE=coc nvim init.lua' 
+# window
+# }
 # 〉
 
 # Window `Log` 〈
