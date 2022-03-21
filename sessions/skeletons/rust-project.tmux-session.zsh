@@ -120,16 +120,6 @@ session "$1"
 }
 # 〉
 
-# Pane: 'Shell' 〈
-() {
-  local hv=v
-  local window_name='Shell'
-  local pane_title='  Shell'
-  local dir="${root_dir}"
-  pane
-}
-# 〉
-
 # 〉
 
 finish
