@@ -18,7 +18,9 @@ typeset -A sessions=(
   d Dotfiles
   h Hammerspoon
   n Neovim
+  v Neovim
   t Tmux
+	e Neorg
 )
 
 for key session in "${(@kv)sessions}"; do
