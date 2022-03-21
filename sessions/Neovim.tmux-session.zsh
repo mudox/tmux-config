@@ -72,6 +72,16 @@ window
 }
 #  〉
 
+# Window `Snippets` 〈
+() {
+local window_name="Snippets"
+local pane_title="  Snippets"
+local dir=~/.local/share/nvim/site/pack/mudox/start/vim-mysnippets/LuaSnip
+local cmd="nvim init.lua"
+window
+}
+#  〉
+
 #  〉
 
 finish
