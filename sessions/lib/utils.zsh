@@ -38,6 +38,7 @@ session() {
 #   local pane_title=...
 #   local dir=...
 #   local cmd=...
+#   local env=(NAME=VALUE NAME=VALUE ...)
 #   window
 # }
 # ```
@@ -54,6 +55,7 @@ window() {
   : ${pane_title:?}
   : ${dir:?}
   : ${cmd:=zsh}
+	: ${env:=()}
 
   local s w p format
   print -v format "#{session_id}\t#{window_id}\t#{pane_id}"
@@ -61,10 +63,16 @@ window() {
   if [[ $session_created != true ]]; then
     jack info "Create session [${session_name}]"
 
+		local set_envs=()
+		for e in $envs; do
+			set_envs=(-e "$e" $set_envs)
+		done
+
     tmux new-session \
       -s "${session_name}" \
       -n "${window_name}" \
       -c "${dir}" \
+			${set_envs} \
       -d \
       -PF "${format}" \
       -- \
@@ -77,6 +85,7 @@ window() {
       -t "${session_name}:{end}" \
       -n "${window_name}" \
       -c "${dir}" \
+			${set_envs} \
       -PF "${format}" \
       -- \
       "${cmd}" | read s w p
@@ -101,6 +110,7 @@ window() {
 # local hv=... # 'h'(default) or 'v'
 # local dir=...
 # local cmd=...
+# local env=(NAME=VALUE NAME=VALUE ...)
 # pane
 # }
 # ```
@@ -115,13 +125,20 @@ pane() {
   : ${hv:=h}
   : ${dir:?}
   : ${cmd:=zsh}
+	: ${env:=()}
 
   jack verbose "  + Pane [$pane_title]"
+
+	local set_envs=()
+	for e in $env; do
+		set_envs=(-e "$e" $set_envs)
+	done
 
   local pane_id=$(tmux split-window \
     -t "${pane}" \
     -"${hv}" \
     -c "${dir}" \
+		${set_envs} \
     -PF '#D' \
     -- \
     "${cmd}")
