@@ -17,7 +17,6 @@ bind q run-shell "${scripts_dir}/display-session-tip.zsh 3"
 typeset -A sessions=(
   d Dotfiles
   h Hammerspoon
-  n Neovim
   v Neovim
   t Tmux
 	e Neorg
