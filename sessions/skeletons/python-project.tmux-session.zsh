@@ -108,7 +108,7 @@ session "${1:?need a session name}"
   local window_name='Main'
   local pane_title='  Edit'
   local dir="${root_dir}"
-  local cmd="nvim"
+  local cmd="poetry run nvim"
   window
 }
 
