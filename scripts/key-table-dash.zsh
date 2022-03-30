@@ -19,7 +19,8 @@ typeset -A sessions=(
   h Hammerspoon
   v Neovim
   t Tmux
-	e Neorg
+	e Neorg:1
+	j Neorg:Journal
 )
 
 for key session in "${(@kv)sessions}"; do
