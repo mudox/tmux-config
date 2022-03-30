@@ -21,7 +21,7 @@ window
 local window_name='Help'
 local pane_title='  Help'
 local dir="$root_dir"
-local cmd='man tmux'
+local cmd='batman tmux'
 window
 }
 # 〉
