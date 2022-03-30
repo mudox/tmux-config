@@ -82,6 +82,16 @@ window
 }
 #  〉
 
+# Window `Plugins` 〈
+() {
+local window_name="Plugins"
+local pane_title="  Plugins"
+local dir=~/.local/share/nvim/site/mdx_nvim_mode/lsp/pack/packer
+# local cmd="nvim init.lua"
+window
+}
+#  〉
+
 #  〉
 
 finish
