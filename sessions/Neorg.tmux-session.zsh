@@ -20,8 +20,8 @@ window
 () {
 local window_name='Journal'
 local pane_title='  Journal'
-local dir="${root_dir}/journal"
-local cmd='MDX_NVIM_MODE=neorg nvim -O $(\ls | sort -r | head -n5)'
+local dir="${root_dir}"
+local cmd='MDX_NVIM_MODE=neorg nvim -O $(\ls journal/*.norg | sort -r | head -n5)'
 window
 }
 # 〉
