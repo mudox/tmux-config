@@ -21,6 +21,7 @@ typeset -A sessions=(
   t Tmux
 	e Neorg:1
 	j Neorg:Journal
+	X Default:Btop
 )
 
 for key session in "${(@kv)sessions}"; do
