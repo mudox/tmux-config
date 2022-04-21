@@ -35,3 +35,6 @@ bind a display-popup -w60% -h80% ap
 
 # Htop
 bind x display-popup -E -w70% -h80% 'htop --user mudox'
+
+# Kabmat
+bind b display-popup -E -w70% -h80% '~/Git/kabmat/kabmat'
