@@ -31,7 +31,7 @@ done
 bind g display-popup -E -w90% -h90% git-repos-status-dashboard
 
 # Ap
-bind a display-popup -w60% -h80% ap
+bind a display-popup -E -w60% -h80% ap
 
 # Htop
 bind x display-popup -E -w70% -h80% 'htop --user mudox'
