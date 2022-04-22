@@ -1,1 +1,1 @@
-watch-test.zsh
+watch-run.zsh
