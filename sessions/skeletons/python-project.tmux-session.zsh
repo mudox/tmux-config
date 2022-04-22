@@ -60,7 +60,8 @@ if [[ ! -d ${root_dir} ]]; then
     jack info 'Create project'
 
     # project
-		cd "${MDX_DEV_DIR}" # NOTE: $pwd must be parent of $root_dir or poetry will panic
+		# NOTE: ${PWD} must be parent of ${root_dir} or poetry will panic
+		cd "${MDX_DEV_DIR}" 
     poetry new --src "${root_dir}"
     cd "${root_dir}"
 
@@ -123,6 +124,20 @@ session "${1:?need a session name}"
   local cmd="${root_dir}/.ap-actions/default-watch-action.zsh"
   pane
 }
+# 〉
+
+# Pane: Watcher 〈
+if [[ -n $create ]]; then
+	() {
+		local hv='v'
+		local pane_title='  Poetry install'
+		local dir="${root_dir}"
+		local cmd="poetry install && tmux respawn-pane -k -t ${window}.2 && tmux kill-pane -t ${window}.3"
+		pane
+	}
+
+	tmux switch-client -t "${pane}"
+fi
 # 〉
 
 # 〉
