@@ -23,6 +23,7 @@ session() {
     tmux kill-session -t "${session_name}"
   fi
 }
+
 # 〉
 
 # window: Creates a new session/window. 〈
@@ -146,6 +147,7 @@ pane() {
 
   set_pane_label_suffix "${pane}" "${pane_title}"
 }
+
 # 〉
 
 # finish: Finalize session creation. 〈
@@ -157,4 +159,5 @@ pane() {
 finish() {
   tmux select-window -t "${session_name:?}:1.1"
 }
+
 # 〉
