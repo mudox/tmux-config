@@ -77,11 +77,15 @@ if [[ ! -d ${root_dir} ]]; then
 
     # ap actions
     mkdir "${root_dir}/.ap-actions"
-    for skeleton in "${template_dir}"/ap-actions/*; do
-      package_name="${package_name}" \
-				envsubst \
-				< "${skeleton}" \
-				> "${root_dir}/.ap-actions/$(basename ${skeleton})"
+		for skeleton in "${template_dir}"/ap-actions/*; do
+			if [[ -f $skeleton ]]; then
+				project_name="${package_name}" \
+					envsubst \
+					< "${skeleton}" \
+					> "${root_dir}/.ap-actions/$(basename ${skeleton})"
+			else
+				cp -a "${skeleton}" "${root_dir}/.ap-actions/$(basename ${skeleton})"
+			fi
     done
     chmod +x "${root_dir}"/.ap-actions/*.zsh
   else
