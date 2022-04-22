@@ -16,26 +16,6 @@ window
 }
 #  〉
 
-# # Window: Karabiner 〈
-# () {
-# local window_name="Karabiner"
-# local pane_title=' Edit'
-# local dir="${root_dir}/karabiner"
-# local cmd="nvim"
-# window
-# }
-# #  〉
-
-# Window: Actions 〈
-() {
-local window_name="Actions"
-local pane_title='  Edit'
-local dir="${root_dir}/ap"
-local cmd="nvim"
-window
-}
-#  〉
-
 finish
 
 #  vim: ft=tmux-session.zsh fdm=marker fmr=\ 〈,\ 〉
