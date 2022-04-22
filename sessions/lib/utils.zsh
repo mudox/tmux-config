@@ -14,10 +14,8 @@ trap 'tput cnorm; tmux set -g @mdx-display-pane-tip true' EXIT
 #
 # Adds variables:
 # - session_name
-# - session_created
 session() {
   session_name="${1:?need a session name as 1st argument}"
-  session_created=false
 
   # kill old session if any
   if tmux has-session -t ${session_name} &>/dev/null; then
@@ -55,53 +53,53 @@ window() {
   : ${pane_title:?}
   : ${dir:?}
   : ${cmd:=zsh}
-	: ${env:=()}
+  : ${env:=()}
+
+  local set_env=()
+  for e in $env; do
+    set_env=(-e "$e" $set_env)
+  done
 
   local s w p format
   print -v format "#{session_id}\t#{window_id}\t#{pane_id}"
 
-  if [[ $session_created != true ]]; then
+  if ! tmux has-session -t "${session_name}"; then
     jack info "Create session [${session_name}]"
 
-		local set_envs=()
-		for e in $envs; do
-			set_envs=(-e "$e" $set_envs)
-		done
-
-    tmux new-session \
+    tmux new-session       \
       -s "${session_name}" \
-      -n "${window_name}" \
-      -c "${dir}" \
-			${set_envs} \
-      -d \
-      -PF "${format}" \
-      -- \
+      -n "${window_name}"  \
+      -c "${dir}"          \
+      ${set_env}           \
+      -d                   \
+      -PF "${format}"      \
+      --                   \
       "${cmd}" | read s w p
 
-    session_created=true
   else
-    tmux new-window \
-      -a \
+    tmux new-window              \
+      -a                         \
       -t "${session_name}:{end}" \
-      -n "${window_name}" \
-      -c "${dir}" \
-			${set_envs} \
-      -PF "${format}" \
-      -- \
+      -n "${window_name}"        \
+      -c "${dir}"                \
+      ${set_env}                 \
+      -PF "${format}"            \
+      --                         \
       "${cmd}" | read s w p
   fi
 
   window="$s:$w"
   pane="${window}.$p"
 
-	set_pane_label_suffix "${pane}" "${pane_title}"
+  set_pane_label_suffix "${pane}" "${pane_title}"
 
   jack verbose "Create window [${window_name}]"
   jack verbose "  + Pane [$pane_title]"
 }
+
 # 〉
 
-# pane: Creates a new pane by splitting a pane. 〈
+# pane: Creates a new pane by splitting a pane or window. 〈
 #
 # Usage:
 # ```zsh
@@ -125,26 +123,28 @@ pane() {
   : ${hv:=h}
   : ${dir:?}
   : ${cmd:=zsh}
-	: ${env:=()}
+  : ${env:=()}
 
   jack verbose "  + Pane [$pane_title]"
 
-	local set_envs=()
-	for e in $env; do
-		set_envs=(-e "$e" $set_envs)
-	done
+  local set_env=()
+  for e in $env; do
+    set_env=(-e "$e" $set_env)
+  done
 
   local pane_id=$(tmux split-window \
-    -t "${pane}" \
-    -"${hv}" \
-    -c "${dir}" \
-		${set_envs} \
-    -PF '#D' \
-    -- \
+    -t "${pane}"                    \
+    -"${hv}"                        \
+    -c "${dir}"                     \
+    ${set_env}                      \
+    -PF '#D'                        \
+		-d                              \
+    --                              \
     "${cmd}")
+
   pane="${window}.${pane_id}"
 
-	set_pane_label_suffix "${pane}" "${pane_title}"
+  set_pane_label_suffix "${pane}" "${pane_title}"
 }
 # 〉
 
