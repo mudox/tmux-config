@@ -2,47 +2,32 @@
 set -euo pipefail
 
 source "${MDX_TMUX_DIR}/scripts/lib/utils.zsh"
+source "${MDX_TMUX_DIR}/scripts/lib/menu.zsh"
 
-menu=()
-
-item() {
-	menu+=("$1" "$2" "$3")
+window() {
+	shell "$1" "$2" "${scripts_dir}/switch-session.zsh $3"
 }
 
-popup-item() {
-	item "$1" "$2" "display-popup -E -w70% -h80% \"$3\""
-}
+sep       ' '
+window    Neovim         v    'Neovim'
+window    Dotfiles       d    'Dotfiles'
+window    Tmux           t    'Tmux'
+window    Hammerspoon    h    'Hammerspoon'
 
-shell-item() {
-  item "$1" "$2" "run-shell '$3'"
-}
+nl
+sep       ' '
+window    Note           e    'Neorg:1'
+window    Journal        j    'Neorg:Journal'
 
-sep() { 
-	# menu+=('')
-	menu+=("-#[align=centre]- $1 -" '-' '-')
-}
 
-typeset -A sessions=(
-  d Dotfiles
-  h Hammerspoon
-  v Neovim
-  t Tmux
-	e Neorg:1
-	j Neorg:Journal
-	X Default:Top
-)
+nl
+sep       ' '
+window    BTop           X    'Default:Top'
+popup     Htop           x    'htop --user mudox'
 
-sep ' '
-
-for key session in "${(@kv)sessions}"; do
-	shell-item "$session" "$key" "${scripts_dir}/switch-session.zsh ${session}"
-done
-
-sep ' '
-
-# popup-item Tip   q "${scripts_dir}/display-session-tip.zsh 3"
-popup-item Ap    a ~/.bin/ap
-popup-item Htop  x 'htop --user mudox'
-popup-item GitUI g /opt/homebrew/bin/gitui
+nl
+sep       ' '
+popup     Ap             a    "${HOME}/.bin/ap"
+popup     GitUI          g    '/opt/homebrew/bin/gitui'
 
 tmux display-menu -- "${(@)menu}"
