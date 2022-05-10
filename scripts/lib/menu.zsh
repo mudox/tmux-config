@@ -1,9 +1,10 @@
 #  vim: fdm=marker fmr=〈,〉
 
 menu=()
+tint='terminal'
 
 item() {
-	menu+=("$1" "$2" "$3")
+	menu+=("#[fg=$tint]$1" "$2" "$3")
 }
 
 popup() {
@@ -31,5 +32,12 @@ sep() {
 	local right=$(printf '―%.0s' {1..${4:-8}})
 	local align="${2:-centre}"
 	menu+=("-#[align=$align]$left $1 $right" '-' '-')
+}
+
+# $1: title
+sep1() { 
+	# local right=$(printf '―%.0s' {1..4})
+	local left=$(printf ' %.0s' {1..$(( 22 - $#1 ))})
+	menu+=("-$left#[fg=white,bg=black]#[fg=black,bg=#a89b82] $1 " '-' '-')
 }
 

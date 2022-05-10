@@ -8,26 +8,37 @@ window() {
 	shell "$1" "$2" "${scripts_dir}/switch-session.zsh $3"
 }
 
-sep       ' '
+tint='green'
+sep1 'Config'
 window    Neovim         v    'Neovim'
 window    Dotfiles       d    'Dotfiles'
 window    Tmux           t    'Tmux'
 window    Hammerspoon    h    'Hammerspoon'
 
 nl
-sep       ' '
+tint=blue
+sep1 'Note'
 window    Note           e    'Neorg:1'
 window    Journal        j    'Neorg:Journal'
 
 
 nl
-sep       ' '
+tint=brown
+sep1 'Monitor'
 window    BTop           X    'Default:Top'
 popup     Htop           x    'htop --user mudox'
 
 nl
-sep       ' '
+tint=yellow
+sep1 'Popup'
 popup     Ap             a    "${HOME}/.bin/ap"
 popup     GitUI          g    '/opt/homebrew/bin/gitui'
+
+nl
+tint=colour17
+sep1 'DSA'
+window    DA-Python      1    DA-Python
+window    DA-Swift       2    DA-Swift
+window    DA-Rust        3    DA-Rust
 
 tmux display-menu -- "${(@)menu}"
