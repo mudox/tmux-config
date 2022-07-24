@@ -19,7 +19,7 @@ nl
 tint=blue
 sep1 'Note'
 window    Note           e    'Neorg:1'
-window    Journal        j    'Neorg:Journal'
+window    Journal        o    'Neorg:Journal'
 
 
 nl
@@ -40,5 +40,6 @@ sep1 'DSA'
 window    DA-Python      1    DA-Python
 window    DA-Swift       2    DA-Swift
 window    DA-Rust        3    DA-Rust
+window    DA-JavaScript  4    DA-JavaScript
 
 tmux display-menu -- "${(@)menu}"
