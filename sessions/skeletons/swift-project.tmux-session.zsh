@@ -92,13 +92,14 @@ session "$1"
   local window_name="Main"
   local pane_title='  Edit'
   local dir="${root_dir}"
-  local cmd="nvim ${root_dir}/package.swift"
+  local cmd="nvim ${root_dir}/.ap-actions/script/test.zsh"
   window
 }
 
 # Pane: Watcher 〈
 () {
   local pane_title='  Watch'
+	local size=120
   local dir="${root_dir}"
   local cmd="${root_dir}/.ap-actions/default-watch-action.zsh"
   pane

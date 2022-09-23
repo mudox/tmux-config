@@ -18,8 +18,8 @@ session() {
   session_name="${1:?need a session name as 1st argument}"
 
   # kill old session if any
-  if tmux has-session -t ${session_name} &>/dev/null; then
-    jack warn "session [${session_name}] already exists, kill it!"
+  if tmux has-session -t "${session_name}" &>/dev/null; then
+    jack warn "session ["${session_name}"] already exists, kill it!"
     tmux kill-session -t "${session_name}"
   fi
 }
@@ -56,6 +56,7 @@ window() {
   : ${cmd:=zsh}
   : ${env:=()}
 
+	# LATER: remove it?
   local set_env=()
   for e in $env; do
     set_env=(-e "$e" $set_env)
@@ -64,12 +65,13 @@ window() {
   local s w p format
   print -v format "#{session_id}\t#{window_id}\t#{pane_id}"
 
-  if ! tmux has-session -t "${session_name}"; then
+  if ! tmux has-session -t "${session_name}" &>/dev/null; then
     jack info "Create session [${session_name}]"
 
     tmux new-session       \
       -s "${session_name}" \
       -n "${window_name}"  \
+			-x- -y-              \
       -c "${dir}"          \
       ${set_env}           \
       -d                   \
@@ -107,6 +109,7 @@ window() {
 # () {
 # local pane_title=...
 # local hv=... # 'h'(default) or 'v'
+# local size=... # 120, 30% ...
 # local dir=...
 # local cmd=...
 # local env=(NAME=VALUE NAME=VALUE ...)
@@ -122,6 +125,7 @@ window() {
 pane() {
   : ${pane_title:?}
   : ${hv:=h}
+	: ${size:=50%}
   : ${dir:?}
   : ${cmd:=zsh}
   : ${env:=()}
@@ -135,9 +139,9 @@ pane() {
 
   local pane_id=$(tmux split-window \
     -t "${pane}"                    \
-    -"${hv}"                        \
+    -"${hv}" -l "${size}"           \
     -c "${dir}"                     \
-    ${set_env}                      \
+    "${set_env}"                    \
     -PF '#D'                        \
 		-d                              \
     --                              \

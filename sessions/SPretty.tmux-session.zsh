@@ -1,4 +1,4 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-cargo watch --clear --exec check
+pyp SPretty spretty

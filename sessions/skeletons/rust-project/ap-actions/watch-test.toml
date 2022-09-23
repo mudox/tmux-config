@@ -1,7 +1,7 @@
 icon = " "
 
 # required
-title = "Watch & cargo test"
+title = "Watch & test"
 
 [tmux]
 pane_title = "  Test"

@@ -1,9 +1,9 @@
 icon = " "
 
 # required
-title = "Watch & cargo check"
+title = "Watch & swift test"
 
 [tmux]
-pane_title = "  Check"
+pane_title = "  Test"
 
 # description = ""

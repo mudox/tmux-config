@@ -2,16 +2,12 @@
 
 source ${MDX_TMUX_DIR}/sessions/lib/helper.zsh
 
-root="${HOME}/OneDrive/Apple/HuiLong"
+root="${HOME}/Develop/Apple/HuiLong"
 
 setup 'HuiLong' "${root}"
 
-new_session 'Config' "${root}/" "
-nvim -p Podfile.rb Podfile.lock project.yml Gems.rb
+new_session 'Main' "${root}/" "
+nvim -p Project.swift
 "
-
-new_window 'Edit' "${root}"
-
-new_window 'L10n' "${root}"
 
 clean_up

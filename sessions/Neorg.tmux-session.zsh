@@ -11,7 +11,7 @@ session "Neorg"
 local window_name='Main'
 local pane_title='  Edit'
 local dir="$root_dir"
-local cmd='MDX_NVIM_MODE=neorg nvim inbox.norg'
+local cmd='MDX_NVIM_MODE=neorg nvim'
 window
 }
 # 〉
@@ -21,7 +21,7 @@ window
 local window_name='Journal'
 local pane_title='  Journal'
 local dir="${root_dir}"
-local cmd='MDX_NVIM_MODE=neorg nvim -O $(\ls journal/*.norg | sort -r | head -n5)'
+local cmd='MDX_NVIM_MODE=neorg nvim -c "luafile ${MDX_NVIM_DIR}/lua/mudox/lib/journal-init.lua"'
 window
 }
 # 〉

@@ -81,8 +81,9 @@ if [[ ! -d ${root_dir} ]]; then
 		for skeleton in "${template_dir}"/ap-actions/*; do
 			if [[ -f $skeleton ]]; then
 				project_name="${package_name}" \
-					envsubst \
-					< "${skeleton}" \
+				test_bin='"${test_bin}"'       \
+					envsubst                     \
+					< "${skeleton}"              \
 					> "${root_dir}/.ap-actions/$(basename ${skeleton})"
 			else
 				cp -a "${skeleton}" "${root_dir}/.ap-actions/$(basename ${skeleton})"
@@ -126,13 +127,17 @@ session "${1:?need a session name}"
 }
 # 〉
 
-# Pane: Watcher 〈
+# Pane: Install 〈
 if [[ -n $create ]]; then
 	() {
 		local hv='v'
-		local pane_title='  Poetry install'
+		local pane_title='  Install'
 		local dir="${root_dir}"
-		local cmd="poetry install && tmux respawn-pane -k -t ${window}.2 && tmux kill-pane -t ${window}.3"
+		local cmd="
+		  poetry install
+			&& tmux respawn-pane -k -t ${window}.2
+		  && tmux kill-pane -t ${window}.3
+		"
 		pane
 	}
 

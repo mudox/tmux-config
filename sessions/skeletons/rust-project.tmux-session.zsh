@@ -114,8 +114,9 @@ session "$1"
 # Pane: 'Watcher' 〈
 () {
   local pane_title='  Watch'
+	# local size=120
   local dir="${root_dir}"
-  local cmd="${root_dir}/.ap-actions/default-watch-action.zsh"
+  local cmd="${root_dir}/.ap-actions/watch-test.zsh"
   pane
 }
 # 〉

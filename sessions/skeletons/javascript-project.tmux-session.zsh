@@ -2,10 +2,10 @@
 set -euo pipefail
 
 usage() {
-cat <<END
+cat <<'END'
 Create tmux session for the javascript project, create the project if requested.
 
-Usage: $(basename $0) [-c] session_title project_name_or_path
+Usage: $(basename $0) [-c] SESSION_TITLE PROJECT_NAME_OR_PATH
 
 Flags:
   -c create the project
@@ -21,11 +21,14 @@ END
 }
 
 # Parse flags 〈
+
 typeset create
 zparseopts -D -E c=create
+
 # 〉
 
 # Parse positional arguments  〈
+
 if [[ $# -ne 2 ]]; then 
   jack error "Invalid number of positional arguments"
   usage
@@ -43,26 +46,28 @@ else
   fi
   root_dir="${prefix}/$2"
 fi
+
 # 〉
 
 # Create project if requested  〈
+
 if [[ ! -d ${root_dir} ]]; then
   if [[ -n ${create} ]]; then
     jack info 'Create project'
 
-    # create project
+    # Create project
     mkdir -p "${root_dir}" && cd "${root_dir}"
     pnpm init -y
     sd 'index.js' 'src/index.js' "${root_dir}/package.json"
 
-    # skeleton files
+    # Skeleton files
     skeleton_dir="${MDX_TMUX_DIR}/sessions/skeletons/javascript-project"
-    mv "${skeleton_dir}"/* "${root_dir}"
+    cp -a "${skeleton_dir}"/* "${root_dir}"
     
-    # ap actions
-    cp -a "${root_dir}/ap-actions" "${root_dir}/.ap-actions"
+    # Ap actions
+    mv "${root_dir}/ap-actions" "${root_dir}/.ap-actions"
 
-    # git repo
+    # Git
     git init
     gi node >> "${root_dir}/.gitignore"
   else
@@ -75,14 +80,17 @@ else
     exit 1
   fi
 fi
+
 # 〉
 
 # Creat tmux session  〈
+
 source ${MDX_TMUX_DIR}/sessions/lib/utils.zsh
 
 session "$1"
 
 # Window: "Main" 〈
+
 () {
   local window_name="Main"
   local pane_title='  Edit'
@@ -92,12 +100,14 @@ session "$1"
 }
 
 # Pane: 'Watcher' 〈
+
 () {
   local pane_title='  Watch'
   local dir="${root_dir}"
   local cmd="${root_dir}/.ap-actions/default-watch-action.zsh"
   pane
 }
+
 # 〉
 
 # 〉
