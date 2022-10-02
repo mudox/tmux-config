@@ -26,6 +26,6 @@ if (($# > 0)); then
     exec $cmd $@
   fi
 else
-  eval "$("${MDX_GIT_DIR}/base16-shell/profile_helper.sh")"
+  source "${MDX_GIT_DIR}/base16-shell/profile_helper.sh"
   exec $cmd attach >/dev/null 2>&1
 fi
