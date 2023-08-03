@@ -38,6 +38,6 @@ sep() {
 sep1() { 
 	# local right=$(printf '―%.0s' {1..4})
 	local left=$(printf ' %.0s' {1..$(( 22 - $#1 ))})
-	menu+=("-$left#[fg=white,bg=black]#[fg=black,bg=#a89b82] $1 " '-' '-')
+	menu+=("-$left#[fg=$tint,bg=black,nodim]#[fg=black,bg=$tint,nodim] $1 " '-' '-')
 }
 

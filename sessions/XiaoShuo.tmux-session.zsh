@@ -2,9 +2,9 @@
 
 source ${MDX_TMUX_DIR}/sessions/lib/helper.zsh
 
-root="${HOME}/Develop/Apple/XiuFeng"
+root="${HOME}/Develop/Apple/XiaoShuo"
 
-setup 'XiuFeng' "${root}"
+setup 'XiaoShuo' "${root}"
 
 new_session 'Main' "${root}" nvim
 

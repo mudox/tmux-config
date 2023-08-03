@@ -2,18 +2,18 @@
 
 source ${MDX_TMUX_DIR}/sessions/lib/utils.zsh
 
-root_dir="${MDX_TMUX_DIR}"
+root_dir="${HOME}"
 
-session "Tmux"
+session "Default"
 
-main_editor_window
+main_shell_window
 
 # Window: 'Help' 〈
 () {
-local window_name='Help'
-local pane_title='  Help'
+local window_name='Monitor'
+local pane_title='󰦉  BTop'
 local dir="$root_dir"
-local cmd='MANPAGER="MDX_NVIM_MODE=man nvim +Man!" man tmux'
+local cmd='btop'
 window
 }
 # 〉

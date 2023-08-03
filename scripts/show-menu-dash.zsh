@@ -9,7 +9,7 @@ window() {
 }
 
 tint='green'
-sep1 'Config'
+sep1 'CONFIG'
 window    Neovim         v    'Neovim'
 window    Dotfiles       d    'Dotfiles'
 window    Tmux           t    'Tmux'
@@ -17,22 +17,22 @@ window    Hammerspoon    h    'Hammerspoon'
 
 nl
 tint=blue
-sep1 'Note'
+sep1 'NOTE'
 window    Note           e    'Neorg:1'
 window    Journal        o    'Neorg:Journal'
 
-
 nl
 tint=brown
-sep1 'Monitor'
-window    BTop           X    'Default:Top'
+sep1 'MONITOR'
+window    BTop           X    'Default:Monitor'
 popup     Htop           x    'htop --user mudox'
 
 nl
 tint=yellow
-sep1 'Popup'
+sep1 'POPUP'
 popup     Ap             a    "${HOME}/.bin/ap"
 popup     GitUI          g    '/opt/homebrew/bin/gitui'
+popup     LazyGit        z    '/opt/homebrew/bin/lazygit'
 
 nl
 tint=colour17
@@ -42,4 +42,4 @@ window    DA-Swift       2    DA-Swift
 window    DA-Rust        3    DA-Rust
 window    DA-JavaScript  4    DA-JavaScript
 
-tmux display-menu -- "${(@)menu}"
+tmux display-menu -T ' GOTO ' -- "${(@)menu}"

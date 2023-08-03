@@ -1,4 +1,6 @@
-# Usage: setup session_name
+# TODO: migrate to sessions/lib/utils.zsh
+
+# Usage: setup {session_name}
 #
 # Defines envs:
 # - session_name
@@ -19,7 +21,7 @@ setup() { # 〈1
   fi
 } # 〉
 
-# Usage: new_session window_name path [command]
+# Usage: new_session {window_name} {path} [command]
 #
 # It creates a new session with its initial window.
 #
@@ -56,7 +58,7 @@ new_session() { # 〈1
     "$cmd"
 } # 〉
 
-# Usage: new_window window_name path [command];
+# Usage: new_window {window_name} {path} [command];
 #
 # Create a new window and append it to the session
 #
@@ -67,8 +69,8 @@ new_session() { # 〈1
 # - window # tmux absolute identifier of the create window, e.g. `GuruLibs:Config`.
 
 new_window() { # 〈1
-  local window_name=$1
-  local root_dir=$2
+  local window_name="$1"
+  local root_dir="$2"
 
   window="${session_name}:${window_name}"
 
@@ -100,6 +102,13 @@ title_pane() {
 
 hide_title() {
   tmux set -w -t "$window" pane-border-status off
+}
+
+apple_project() { 
+	root="${HOME}/Develop/Apple/$1"
+
+	setup "$1"
+	new_session 'Main' "$root" nvim
 }
 
 # vim: fdm=marker fmr=〈,〉

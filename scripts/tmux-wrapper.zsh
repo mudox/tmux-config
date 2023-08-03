@@ -27,5 +27,5 @@ if (($# > 0)); then
   fi
 else
   source "${MDX_GIT_DIR}/base16-shell/profile_helper.sh"
-  exec $cmd attach >/dev/null 2>&1
+  exec $cmd attach &>/dev/null
 fi

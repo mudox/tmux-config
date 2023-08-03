@@ -1,11 +1,11 @@
 #!/usr/bin/env zsh
 
-source ${MDX_TMUX_DIR}/sessions/lib/helper.zsh
+source ${MDX_TMUX_DIR}/sessions/lib/utils.zsh
 
 root_dir="${HOME}/Git/hs-config"
 
-setup Hammerspoon
+session 'Hammerspoon'
 
-new_session Main "${root_dir}" 'nvim init.lua'
+main_editor_window
 
-clean_up
+finish

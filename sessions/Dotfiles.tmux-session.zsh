@@ -2,19 +2,13 @@
 
 source ${MDX_TMUX_DIR}/sessions/lib/utils.zsh
 
+set -x
+
 root_dir="${HOME}/.dotfiles"
 
 session "Dotfiles"
 
-# Window: Main 〈
-() {
-local window_name="Main"
-local pane_title="  Edit"
-local dir="${root_dir}"
-local cmd="nvim zsh/zshrc.zsh"
-window
-}
-#  〉
+main_editor_window
 
 finish
 

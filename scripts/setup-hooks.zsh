@@ -8,7 +8,7 @@ hook() {
 }
 
 hook 'client-session-changed'
-hook 'session-window-changed'
+# hook 'session-window-changed'
 hook 'after-split-window'
 hook 'after-kill-pane'
 hook 'after-resize-pane'
