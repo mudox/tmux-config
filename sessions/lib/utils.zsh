@@ -5,8 +5,7 @@ set -eo pipefail
 source "${MDX_TMUX_DIR}/scripts/lib/utils.zsh"
 
 tput civis
-tmux set-option -g @mdx-display-pane-tip false
-trap 'tput cnorm; tmux set -g @mdx-display-pane-tip true' EXIT
+trap 'tput cnorm' EXIT
 
 # session 〈
 # Declare (prepare) a new session
@@ -16,23 +15,11 @@ trap 'tput cnorm; tmux set -g @mdx-display-pane-tip true' EXIT
 # Adds variables:
 # - session_name
 
-# _session() {
-#     # NOTE: session name MUST be same as first part of session file name
-#     session_name="${1:?need a session name as 1st argument}"
-#     tmp_name="__TMP__"
-#     current_session_name=$(tmux display-message -p -F '#{session_name}')
-#
-#     # discard old session if any
-#     if tmux has-session -t "=${session_name}" &>/dev/null; then
-#         tmux rename-session "${tmp_name}"
-#     fi
-# }
-
 session() {
     session_name="${1:?need a session name as 1st argument}"
-    set +e
-    tmux kill-session -t "=${session_name}" &>/dev/null
-    set -e
+    if tmux has-session -t "${session_name}" &>/dev/null; then
+        tmux kill-session -t "${session_name}"
+    fi
 }
 
 # 〉
@@ -77,28 +64,30 @@ window() {
     local s w p format
     print -v format "#{session_id}\t#{window_id}\t#{pane_id}"
 
-    if ! tmux has-session -t "=${session_name}" &>/dev/null; then
-        tmux new-session                \
-            -s "${session_name}"        \
-            -n "${window_name}"         \
-            -x- -y-                     \
-            -c "${dir}"                 \
-            ${set_env}                  \
-            -d                          \
-            -PF "${format}"             \
-            --                          \
-            "${cmd}"                    \
+    # if ! tmux has-session -t "=${session_name}" &>/dev/null; then
+    if [[ -z $session_id ]]; then
+        tmux new-session                                     \
+            -s "${session_name}"                             \
+            -n "${window_name}"                              \
+            -x $(tmux display-message -p '#{client_width}')  \
+            -y $(tmux display-message -p '#{client_height}') \
+            -c "${dir}"                                      \
+            ${set_env}                                       \
+            -d                                               \
+            -PF "${format}"                                  \
+            --                                               \
+            "${cmd}"                                         \
             | read session_id window_id pane_id
     else
-        tmux new-window                 \
-            -a                          \
-            -t "${session_id}:{end}"    \
-            -n "${window_name}"         \
-            -c "${dir}"                 \
-            ${set_env}                  \
-            -PF "${format}"             \
-            --                          \
-            "${cmd}"                    \
+        tmux new-window                                      \
+            -a                                               \
+            -t "${session_id}:{end}"                         \
+            -n "${window_name}"                              \
+            -c "${dir}"                                      \
+            ${set_env}                                       \
+            -PF "${format}"                                  \
+            --                                               \
+            "${cmd}"                                         \
             | read session_id window_id pane_id
     fi
 
@@ -192,20 +181,6 @@ pane() {
 #
 # Depends on variables:
 # - session_id
-
-# finish() {
-#     tmux select-window -t "${session_id}:1.1"
-#
-#     current_session_name=$(tmux display-message -p -F '#{session_name}')
-#     if [[ $current_session_name == $tmp_name ]]; then
-#         # tmux display-message "switch to ${session_id}"
-#         tmux switch-client -t "${session_id}"
-#     fi
-#     if tmux has-session -t "=${tmp_name}" &>/dev/null; then
-#         tmux kill-session -t "=${tmp_name}" &>/dev/null
-#     fi
-#     true
-# }
 
 finish() {
     tmux select-window -t "${session_id}:1.1"

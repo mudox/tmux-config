@@ -2,8 +2,6 @@
 
 source ${MDX_TMUX_DIR}/sessions/lib/utils.zsh
 
-set -x
-
 root_dir="${HOME}/.dotfiles"
 
 session "Dotfiles"

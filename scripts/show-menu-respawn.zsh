@@ -6,17 +6,23 @@ source "${MDX_TMUX_DIR}/scripts/lib/menu.zsh"
 
 nl
 tint='green'
-script   'Pane'      '%'   'respawn-pane.zsh'
-# script   'Session'   '$'   'respawn-session.zsh'
+script 'Pane'     '%' 'respawn-pane -k'
+item   'Window'   '@' 'respawn-window -k'
 
 nl
 tint='red'
-script   'Zsh'       'z'   'respawn-pane-with-zsh.zsh'
-script   'Neovim'    'v'   'respawn-pane-with-neovim.zsh'
+sep1   'CURRENT PANE'
+script 'Shell'    's' 'respawn-pane-with-zsh.zsh'
+script 'Editor'   'e' 'respawn-pane-with-neovim.zsh'
+script 'More...'  '?' 'respawn-pane-with-ap-t.zsh'
 
 nl
 tint='yellow'
-item     'On...'     'q'   "display-panes 'respawn-pane -k -t %%'"
-script   'More...'    '?'  'respawn-pane-with-ap-t.zsh'
+sep1   'OTHER PANE'
+item   'Right of' 'l' "respawn-pane -k -t '{right-of}'"
+item   'Left of'  'h' "respawn-pane -k -t '{left-of}'"
+item   'Up of'    'k' "respawn-pane -k -t '{up-of}'"
+item   'Down of'  'j' "respawn-pane -k -t '{down-of}'"
+item   'On...'    'q' "display-panes 'respawn-pane -k -t %%'"
 
 tmux display-menu -T ' RESPAWN ' -xP -yP -- "${(@)menu}"
