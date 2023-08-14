@@ -8,7 +8,7 @@ window() {
 	shell "$1" "$2" "${scripts_dir}/switch-session.zsh $3"
 }
 
-tint='green'
+tint=green
 sep1 'CONFIG'
 window    Neovim         v    'Neovim'
 window    Dotfiles       d    'Dotfiles'
@@ -22,9 +22,9 @@ window    Note           e    'Neorg:1'
 window    Journal        o    'Neorg:Journal'
 
 nl
-tint=brown
+tint=red
 sep1 'MONITOR'
-window    BTop           X    'Default:Monitor'
+window    BTop           X    'Default:Top'
 popup     Htop           x    'htop --user mudox'
 
 nl
@@ -35,11 +35,11 @@ popup     GitUI          g    '/opt/homebrew/bin/gitui'
 popup     LazyGit        z    '/opt/homebrew/bin/lazygit'
 
 nl
-tint=colour17
+tint=grey
 sep1 'DSA'
 window    DA-Python      1    DA-Python
 window    DA-Swift       2    DA-Swift
 window    DA-Rust        3    DA-Rust
 window    DA-JavaScript  4    DA-JavaScript
 
-tmux display-menu -T ' GOTO ' -- "${(@)menu}"
+tmux display-menu -T '   GOTO ' -- "${(@)menu}"

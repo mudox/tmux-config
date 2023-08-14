@@ -1,4 +1,4 @@
-#  vim: fdm=marker fmr=〈,〉
+# vim: fdm=marker fmr=〈,〉
 
 menu=()
 tint='terminal'
@@ -36,8 +36,7 @@ sep() {
 
 # $1: title
 sep1() { 
-	# local right=$(printf '―%.0s' {1..4})
 	local left=$(printf ' %.0s' {1..$(( 22 - $#1 ))})
-	menu+=("-$left#[fg=$tint,bg=black,nodim]#[fg=black,bg=$tint,nodim] $1 " '-' '-')
+	menu+=("-$left#[fg=$tint,bg=default,nodim]#[fg=black,bg=$tint,nodim] $1 " '-' '-')
 }
 

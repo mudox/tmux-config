@@ -30,11 +30,12 @@ goto+=(
 
 # Monitor
 goto+=(
-    'X'     Default:Monitor
+    'X'     Default:Top
 )
 
 # Default
 goto+=(
+    'y'     Default:Main
     'Space' Default:Main
 )
 
@@ -64,7 +65,7 @@ bind -N 'Goto next session'       ']' switch-client -n
 
 # Menu
 bind -N 'Show menu' \
-    '-' run-shell "${MDX_TMUX_DIR}/scripts/show-menu-dash.zsh"
+    '-' run-shell "${MDX_TMUX_DIR}/scripts/menu-goto.zsh"
 
 # Tav
 bind -N 'Run Tav' 'M-y' run-shell tav
