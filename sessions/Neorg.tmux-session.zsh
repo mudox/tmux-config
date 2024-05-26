@@ -21,7 +21,7 @@ window
 local window_name='Journal'
 local pane_title='  Journal'
 local dir="${root_dir}"
-local cmd='MDX_NVIM_MODE=neorg nvim -c "luafile ${MDX_NVIM_DIR}/lua/mudox/lib/journal-init.lua"'
+local cmd='MDX_NVIM_MODE=neorg nvim -c "luafile ${MDX_NVIM_DIR}/lua/mudox/util/journal-init.lua"'
 window
 }
 # 〉

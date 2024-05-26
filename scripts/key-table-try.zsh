@@ -3,8 +3,8 @@ set -euo pipefail
 
 source "${MDX_TMUX_DIR}/scripts/lib/utils.zsh"
 
-TABLE_NAME='goto'
-TABLE_PREFIX='M-y'
+TABLE_NAME='try'
+TABLE_PREFIX=']'
 source "${MDX_TMUX_DIR}/scripts/lib/key-table.zsh"
 
 typeset -A map
@@ -12,7 +12,6 @@ typeset -A map
 # Config
 map+=(
     'v'     Neovim
-    '\;'    Neovim
     'd'     Dotfiles
     't'     Tmux
     'h'     Hammerspoon
@@ -20,7 +19,8 @@ map+=(
 
 # Note
 map+=(
-    'n'     Note
+    'e'     Neorg:1
+    'j'     Neorg:Journal
 )
 
 # Monitor

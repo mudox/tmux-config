@@ -18,8 +18,7 @@ window    Hammerspoon    h    'Hammerspoon'
 nl
 tint=blue
 sep1 'NOTE'
-window    Note           e    'Neorg:1'
-window    Journal        o    'Neorg:Journal'
+window    Note           n    'Note'
 
 nl
 tint=red
@@ -31,8 +30,14 @@ nl
 tint=yellow
 sep1 'POPUP'
 popup     Ap             a    "${HOME}/.bin/ap"
+popup     LuaPad         l    "nvim +Luapad '+wincmd o'"
+
+nl
+tint=magenta
+sep1 'GIT'
 popup     GitUI          g    '/opt/homebrew/bin/gitui'
 popup     LazyGit        z    '/opt/homebrew/bin/lazygit'
+shell     GitTower       G    '/usr/local/bin/gittower .'
 
 nl
 tint=grey
