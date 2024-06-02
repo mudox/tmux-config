@@ -1,1 +1,0 @@
-after-resize-pane.zsh
