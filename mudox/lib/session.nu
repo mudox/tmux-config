@@ -74,9 +74,3 @@ export def end [] {
   let session = $in
   tmux select-window -t $'($session.id):1.1'
 }
-
-# test
-# new TestNu
-# | window Main -d ('~/Git/tmux-config' | path expand)
-# | pane h 
-# | window Edit -d ('~/Git/neovim-config' | path expand) nvim

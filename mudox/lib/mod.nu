@@ -25,3 +25,9 @@ export def window-panes [] {
 export def zoomed [] {
   (tmux-query '#{window_zoomed_flag}') == '1'
 }
+
+export def load-data [name: string] {
+  let filename = ([$env.MDX_TMUX_DIR data $'($name).nuon'] | path join )
+  open $filename | update items { flatten }
+}
+

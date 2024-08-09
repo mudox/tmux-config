@@ -1,0 +1,71 @@
+{
+  kt_name: goto
+  m_title: '   GOTO ' 
+  prefix: 'root:M-y'
+  items: [
+    # home
+    [
+      [ type      key   target     ];
+      [ switch-to Enter 'Home'     ]
+      [ switch-to z     'Home:Zsh' ]
+      [ switch-to n     'Home:Nu'  ]
+    ]
+
+    # config
+    { type: tint color: green }
+    { type: powerline title: CONFIG }
+    [
+      [ type      key   target      m_title     ];
+      [ switch-to v     Neovim      Neovim      ]
+      [ switch-to Space Neovim      null        ]
+      [ switch-to d     Dotfiles    Dotfiles    ]
+      [ switch-to t     Tmux        Tmux        ]
+      [ switch-to h     Hammerspoon Hammerspoon ]
+    ]
+
+    # monitor
+    { type: nl }
+    { type: tint color: red }
+    { type: powerline title: MONITOR }
+    { type: switch-to key: X target: 'Home:Top'                         m_title: BTop }
+    { type: popup     key: x cmd:    'htop --user mudox'  kt_name: HTop m_title: HTop }
+
+    # popup
+    { type: nl }
+    { type: tint color: yellow }
+    { type: powerline title: POPUP }
+    [
+      [ type  key cmd                 kt_name m_title ];
+      [ popup a   ap                  Ap      Ap      ]
+      [ popup l   "nvim +Luapad '+wincmd o'"                  LuaPad      LuaPad      ]
+    ]
+
+    # git
+    { type: nl }
+    { type: tint color: magenta }
+    { type: powerline title: GIT }
+    [
+      [ type  key cmd                 kt_name m_title ];
+      [ popup g   gitui               GitUI   GitUI   ]
+      [ popup G   lazygit             LazyGit LazyGit ]
+    ]
+    { type: run key: C-g cmd: '/usr/local/bin/gittower .' my: false kt_desc: 'Launch GitTower' m_title: GitTower }
+
+    # submenus
+    { type: nl }
+    { type: tint color: blue }
+    { type: powerline title: MORE }
+    [
+      [type    key name kt_name m_title ];
+      [child   y   try  Try     Try     ]
+    ]
+
+    # session navigation
+    [
+      [type key cmd                kt_desc];
+      [item '/' 'switch-client -l' 'switch to last session']
+      [item '[' 'switch-client -p' 'switch to previous session']
+      [item ']' 'switch-client -n' 'switch to next session']
+    ]
+  ]
+}

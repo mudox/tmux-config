@@ -1,19 +1,83 @@
-# vim: fdm=marker fmr=〈,〉
+#!/usr/bin/env nu
+
+### usage
+# begin with `new`
+#
+# middle filled with
+# - menu items
+#   - `item`
+#   - `run`
+#   - `swithc-to`
+#   - `popup`
+#
+# - style & deocration
+#   - `tint`
+#   - `nl`
+#   - `powerline`
+#
+# end with `show`
 
 const default_tint = terminal
+const menu_width = 22 # magic number
 
 export def new [title: string] {
   {title: $title, body: [], tint: $default_tint}
 }
 
-export def tint [v: string] {
-  update tint $v
-}
-
 export def item [title: string, key: string, cmd: string] {
   let menu = $in
-  let title = $'#[fg=($menu.tint)]($title)'
+  let title = $'#[fg=($menu.tint)]($title | fill -w ($menu_width - 3))'
   let body = $menu.body ++ [$title, $key, $cmd]
+  $menu | update body $body
+}
+
+export def run [title: string, key: string, --my, cmd: string] {
+  let menu = $in
+
+  mut cmd = if $my {
+    [$env.MDX_TMUX_DIR mudox $cmd] | path join | path expand 
+  } else {
+    $cmd
+  }
+  $cmd = $'run-shell "($cmd)"'
+
+  $menu | item $title $key $cmd
+}
+
+export def switch-to [title: string, key: string, target: string] {
+  let menu = $in
+  let cmd = $"switch-to.nu '($target)'"
+	$menu | run $title $key --my $cmd
+}
+
+export def popup [title: string, key: string, cmd: string] {
+  let menu = $in
+  let cmd = $'display-popup -E -w70% -h80% "($cmd)"'
+  $menu | item $title $key $cmd
+}
+
+export def child [title: string, key: string, name: string] {
+  let menu = $in 
+  let cmd = $'lib/menu.nu ($name)'
+  $menu | run $title $key --my $cmd
+}
+
+export def tint [v: string] {
+  let menu = $in 
+  $menu | update tint $v
+}
+
+export def nl [] {
+  let menu = $in
+  let body = $menu.body ++ ['- ', '-', '-']
+  $menu | update body $body
+}
+
+export def powerline [title: string] {
+  let menu = $in
+  let padding = ' ' | fill -w ($menu_width - ($title | str length --grapheme-clusters))
+  let title = $'-($padding)#[fg=($menu.tint),bg=default,nodim]#[fg=black,bg=($menu.tint),nodim] ($title) '
+  let body = $menu.body ++ [$title, '-', '-']
   $menu | update body $body
 }
 
@@ -23,54 +87,55 @@ export def show [--pane] {
   tmux display-menu ...($opts) -T $menu.title -- ...($menu.body)
 }
 
-export def popup [title: string, key: string, cmd: string] {
+# unused
+export def dump [name?: string --pane] {
   let menu = $in
-  let cmd = $'display-popup -E -w70% -h80% "($cmd)"'
-  $menu | item $title $key $cmd
-}
+  let opts = if $pane { [-x P -y P] } else { [] }
+  let items = ($menu.body | group 3 | each { 
+    let item = $in
+    let text = $"'($item.0)'" | fill -c ' ' -w 90
+    let key = $"'($item.1)'"
+    let cmd = $'"($item.2)"' | fill -c ' ' -w 40
+    $"\\\n  ($text) ($key) ($cmd)"
+  })
 
-export def run [title: string, key: string, path: string, --my] {
-  let menu = $in
-  let path = if $my {
-    [$env.MDX_TMUX_DIR mudox $path] | path join | path expand 
+  mut text = "# vim: ft=tmux\n\n"
+  $text += ([display-menu ...($opts) -T $"'($menu.title)'" -- ...($items)] | str join ' ')
+  if $name != null {
+    $text | save -f $'($env.MDX_TMUX_DIR)/tmux/($name).conf'
   } else {
-    $path
+    $text
   }
-  
-  let cmd = $'run-shell "($path)"'
-  $menu | item $title $key $cmd
 }
 
-export def goto [title: string, key: string, session_name: string] {
-	run $title $key --my $"switch-session.zsh ($session_name)"
-}
+# show menu from definition file
+# usage: menu.nu goto
+# it will read `data/goto.nuon` to show the menu
+export def main [
+  name: string # name from `data/<name>.nuon` which defines the menu to show
+] {
+  use mod.nu load-data
+  let data = (load-data $name)
 
-export def nl [] {
-  let menu = $in
-  let body = $menu.body ++ ['- ', '-', '-']
-  
-  $menu | update body $body
-}
+  let menu = (new $data.m_title)
+  $data.items | reduce --fold $menu {|item, menu|
+    # ui items
+    match $item.type {
+      tint      => { return ($menu | tint $item.color)      }
+      nl        => { return ($menu | nl)                    }
+      powerline => { return ($menu | powerline $item.title) }
+    }
 
-export def powerline [title: string] {
-  let menu = $in
-  const menu_width = 22
-  let padding = ' ' | fill -w ($menu_width - ($title | str length --grapheme-clusters))
-  let title = $'-($padding)#[fg=($menu.tint),bg=default,nodim]#[fg=black,bg=($menu.tint),nodim] ($title) '
-  let body = $menu.body ++ [$title, '-', '-']
-  $menu | update body $body
-}
+    # data items
+    if $item.m_title? == null { return $menu }
+    match $item.type {
+      item      => { $menu | item      $item.m_title $item.key $item.cmd               }
+      run       => { $menu | run       $item.m_title $item.key $item.cmd --my=$item.my }
+      switch-to => { $menu | switch-to $item.m_title $item.key $item.target            }
+      popup     => { $menu | popup     $item.m_title $item.key $item.cmd               }
+      child     => { $menu | child     $item.m_title $item.key $item.name              }
 
-def test [] {
-  new '   Test '
-  | tint  green
-  | item  Print  a 'display-message -p hi'
-  | nl
-  | powerline NOTE
-  | tint  red
-  | item  Item  b cmd
-  | popup Popup c nu
-  | tint  yellow
-  | run   Run   d --my test.nu
-  | show
+      _         => { $menu                                                             }
+    }
+  } | show
 }

@@ -7,5 +7,6 @@ def hook [event: string] {
 
 hook client-session-changed
 hook after-split-window
+hook after-kill-pane
 hook pane-focus-in
 hook after-resize-pane

@@ -1,0 +1,18 @@
+{
+  kt_name: try
+  m_title: '   TRY ' 
+  prefix: 'goto:y'
+  items: [
+    [
+      [ type      key target         m_title    ];
+      [ switch-to a   Try-JavaScript JavaScript ]
+      [ switch-to c   Try-C          C          ]
+      [ switch-to n   Try-Nushell    Nushell    ]
+      [ switch-to p   Try-Python     Python     ]
+      [ switch-to r   Try-Rust       Rust       ]
+      [ switch-to s   Try-Swift      Swift      ]
+      [ switch-to t   Try-TypeScript TypeScript ]
+      [ switch-to z   Try-Zsh        Zsh        ]
+    ]
+  ]
+}

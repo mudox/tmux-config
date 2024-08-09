@@ -6,6 +6,4 @@ let dir = ('~/.dotfiles' | path expand)
 
 new Dotfiles
 | window Main    nvim -d $dir
-| window Nushell nu
-| pane  h       nvim
 | end 

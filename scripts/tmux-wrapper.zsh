@@ -17,6 +17,11 @@ elif [[ -n $ITERM_SESSION_ID ]]; then
 else
 	server=default
 fi
+
+# if [[ -n $NVIM ]]; then
+# 	server="${server}-nvim-term"
+# fi
+
 cmd+=(-L $server)
 
 if (($# > 0)); then
