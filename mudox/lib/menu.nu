@@ -17,7 +17,7 @@
 #
 # end with `show`
 
-const default_tint = terminal
+const default_tint = "terminal"
 const menu_width = 22 # magic number
 
 export def new [title: string] {

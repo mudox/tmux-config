@@ -23,12 +23,13 @@
       [ switch-to h     Hammerspoon Hammerspoon ]
     ]
 
-    # monitor
+    # system
     { type: nl }
     { type: tint color: red }
-    { type: powerline title: MONITOR }
-    { type: switch-to key: X target: 'Home:Top'                         m_title: BTop }
-    { type: popup     key: x cmd:    'htop --user mudox'  kt_name: HTop m_title: HTop }
+    { type: powerline title: SYSTEM }
+    { type: switch-to key: X target: 'Home:Top'                         m_title: BTop    }
+    { type: popup     key: x cmd:    'htop --user mudox'  kt_name: HTop m_title: HTop    }
+    { type: switch-to key: N target: 'Network'                          m_title: Network }
 
     # popup
     { type: nl }
