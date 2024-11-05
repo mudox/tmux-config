@@ -1,0 +1,15 @@
+[session]
+Home        = ' '
+
+Dotfiles    = ' '
+HammerSpoon = '󰣪 '
+Neovim      = ' '
+Tmux        = ' '
+
+[window]
+Edit        = ' '
+Top         = ' '
+Zsh         = ' '
+Nu          = ' '
+
+[pane]

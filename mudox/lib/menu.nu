@@ -17,8 +17,10 @@
 #
 # end with `show`
 
+use icon.nu *
+
 const default_tint = "terminal"
-const menu_width = 22 # magic number
+const menu_width = 25 # magic number
 
 export def new [title: string] {
   {title: $title, body: [], tint: $default_tint}
@@ -26,7 +28,11 @@ export def new [title: string] {
 
 export def item [title: string, key: string, cmd: string] {
   let menu = $in
-  let title = $'#[fg=($menu.tint)]($title | fill -w ($menu_width - 3))'
+  mut title = $title
+  if $title !~ '^[^a-zA-Z]' {
+    $title = '   ' + $title
+  }
+  $title = $'#[fg=($menu.tint)]($title | fill -w ($menu_width - 3))'
   let body = $menu.body ++ [$title, $key, $cmd]
   $menu | update body $body
 }
@@ -46,6 +52,11 @@ export def run [title: string, key: string, --my, cmd: string] {
 
 export def switch-to [title: string, key: string, target: string] {
   let menu = $in
+  mut title = $title
+  let session = $target | split row ':' | get 0
+  if $session == $title {
+    $title = iprefix session $session
+  }
   let cmd = $"switch-to.nu '($target)'"
 	$menu | run $title $key --my $cmd
 }

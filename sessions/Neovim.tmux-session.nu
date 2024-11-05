@@ -5,5 +5,5 @@ use ../mudox/lib/session.nu *
 let dir = ('~/.config/nvim' | path expand)
 
 new Neovim
-| window Main nvim -d $dir 
+| edit-window --dir $dir
 | end

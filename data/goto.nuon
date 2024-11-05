@@ -16,9 +16,9 @@
     { type: powerline title: CONFIG }
     [
       [ type      key   target      m_title     ];
+      [ switch-to d     Dotfiles    Dotfiles    ]
       [ switch-to v     Neovim      Neovim      ]
       [ switch-to Space Neovim      null        ]
-      [ switch-to d     Dotfiles    Dotfiles    ]
       [ switch-to t     Tmux        Tmux        ]
       [ switch-to h     Hammerspoon Hammerspoon ]
     ]
@@ -27,9 +27,9 @@
     { type: nl }
     { type: tint color: red }
     { type: powerline title: SYSTEM }
-    { type: switch-to key: X target: 'Home:Top'                         m_title: BTop    }
-    { type: popup     key: x cmd:    'htop --user mudox'  kt_name: HTop m_title: HTop    }
-    { type: switch-to key: N target: 'Network'                          m_title: Network }
+    { type: switch-to key: X target: 'Home:Top'                         m_title: '󰄧  BTop' }
+    { type: popup     key: x cmd:    'htop --user mudox'  kt_name: HTop m_title: '󰄧  HTop' }
+    { type: switch-to key: N target: 'Network'                          m_title: Network   }
 
     # popup
     { type: nl }
@@ -57,8 +57,8 @@
     { type: tint color: blue }
     { type: powerline title: MORE }
     [
-      [type    key name kt_name m_title ];
-      [child   y   try  Try     Try     ]
+      [type    key name kt_name m_title  ];
+      [child   y   try  Try     '  Try' ]
     ]
 
     # session navigation

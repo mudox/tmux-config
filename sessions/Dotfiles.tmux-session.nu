@@ -5,5 +5,5 @@ use ../mudox/lib/session.nu *
 let dir = ('~/.dotfiles' | path expand)
 
 new Dotfiles
-| window Main    nvim -d $dir
+| edit-window --dir $dir
 | end 

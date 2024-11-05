@@ -1,6 +1,8 @@
 use mod.nu tmux-query
+use icon.nu [iprefix, istrip]
 
 export def new [name: string] {
+  let name = iprefix session $name
   try { tmux kill-session -t $'=($name)' o+e>| ignore }
   {name: $name}
 }
@@ -12,6 +14,7 @@ export def window [
   --pane-title(-p): string 
 ] {
   let session = $in
+  let name = iprefix window $name
 
   let dir = $dir | default $session.dir? | default '~'
   let format = "#{session_id}\t#{window_id}\t#{pane_id}"
@@ -43,6 +46,10 @@ export def window [
   | upsert id $ids.0
   | upsert window_id $ids.1
   | upsert pane_id $ids.2
+}
+
+export def edit-window [--dir(-d): string] {
+  window Edit nvim --dir $dir
 }
 
 export def pane [
