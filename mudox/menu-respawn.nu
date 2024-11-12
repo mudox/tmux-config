@@ -19,7 +19,7 @@ def main [--current] {
   | run       Zsh     z   --my 'respawn-pane.nu zsh'
   | run       Nushell n   --my 'respawn-pane.nu nu'
   | run       Neovim  v   --my 'respawn-pane.nu nvim'
-  | run       '...'   '?' --my 'respawn-pane.nu "ap t"'
+  | run       'On...'   '?' --my 'respawn-pane.nu "ap t"'
   | if not $current {
     # OTHER PANE  
     $in

@@ -8,9 +8,10 @@ export def iprefix [
   mut icon = $icon
   if $icon == null {
     $icon = open ($env.MDX_TMUX_DIR + '/data/icons.toml') | get -i $type | get -i $name | default (match $type {
-      'session' => ' ',
+      'session' => '  ',
       'window'  => ' ',
-      'pane'    => '󱓼 ',
+      'pane'    => '󱂬 ',
+      'item'    => '  ',
       _         => '❗'
     })
   }

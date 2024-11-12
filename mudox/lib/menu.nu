@@ -30,7 +30,7 @@ export def item [title: string, key: string, cmd: string] {
   let menu = $in
   mut title = $title
   if $title !~ '^[^a-zA-Z]' {
-    $title = '   ' + $title
+    $title = iprefix item $title
   }
   $title = $'#[fg=($menu.tint)]($title | fill -w ($menu_width - 3))'
   let body = $menu.body ++ [$title, $key, $cmd]

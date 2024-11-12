@@ -13,3 +13,17 @@ Zsh         = ' '
 Nu          = ' '
 
 [pane]
+
+[item]
+Server      = '󰒍 '
+Session     = '󱋊 '
+Window      = ' '
+Pane        = '󱂬 '
+
+Left        = '󱂪 '
+Right       = '󱂫 '
+Up          = '󱔓 '
+Down        = '󱂩 '
+Zsh         = ' '
+NuShell     = ' '
+Neovim      = ' '
