@@ -1,22 +1,40 @@
-export def iprefix [
-  type: string # one of `session`, `window`, `pane`
+#!/usr/bin/env nu
+
+export def icon-for [
+  type: string # one of `session`, `window`, `pane`, `item`
   name: string
-  --icon(-i): string
 ] {
-  if $name =~ '^[^a-zA-Z]' { return $name }
+    let cp = [$type $name] | into cell-path
+    open ($env.MDX_TMUX_DIR + '/data/icons.toml') | get -i $cp
+    # | default (match $type {
+    #     'session' => null,
+    #     'window'  => ' ',
+    #     'pane'    => '󱂬 ',
+    #     'item'    => '  ',
+    #     _         => '❗'
+    #   })
+}
 
-  mut icon = $icon
-  if $icon == null {
-    $icon = open ($env.MDX_TMUX_DIR + '/data/icons.toml') | get -i $type | get -i $name | default (match $type {
-      'session' => '  ',
-      'window'  => ' ',
-      'pane'    => '󱂬 ',
-      'item'    => '  ',
-      _         => '❗'
-    })
+export def iprefix [
+  type: string # one of `session`, `window`, `pane`, `item`
+  name: string
+  --icon: string
+  --padding
+] {
+  if $name =~ '^[^a-zA-Z]' { 
+    return $name 
+  } else {
+    let i = $icon | default (icon-for $type $name)
+    if $i == null {
+      if $padding {
+        return $'   ($name)'
+      } else {
+        return $name
+      }
+    } else {
+      return $'($i) ($name)'
+    }
   }
-
-  return $'($icon) ($name)'
 }
 
 export def istrip [] {
@@ -24,18 +42,25 @@ export def istrip [] {
 }
 
 def test [] {
-  iprefix -i '󰉊 ' session Flower | print
+  iprefix --icon '󰉊 ' session Flower | print
 
   iprefix session Neovim | print
-  iprefix session Dotfiles | print
+  iprefix session Dotfiles --padding | print
   iprefix session Tmux | print
   iprefix session HammerSpoon | print
-
-  iprefix session Session | print
+  
+  iprefix session Session --padding | print
   iprefix window Window | print
   iprefix pane Pane | print
 
   iprefix server Server | print
 
   iprefix session '  Home'
+}
+
+def main [
+  type: string 
+  name: string
+] {
+  print (iprefix $type $name)
 }

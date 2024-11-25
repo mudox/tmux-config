@@ -16,11 +16,13 @@
     { type: powerline title: CONFIG }
     [
       [ type      key   target      m_title     ];
+
       [ switch-to d     Dotfiles    Dotfiles    ]
       [ switch-to v     Neovim      Neovim      ]
       [ switch-to Space Neovim      null        ]
       [ switch-to t     Tmux        Tmux        ]
       [ switch-to h     Hammerspoon Hammerspoon ]
+      [ switch-to N     Network     Network     ]
     ]
 
     # system
@@ -29,7 +31,6 @@
     { type: powerline title: SYSTEM }
     { type: switch-to key: X target: 'Home:Top'                         m_title: '󰛐  BTop' }
     { type: popup     key: x cmd:    'htop --user mudox'  kt_name: HTop m_title: '󰈈  HTop' }
-    { type: switch-to key: N target: 'Network'                          m_title: Network   }
 
     # popup
     { type: nl }
@@ -37,6 +38,7 @@
     { type: powerline title: POPUP }
     [
       [ type  key cmd                 kt_name m_title ];
+
       [ popup a   ap                  Ap      Ap      ]
       [ popup l   "nvim +Luapad '+wincmd o'"                  LuaPad      LuaPad      ]
     ]
@@ -47,6 +49,7 @@
     { type: powerline title: GIT }
     [
       [ type  key cmd                 kt_name m_title ];
+
       [ popup g   gitui               GitUI   GitUI   ]
       [ popup G   lazygit             LazyGit LazyGit ]
     ]
@@ -58,15 +61,17 @@
     { type: powerline title: MORE }
     [
       [type    key name kt_name m_title  ];
+
       [child   y   try  Try     '  Try' ]
     ]
 
     # session navigation
     [
-      [type key cmd                kt_desc];
-      [item '/' 'switch-client -l' 'switch to last session']
-      [item '[' 'switch-client -p' 'switch to previous session']
-      [item ']' 'switch-client -n' 'switch to next session']
+      [type key cmd                kt_desc                      ];
+
+      [item '/' 'switch-client -l' 'switch to last session'     ]
+      [item '[' 'switch-client -p' 'switch to previous session' ]
+      [item ']' 'switch-client -n' 'switch to next session'     ]
     ]
   ]
 }

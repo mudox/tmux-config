@@ -30,7 +30,7 @@ export def item [title: string, key: string, cmd: string] {
   let menu = $in
   mut title = $title
   if $title !~ '^[^a-zA-Z]' {
-    $title = iprefix item $title
+    $title = iprefix item $title --padding
   }
   $title = $'#[fg=($menu.tint)]($title | fill -w ($menu_width - 3))'
   let body = $menu.body ++ [$title, $key, $cmd]
@@ -54,9 +54,9 @@ export def switch-to [title: string, key: string, target: string] {
   let menu = $in
   mut title = $title
   let session = $target | split row ':' | get 0
-  if $session == $title {
-    $title = iprefix session $session
-  }
+  # if $session == $title {
+  $title = iprefix session $title --padding
+  # }
   let cmd = $"switch-to.nu '($target)'"
 	$menu | run $title $key --my $cmd
 }

@@ -6,11 +6,20 @@ HammerSpoon = '󰣪 '
 Neovim      = ' '
 Tmux        = ' '
 
-[window]
-Edit        = ' '
-Top         = ' '
+JavaScript  = ' '
+TypeScript  = ' '
 Zsh         = ' '
 Nu          = ' '
+Swift       = ' '
+Python      = ' '
+
+[window]
+Edit        = ' '
+
+Zsh         = ' '
+Nu          = ' '
+
+Top         = '󰈈 '
 
 [pane]
 
