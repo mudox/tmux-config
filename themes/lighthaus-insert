@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#50C16E,bg=#21252D"
 set -g status-left "#[fg=#21252D,bg=#50C16E] #S #[fg=#50C16E,bg=#21252D,nobold,nounderscore,noitalics]#[fg=#50C16E,bg=#21252D] %H:%M "
 set -g status-right "#[fg=#50C16E,bg=#21252D] %d %b #[fg=#50C16E,bg=#21252D,nobold,nounderscore,noitalics]#[fg=#21252D,bg=#50C16E] #h "
-setw -g window-status-format "#[fg=#50C16E,bg=#21252D] #I | #W "
+setw -g window-status-format "#[fg=#50C16E,bg=#21252D] #I │ #W "
 setw -g window-status-current-format "#[fg=#21252D,bg=#090B26,nobold,nounderscore,noitalics]#[fg=#FFFADE,bg=#090B26] #I  #W  #P #[fg=#21252D,bg=#090B26,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme lighthaus-insert

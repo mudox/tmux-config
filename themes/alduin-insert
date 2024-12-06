@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#ffffff,bg=#af8787"
 set -g status-left "#[fg=#ffffff,bg=#878787] #S #[fg=#878787,bg=#af8787,nobold,nounderscore,noitalics]#[fg=#ffffff,bg=#af8787] %H:%M "
 set -g status-right "#[fg=#ffffff,bg=#af8787] %d %b #[fg=#878787,bg=#af8787,nobold,nounderscore,noitalics]#[fg=#ffffff,bg=#878787] #h "
-setw -g window-status-format "#[fg=#ffffff,bg=#af8787] #I | #W "
+setw -g window-status-format "#[fg=#ffffff,bg=#af8787] #I │ #W "
 setw -g window-status-current-format "#[fg=#af8787,bg=#af8787,nobold,nounderscore,noitalics]#[fg=#ffffff,bg=#af8787] #I  #W  #P #[fg=#af8787,bg=#af8787,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme alduin-insert

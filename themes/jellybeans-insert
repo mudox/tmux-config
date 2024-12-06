@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#ffffff,bg=#262626"
 set -g status-left "#[fg=#ffffff,bg=#437019] #S #[fg=#437019,bg=#262626,nobold,nounderscore,noitalics]#[fg=#ffffff,bg=#262626] %H:%M "
 set -g status-right "#[fg=#ffffff,bg=#262626] %d %b #[fg=#437019,bg=#262626,nobold,nounderscore,noitalics]#[fg=#ffffff,bg=#437019] #h "
-setw -g window-status-format "#[fg=#ffffff,bg=#262626] #I | #W "
+setw -g window-status-format "#[fg=#ffffff,bg=#262626] #I │ #W "
 setw -g window-status-current-format "#[fg=#262626,bg=#262626,nobold,nounderscore,noitalics]#[fg=#ffffff,bg=#262626] #I  #W  #P #[fg=#262626,bg=#262626,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme jellybeans-insert

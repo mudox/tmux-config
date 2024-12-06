@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#899BA6,bg=#556873"
 set -g status-left "#[fg=#556873,bg=#7FC1CA] #S #[fg=#7FC1CA,bg=#556873,nobold,nounderscore,noitalics]#[fg=#899BA6,bg=#556873] %H:%M "
 set -g status-right "#[fg=#899BA6,bg=#556873] %d %b #[fg=#7FC1CA,bg=#556873,nobold,nounderscore,noitalics]#[fg=#556873,bg=#7FC1CA] #h "
-setw -g window-status-format "#[fg=#899BA6,bg=#556873] #I | #W "
+setw -g window-status-format "#[fg=#899BA6,bg=#556873] #I │ #W "
 setw -g window-status-current-format "#[fg=#556873,bg=#6A7D89,nobold,nounderscore,noitalics]#[fg=#899BA6,bg=#6A7D89] #I  #W  #P #[fg=#556873,bg=#6A7D89,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme base16_nova-insert

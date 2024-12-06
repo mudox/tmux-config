@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#9cffd3,bg=#202020"
 set -g status-left "#[fg=#00005f,bg=#dfff00] #S #[fg=#dfff00,bg=#202020,nobold,nounderscore,noitalics]#[fg=#9cffd3,bg=#202020] %H:%M "
 set -g status-right "#[fg=#9cffd3,bg=#202020] %d %b #[fg=#dfff00,bg=#202020,nobold,nounderscore,noitalics]#[fg=#00005f,bg=#dfff00] #h "
-setw -g window-status-format "#[fg=#9cffd3,bg=#202020] #I | #W "
+setw -g window-status-format "#[fg=#9cffd3,bg=#202020] #I │ #W "
 setw -g window-status-current-format "#[fg=#202020,bg=#444444,nobold,nounderscore,noitalics]#[fg=#ffffff,bg=#444444] #I  #W  #P #[fg=#202020,bg=#444444,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme dark_minimal

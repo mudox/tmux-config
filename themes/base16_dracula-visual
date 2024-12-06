@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#62d6e8,bg=#3a3c4e"
 set -g status-left "#[fg=#3a3c4e,bg=#b45bcf] #S #[fg=#b45bcf,bg=#3a3c4e,nobold,nounderscore,noitalics]#[fg=#62d6e8,bg=#3a3c4e] %H:%M "
 set -g status-right "#[fg=#62d6e8,bg=#3a3c4e] %d %b #[fg=#b45bcf,bg=#3a3c4e,nobold,nounderscore,noitalics]#[fg=#3a3c4e,bg=#b45bcf] #h "
-setw -g window-status-format "#[fg=#62d6e8,bg=#3a3c4e] #I | #W "
+setw -g window-status-format "#[fg=#62d6e8,bg=#3a3c4e] #I │ #W "
 setw -g window-status-current-format "#[fg=#3a3c4e,bg=#4d4f68,nobold,nounderscore,noitalics]#[fg=#62d6e8,bg=#4d4f68] #I  #W  #P #[fg=#3a3c4e,bg=#4d4f68,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme base16_dracula-visual

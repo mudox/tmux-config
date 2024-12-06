@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#009900,bg=#003300"
 set -g status-left "#[fg=#003300,bg=#009900] #S #[fg=#009900,bg=#003300,nobold,nounderscore,noitalics]#[fg=#009900,bg=#003300] %H:%M "
 set -g status-right "#[fg=#009900,bg=#003300] %d %b #[fg=#009900,bg=#003300,nobold,nounderscore,noitalics]#[fg=#003300,bg=#009900] #h "
-setw -g window-status-format "#[fg=#009900,bg=#003300] #I | #W "
+setw -g window-status-format "#[fg=#009900,bg=#003300] #I │ #W "
 setw -g window-status-current-format "#[fg=#003300,bg=#005500,nobold,nounderscore,noitalics]#[fg=#00dd00,bg=#005500] #I  #W  #P #[fg=#003300,bg=#005500,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme base16_greenscreen-insert

@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#B0B0B0,bg=#202020"
 set -g status-left "#[fg=#202020,bg=#00C918] #S #[fg=#00C918,bg=#202020,nobold,nounderscore,noitalics]#[fg=#B0B0B0,bg=#202020] %H:%M "
 set -g status-right "#[fg=#B0B0B0,bg=#202020] %d %b #[fg=#00C918,bg=#202020,nobold,nounderscore,noitalics]#[fg=#202020,bg=#00C918] #h "
-setw -g window-status-format "#[fg=#B0B0B0,bg=#202020] #I | #W "
+setw -g window-status-format "#[fg=#B0B0B0,bg=#202020] #I │ #W "
 setw -g window-status-current-format "#[fg=#202020,bg=#303030,nobold,nounderscore,noitalics]#[fg=#B0B0B0,bg=#303030] #I  #W  #P #[fg=#202020,bg=#303030,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme base16_summerfruit_dark-insert

@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#f8f8f0,bg=#49483e"
 set -g status-left "#[fg=#f8f8f0,bg=#f92672] #S #[fg=#f92672,bg=#49483e,nobold,nounderscore,noitalics]#[fg=#f8f8f0,bg=#49483e] %H:%M "
 set -g status-right "#[fg=#f8f8f0,bg=#49483e] %d %b #[fg=#f92672,bg=#49483e,nobold,nounderscore,noitalics]#[fg=#f8f8f0,bg=#f92672] #h "
-setw -g window-status-format "#[fg=#f8f8f0,bg=#49483e] #I | #W "
+setw -g window-status-format "#[fg=#f8f8f0,bg=#49483e] #I │ #W "
 setw -g window-status-current-format "#[fg=#49483e,bg=#49483e,nobold,nounderscore,noitalics]#[fg=#f8f8f0,bg=#49483e] #I  #W  #P #[fg=#49483e,bg=#49483e,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme fairyfloss-visual

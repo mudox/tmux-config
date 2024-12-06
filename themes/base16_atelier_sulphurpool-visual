@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#898ea4,bg=#293256"
 set -g status-left "#[fg=#293256,bg=#c76b29] #S #[fg=#c76b29,bg=#293256,nobold,nounderscore,noitalics]#[fg=#898ea4,bg=#293256] %H:%M "
 set -g status-right "#[fg=#898ea4,bg=#293256] %d %b #[fg=#c76b29,bg=#293256,nobold,nounderscore,noitalics]#[fg=#293256,bg=#c76b29] #h "
-setw -g window-status-format "#[fg=#898ea4,bg=#293256] #I | #W "
+setw -g window-status-format "#[fg=#898ea4,bg=#293256] #I │ #W "
 setw -g window-status-current-format "#[fg=#293256,bg=#5e6687,nobold,nounderscore,noitalics]#[fg=#898ea4,bg=#5e6687] #I  #W  #P #[fg=#293256,bg=#5e6687,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme base16_atelier_sulphurpool-visual

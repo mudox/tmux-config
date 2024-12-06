@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#87AF5F,bg=#1C1C1C"
 set -g status-left "#[fg=#FFFFFF,bg=#87AF5F] #S #[fg=#87AF5F,bg=#1C1C1C,nobold,nounderscore,noitalics]#[fg=#87AF5F,bg=#1C1C1C] %H:%M "
 set -g status-right "#[fg=#87AF5F,bg=#1C1C1C] %d %b #[fg=#87AF5F,bg=#1C1C1C,nobold,nounderscore,noitalics]#[fg=#FFFFFF,bg=#87AF5F] #h "
-setw -g window-status-format "#[fg=#87AF5F,bg=#1C1C1C] #I | #W "
+setw -g window-status-format "#[fg=#87AF5F,bg=#1C1C1C] #I │ #W "
 setw -g window-status-current-format "#[fg=#1C1C1C,bg=#5F5F5F,nobold,nounderscore,noitalics]#[fg=#AFAF87,bg=#5F5F5F] #I  #W  #P #[fg=#1C1C1C,bg=#5F5F5F,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme murmur-insert

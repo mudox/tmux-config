@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "italic,fg=#2AA198,bg=#002B36"
 set -g status-left "#[fg=#002B36,bg=#859900,italic] #S #[fg=#859900,bg=#002B36,nobold,nounderscore,noitalics]#[fg=#2AA198,bg=#002B36,italic] %H:%M "
 set -g status-right "#[fg=#2AA198,bg=#002B36] %d %b #[fg=#002B36,bg=#002B36,nobold,nounderscore,noitalics]#[fg=#859900,bg=#002B36,italic] #h "
-setw -g window-status-format "#[fg=#2AA198,bg=#002B36,italic] #I | #W "
+setw -g window-status-format "#[fg=#2AA198,bg=#002B36,italic] #I │ #W "
 setw -g window-status-current-format "#[fg=#002B36,bg=#002B36,nobold,nounderscore,noitalics]#[fg=#93A1A1,bg=#002B36,italic] #I  #W  #P #[fg=#002B36,bg=#002B36,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme solarized_flood

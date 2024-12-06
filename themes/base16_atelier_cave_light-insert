@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#655f6d,bg=#e2dfe7"
 set -g status-left "#[fg=#e2dfe7,bg=#2a9292] #S #[fg=#2a9292,bg=#e2dfe7,nobold,nounderscore,noitalics]#[fg=#655f6d,bg=#e2dfe7] %H:%M "
 set -g status-right "#[fg=#655f6d,bg=#e2dfe7] %d %b #[fg=#2a9292,bg=#e2dfe7,nobold,nounderscore,noitalics]#[fg=#e2dfe7,bg=#2a9292] #h "
-setw -g window-status-format "#[fg=#655f6d,bg=#e2dfe7] #I | #W "
+setw -g window-status-format "#[fg=#655f6d,bg=#e2dfe7] #I │ #W "
 setw -g window-status-current-format "#[fg=#e2dfe7,bg=#8b8792,nobold,nounderscore,noitalics]#[fg=#655f6d,bg=#8b8792] #I  #W  #P #[fg=#e2dfe7,bg=#8b8792,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme base16_atelier_cave_light-insert

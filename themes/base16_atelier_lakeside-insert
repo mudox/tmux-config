@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#7195a8,bg=#1f292e"
 set -g status-left "#[fg=#1f292e,bg=#568c3b] #S #[fg=#568c3b,bg=#1f292e,nobold,nounderscore,noitalics]#[fg=#7195a8,bg=#1f292e] %H:%M "
 set -g status-right "#[fg=#7195a8,bg=#1f292e] %d %b #[fg=#568c3b,bg=#1f292e,nobold,nounderscore,noitalics]#[fg=#1f292e,bg=#568c3b] #h "
-setw -g window-status-format "#[fg=#7195a8,bg=#1f292e] #I | #W "
+setw -g window-status-format "#[fg=#7195a8,bg=#1f292e] #I │ #W "
 setw -g window-status-current-format "#[fg=#1f292e,bg=#516d7b,nobold,nounderscore,noitalics]#[fg=#7195a8,bg=#516d7b] #I  #W  #P #[fg=#1f292e,bg=#516d7b,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme base16_atelier_lakeside-insert

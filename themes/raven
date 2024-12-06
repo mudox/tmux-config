@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#c8c8c8,bg=#2e2e2e"
 set -g status-left "#[fg=#c8c8c8,bg=#2e2e2e] #S #[fg=#2e2e2e,bg=#2e2e2e,nobold,nounderscore,noitalics]#[fg=#c8c8c8,bg=#2e2e2e] %H:%M "
 set -g status-right "#[fg=#c8c8c8,bg=#2e2e2e] %d %b #[fg=#2e2e2e,bg=#2e2e2e,nobold,nounderscore,noitalics]#[fg=#c8c8c8,bg=#2e2e2e] #h "
-setw -g window-status-format "#[fg=#c8c8c8,bg=#2e2e2e] #I | #W "
+setw -g window-status-format "#[fg=#c8c8c8,bg=#2e2e2e] #I │ #W "
 setw -g window-status-current-format "#[fg=#2e2e2e,bg=#2e2e2e,nobold,nounderscore,noitalics]#[fg=#c8c8c8,bg=#2e2e2e] #I  #W  #P #[fg=#2e2e2e,bg=#2e2e2e,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme raven

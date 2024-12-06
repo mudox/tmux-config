@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#ffffff,bg=#005f87"
 set -g status-left "#[fg=#005f5f,bg=#8abeb7] #S #[fg=#8abeb7,bg=#005f87,nobold,nounderscore,noitalics]#[fg=#ffffff,bg=#005f87] %H:%M "
 set -g status-right "#[fg=#ffffff,bg=#005f87] %d %b #[fg=#8abeb7,bg=#005f87,nobold,nounderscore,noitalics]#[fg=#005f5f,bg=#8abeb7] #h "
-setw -g window-status-format "#[fg=#ffffff,bg=#005f87] #I | #W "
+setw -g window-status-format "#[fg=#ffffff,bg=#005f87] #I │ #W "
 setw -g window-status-current-format "#[fg=#005f87,bg=#0087af,nobold,nounderscore,noitalics]#[fg=#c5c8c6,bg=#0087af] #I  #W  #P #[fg=#005f87,bg=#0087af,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme hybridline-insert

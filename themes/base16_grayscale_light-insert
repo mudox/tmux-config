@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#525252,bg=#e3e3e3"
 set -g status-left "#[fg=#e3e3e3,bg=#8e8e8e] #S #[fg=#8e8e8e,bg=#e3e3e3,nobold,nounderscore,noitalics]#[fg=#525252,bg=#e3e3e3] %H:%M "
 set -g status-right "#[fg=#525252,bg=#e3e3e3] %d %b #[fg=#8e8e8e,bg=#e3e3e3,nobold,nounderscore,noitalics]#[fg=#e3e3e3,bg=#8e8e8e] #h "
-setw -g window-status-format "#[fg=#525252,bg=#e3e3e3] #I | #W "
+setw -g window-status-format "#[fg=#525252,bg=#e3e3e3] #I │ #W "
 setw -g window-status-current-format "#[fg=#e3e3e3,bg=#b9b9b9,nobold,nounderscore,noitalics]#[fg=#525252,bg=#b9b9b9] #I  #W  #P #[fg=#e3e3e3,bg=#b9b9b9,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme base16_grayscale_light-insert

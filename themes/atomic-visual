@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#fb4934,bg=#504945"
 set -g status-left "#[bg=#fb4934,none] #S #[fg=#fb4934,bg=#504945,nobold,nounderscore,noitalics]#[fg=#fb4934,bg=#504945,none] %H:%M "
 set -g status-right "#[fg=#fb4934,bg=#504945] %d %b #[fg=#fb4934,bg=#504945,nobold,nounderscore,noitalics]#[bg=#fb4934] #h "
-setw -g window-status-format "#[fg=#fb4934,bg=#504945,none] #I | #W "
+setw -g window-status-format "#[fg=#fb4934,bg=#504945,none] #I │ #W "
 setw -g window-status-current-format "#[fg=#504945,bg=#665c54,nobold,nounderscore,noitalics]#[bg=#665c54,none] #I  #W  #P #[fg=#504945,bg=#665c54,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme atomic-visual

@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#e4e4e4,bg=#1D2529"
 set -g status-left "#[fg=#1D2529,bg=#e4e4e4] #S #[fg=#e4e4e4,bg=#1D2529,nobold,nounderscore,noitalics]#[fg=#e4e4e4,bg=#1D2529] %H:%M "
 set -g status-right "#[fg=#e4e4e4,bg=#1D2529] %d %b #[fg=#e4e4e4,bg=#1D2529,nobold,nounderscore,noitalics]#[fg=#1D2529,bg=#e4e4e4] #h "
-setw -g window-status-format "#[fg=#e4e4e4,bg=#1D2529] #I | #W "
+setw -g window-status-format "#[fg=#e4e4e4,bg=#1D2529] #I │ #W "
 setw -g window-status-current-format "#[fg=#1D2529,bg=#242e33,nobold,nounderscore,noitalics]#[fg=,bg=#242e33] #I  #W  #P #[fg=#1D2529,bg=#242e33,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme supernova-visual

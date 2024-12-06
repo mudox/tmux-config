@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#cdcdcd,bg=#383c3e"
 set -g status-left "#[fg=#383c3e,bg=#88b92d] #S #[fg=#88b92d,bg=#383c3e,nobold,nounderscore,noitalics]#[fg=#cdcdcd,bg=#383c3e] %H:%M "
 set -g status-right "#[fg=#cdcdcd,bg=#383c3e] %d %b #[fg=#88b92d,bg=#383c3e,nobold,nounderscore,noitalics]#[fg=#383c3e,bg=#88b92d] #h "
-setw -g window-status-format "#[fg=#cdcdcd,bg=#383c3e] #I | #W "
+setw -g window-status-format "#[fg=#cdcdcd,bg=#383c3e] #I │ #W "
 setw -g window-status-current-format "#[fg=#383c3e,bg=#53585b,nobold,nounderscore,noitalics]#[fg=#cdcdcd,bg=#53585b] #I  #W  #P #[fg=#383c3e,bg=#53585b,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme base16_helios-insert

@@ -17,7 +17,7 @@ setw -g window-status-separator " "
 setw -g window-status-style "none,fg=#ffffff,bg=#204458"
 set -g status-left "#[fg=#ffff9a,bg=#ff9d00] #S #[fg=#ff9d00,bg=#204458,nobold,nounderscore,noitalics]#[fg=#ffffff,bg=#204458] %H:%M "
 set -g status-right "#[fg=#ffffff,bg=#204458] %d %b #[fg=#ff9d00,bg=#204458,nobold,nounderscore,noitalics]#[fg=#ffff9a,bg=#ff9d00] #h "
-setw -g window-status-format "#[fg=#ffffff,bg=#204458] #I | #W "
+setw -g window-status-format "#[fg=#ffffff,bg=#204458] #I │ #W "
 setw -g window-status-current-format "#[fg=#204458,bg=#8cc2fd,nobold,nounderscore,noitalics]#[fg=#ffffff,bg=#8cc2fd] #I  #W  #P #[fg=#204458,bg=#8cc2fd,nobold,nounderscore,noitalics]"
 
 set -g @mdx-tmux-theme cobalt2-visual
