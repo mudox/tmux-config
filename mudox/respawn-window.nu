@@ -4,4 +4,4 @@ use update-pane-border.nu
 
 tmux clear-history
 tmux respawn-window -k
-update-pane-border
+# update-pane-border

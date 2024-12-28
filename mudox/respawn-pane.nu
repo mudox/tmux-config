@@ -9,5 +9,5 @@ export def main [cmd?: string --target(-t): string = '.'] {
   } else {
     tmux respawn-pane -k -t $target
   }
-  update-pane-border
+  # update-pane-border
 }
