@@ -11,11 +11,11 @@ def main [--current] {
     | tint green
     | run       Pane    '%' --my 'respawn-pane.nu'
     | run       Window  '@' --my 'respawn-window.nu'
+    | nl
+    | tint red
+    | powerline 'CURRENT PANE'
   } else { $in }
   # CURRENT PANE
-  | nl
-  | tint red
-  | powerline 'CURRENT PANE'
   | run       Zsh     z   --my 'respawn-pane.nu zsh'
   | run       Nushell n   --my 'respawn-pane.nu nu'
   | run       Neovim  v   --my 'respawn-pane.nu nvim'

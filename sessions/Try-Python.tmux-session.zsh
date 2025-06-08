@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
-set -euo pipefail
+#!/usr/bin/env nu
 
-pyp Try-Python try-python
+pyp open Try-Python try-python

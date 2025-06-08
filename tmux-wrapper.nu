@@ -9,12 +9,14 @@ def --wrapped wrapper [...args] {
     'kitty'
   } else if 'ALACRITTY_WINDOW_ID' in $env {
     'alacritty'
+  } else if 'GHOSTTY_BIN_DIR' in $env | debug {
+    'ghostty'
   } else if 'WEZTERM_PANE' in $env {
     'wezterm'
-  } else if $env.TERM_PROGRAM? == 'vscode' {
-    'vscode'
   } else if 'ITERM_SESSION_ID' in $env {
     'iterm'
+  } else if $env.TERM_PROGRAM? == 'vscode' {
+    'vscode'
   } else {
     'default'
   } 
