@@ -1,0 +1,11 @@
+#!/usr/bin/env nu
+
+use ../mudox/lib/session.nu *
+
+let rootdir = ('~/Develop/TypeScript/try-ts' | path expand)
+
+new Try-TypeScript
+| window Main 'nvim src/index.ts' -d $rootdir
+| end
+
+# tmux split-pane -t Try-TypeScript:1 -dh -c $rootdir -- pnpm dev

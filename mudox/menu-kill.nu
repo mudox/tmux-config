@@ -2,13 +2,13 @@
 
 use lib/menu.nu *
 
-new ' 󱓇  KILL ' 
+new ' 󱓇  KILL '
 # CURRENT
 | nl
 | tint      green
 | item      Pane    '%'  kill-pane
 | item      Window  '@'  kill-window
-| item      Session '$'  kill-session
+| run       Session '$'  "/Users/mudox/.local/share/tmux/plugins/tmux-sessionist/scripts/kill_session.sh #{session_name} #{session_id}"
 | item      Server  '!'  kill-server
 # WINDOWS
 | nl
@@ -18,11 +18,11 @@ new ' 󱓇  KILL '
 | item      Left     p   'kill-window -t :-'
 # PANES
 | nl
-| tint      yellow 
+| tint      yellow
 | powerline PANE
 | item      Right    l   "kill-pane -t '{right-of}'"
 | item      Left     h   "kill-pane -t '{left-of}'"
 | item      Up       u   "kill-pane -t '{up-of}'"
 | item      Down     d   "kill-pane -t '{down-of}'"
 | item      'On...' '/'  "display-panes 'kill-pane -t %%'"
-| show
+| show --pane

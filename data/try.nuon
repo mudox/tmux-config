@@ -1,6 +1,6 @@
 {
   kt_name: try
-  m_title: '   TRY ' 
+  m_title: '   TRY '
   prefix: 'goto:y'
   items: [
     { type: tint color: red }
@@ -8,6 +8,7 @@
       [ type      key target         m_title    ];
       [ switch-to c   Try-C          C          ]
       [ switch-to r   Try-Rust       Rust       ]
+      [ switch-to C   Try-CangJie    CangJie    ]
       [ switch-to s   Try-Swift      Swift      ]
     ]
 

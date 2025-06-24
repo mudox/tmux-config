@@ -1,6 +1,6 @@
 {
   kt_name: goto
-  m_title: '   GOTO ' 
+  m_title: '   GOTO '
   prefix: 'root:M-y'
   items: [
     # home
@@ -40,7 +40,6 @@
       [ type  key cmd                 kt_name m_title ];
 
       [ popup a   ap                  Ap      Ap      ]
-      [ popup l   "nvim +Luapad '+wincmd o'"                  LuaPad      LuaPad      ]
     ]
 
     # git

@@ -6,12 +6,17 @@ HammerSpoon = '󰣪 '
 Neovim      = ' '
 Tmux        = ' '
 
+C           = ' '
+Rust        = ' '
+CangJie     = ' '
 JavaScript  = ' '
 TypeScript  = ' '
 Zsh         = ' '
 Nu          = ' '
 Swift       = ' '
 Python      = ' '
+Hammerspoon = '󰣪 '
+Network     = '󰒍 '
 
 [window]
 Edit        = ' '

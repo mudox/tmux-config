@@ -19,11 +19,6 @@ elif [[ -n $ITERM_SESSION_ID ]]; then
 else
   server=default
 fi
-
-# if [[ -n $NVIM ]]; then
-# 	server="${server}-nvim-term"
-# fi
-
 cmd+=(-L $server)
 
 if (($# > 0)); then
@@ -33,6 +28,5 @@ if (($# > 0)); then
     exec $cmd $@
   fi
 else
-  # source "${MDX_GIT_DIR}/base16-shell/profile_helper.sh"
   exec $cmd attach &>/dev/null
 fi
