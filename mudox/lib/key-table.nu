@@ -2,7 +2,7 @@
 
 ### usage
 # begin with `new`
-# middle 
+# middle
 # - `item`
 # - `run`
 # - `swithc-to`
@@ -29,14 +29,14 @@ export def new [name: string prefix: string] {
   let key = $pair.1
 
   let switch = [
-    -N $'Key table - ($name)' 
+    -N $'Key table - ($name)'
     -T $parent_kt $key
     switch-client -T $name
   ]
 
-  { name: $name, prefix: $key, cmd: [$switch] } 
-  | item '?' $"list-keys -N -T '($name)'"      'List keys'
-  | run  '-' $"lib/menu.nu '($name)'" --my  'Show menu'
+  { name: $name, prefix: $key, cmd: [$switch] }
+  | item '?' $"list-keys -N -T '($name)'" 'List keys'
+  | run  '-'  --my $"lib/menu.nu '($name)'" 'Show menu'
 }
 
 export def item [key: string cmd: string desc: string] {
@@ -49,7 +49,7 @@ export def run [key: string cmd: string --my desc: string] {
   let kt = $in
 
   mut cmd = if $my {
-    [$env.MDX_TMUX_DIR mudox $cmd] | path join | path expand 
+    [$env.MDX_TMUX_DIR mudox $cmd] | path join | path expand
   } else {
     $cmd
   }
@@ -61,7 +61,7 @@ export def run [key: string cmd: string --my desc: string] {
 export def switch-to [key: string target: string] {
   let kt = $in
   let cmd = $"run-shell '($env.MDX_TMUX_DIR)/mudox/switch-to.nu ($target)'"
-  let desc = $'Switch to ($target)' 
+  let desc = $'Switch to ($target)'
   $kt | item $key $cmd $desc
 }
 
@@ -70,12 +70,12 @@ export def popup [key: string name: string cmd: string] {
   let cmd = $"display-popup -E -w60% -h80% '($cmd)'"
   let desc = $'Popup ($name)'
   $kt | item $key $cmd $desc
-} 
+}
 
 export def child [key: string name: string] {
   let kt = $in
   let switch = [
-    -N $'Key table - ($name)' 
+    -N $'Key table - ($name)'
     -T $kt.name $key
     switch-client -T $name
   ]

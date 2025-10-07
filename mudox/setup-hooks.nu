@@ -5,7 +5,7 @@ def hook [event: string] {
 	tmux set-hook -g $'($event)[100]' $"run-shell '($hook_file)'"
 }
 
-hook client-session-changed
+# hook client-session-changed
 # hook after-split-window
 # hook after-kill-pane
 # hook pane-focus-in

@@ -5,7 +5,7 @@ export def icon-for [
   name: string
 ] {
     let cp = [$type $name] | into cell-path
-    open ($env.MDX_TMUX_DIR + '/data/icons.toml') | get -i $cp
+    open ($env.MDX_TMUX_DIR + '/data/icons.toml') | get --optional $cp
     # | default (match $type {
     #     'session' => null,
     #     'window'  => ' ',
@@ -21,8 +21,8 @@ export def iprefix [
   --icon: string
   --padding
 ] {
-  if $name =~ '^[^a-zA-Z]' { 
-    return $name 
+  if $name =~ '^[^a-zA-Z]' {
+    return $name
   } else {
     let i = $icon | default (icon-for $type $name)
     if $i == null {
@@ -48,7 +48,7 @@ def test [] {
   iprefix session Dotfiles --padding | print
   iprefix session Tmux | print
   iprefix session HammerSpoon | print
-  
+
   iprefix session Session --padding | print
   iprefix window Window | print
   iprefix pane Pane | print
@@ -59,7 +59,7 @@ def test [] {
 }
 
 def main [
-  type: string 
+  type: string
   name: string
 ] {
   print (iprefix $type $name)

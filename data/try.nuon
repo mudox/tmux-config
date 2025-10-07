@@ -35,5 +35,12 @@
       [ type      key target         m_title    ];
       [ switch-to l   LeetCode       LeetCode   ]
     ]
+
+    { type: nl }
+    { type: tint color: purple }
+    [
+      [ type      key target         m_title    ];
+      [ switch-to w   Try-Web        Web        ]
+    ]
   ]
 }

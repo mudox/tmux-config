@@ -8,7 +8,7 @@ new ' 󱓇  KILL '
 | tint      green
 | item      Pane    '%'  kill-pane
 | item      Window  '@'  kill-window
-| run       Session '$'  "/Users/mudox/.local/share/tmux/plugins/tmux-sessionist/scripts/kill_session.sh #{session_name} #{session_id}"
+| run       Session '$'  "/Users/mudox/Git/tmux-config/plugins/tmux-sessionist/scripts/kill_session.sh #{session_name} #{session_id}"
 | item      Server  '!'  kill-server
 # WINDOWS
 | nl

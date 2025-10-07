@@ -3,7 +3,7 @@
 use lib/menu.nu *
 
 def main [--current] {
-  new '   RESPAWN ' 
+  new '   RESPAWN '
   | if not $current {
     # CURRENT
     $in
@@ -21,7 +21,7 @@ def main [--current] {
   | run       Neovim  v   --my 'respawn-pane.nu nvim'
   | run       'On...'   '?' --my 'respawn-pane.nu "ap t"'
   | if not $current {
-    # OTHER PANE  
+    # OTHER PANE
     $in
     | nl
     | tint yellow
@@ -32,5 +32,5 @@ def main [--current] {
     | run       Down    d   --my "respawn-pane.nu -t '.{down-of}'"
     | item      'On...' '/' "display-panes 'respawn-pane -k -t %%'"
   } else { $in }
-  | if $current { show --pane } else { show }
+  | show --pane
 }
