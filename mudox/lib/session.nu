@@ -1,24 +1,21 @@
 use mod.nu tmux-query
-use icon.nu [iprefix, istrip]
 
 export def new [name: string] {
-  let name = iprefix session $name
   try { tmux kill-session -t $'=($name)' o+e>| ignore }
   {name: $name}
 }
 
 export def window [
-  name: string 
-  cmd: string = 'zsh' 
+  name: string
+  cmd: string = 'zsh'
   --dir(-d): string
-  --pane-title(-p): string 
+  --pane-title(-p): string
 ] {
   let session = $in
-  let name = iprefix window $name
 
   let dir = $dir | default $session.dir? | default '~'
   let format = "#{session_id}\t#{window_id}\t#{pane_id}"
-  
+
   let ids = (if $session.id? == null {
     (tmux new-session
       -s $session.name -n $name
@@ -41,7 +38,7 @@ export def window [
 
   # TODO: pane title
 
-  $session 
+  $session
   | upsert dir $dir
   | upsert id $ids.0
   | upsert window_id $ids.1

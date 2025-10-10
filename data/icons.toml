@@ -1,10 +1,10 @@
 [session]
-Home        = ' '
+Home        = '󰞷 '
 
-Dotfiles    = ' '
-HammerSpoon = '󰣪 '
-Neovim      = ' '
-Tmux        = ' '
+Dotfiles    = ' '
+HammerSpoon = '󰁨 '
+Neovim      = '󰘙 '
+Tmux        = ' '
 
 C           = ' '
 Rust        = ' '
@@ -19,14 +19,12 @@ Hammerspoon = '󰣪 '
 Network     = '󰒍 '
 
 [window]
-Edit        = ' '
+Edit        = ' '
 
-Zsh         = ' '
-Nu          = ' '
+Zsh         = '󰞷 '
+Nu          = '󰞷 '
 
-Top         = '󰈈 '
-
-[pane]
+Top         = '󰪫 '
 
 [item]
 Server      = '󰒍 '

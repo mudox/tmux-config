@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # Tmux binary
-cmd=("/opt/homebrew/bin/tmux")
+cmd=("${HOME}/.bin/tmux-bin")
 
 # Determine server
 if [[ -n $KITTY_WINDOW_ID ]]; then
