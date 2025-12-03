@@ -16,9 +16,9 @@ def main [--current] {
     | powerline 'CURRENT PANE'
   } else { $in }
   # CURRENT PANE
-  | run       Zsh     z   --my 'respawn-pane.nu zsh'
-  | run       Nushell n   --my 'respawn-pane.nu nu'
-  | run       Neovim  v   --my 'respawn-pane.nu nvim'
+  | run       Zsh        z  --my 'respawn-pane.nu zsh'
+  | run       NuShell    n  --my 'respawn-pane.nu nu'
+  | run       Neovim     v  --my 'respawn-pane.nu nvim'
   | run       'On...'   '?' --my 'respawn-pane.nu "ap t"'
   | if not $current {
     # OTHER PANE
@@ -26,11 +26,12 @@ def main [--current] {
     | nl
     | tint yellow
     | powerline 'OTHER PANE'
-    | run       Right   l   --my "respawn-pane.nu -t '.{right-of}'"
-    | run       Left    h   --my "respawn-pane.nu -t '.{left-of}'"
-    | run       Up      u   --my "respawn-pane.nu -t '.{up-of}'"
-    | run       Down    d   --my "respawn-pane.nu -t '.{down-of}'"
-    | item      'On...' '/' "display-panes 'respawn-pane -k -t %%'"
+    | run  'Right'         l   --my "respawn-pane.nu -t '.{right-of}'"
+    | run  'Right & Focus' C-l --my "respawn-pane.nu -t '.{right-of}' --focus"
+    | run  'Left'          h   --my "respawn-pane.nu -t '.{left-of}'"
+    | run  'Up'            u   --my "respawn-pane.nu -t '.{up-of}'"
+    | run  'Down'          d   --my "respawn-pane.nu -t '.{down-of}'"
+    | item 'On...' '/' "display-panes 'respawn-pane -k -t %%'"
   } else { $in }
   | show --pane
 }
